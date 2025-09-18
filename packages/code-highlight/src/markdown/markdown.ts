@@ -49,6 +49,7 @@ export function htmlFromMarkdown(
     allowTags?: string[]
     transform?: (node: Record<string, any>) => Record<string, any>
     transformType?: string
+    maskCredentials?: string | string[]
   },
 ) {
   // Add permitted tags and remove stripped ones
@@ -101,7 +102,17 @@ export function htmlFromMarkdown(
     // Run the pipeline
     .processSync(markdown)
 
-  return html.toString()
+  const htmlString = html.toString()
+  // Optionally mask credentials by wrapping occurrences with an element
+  const creds = (
+    typeof options?.maskCredentials === 'string' ? [options.maskCredentials] : (options?.maskCredentials ?? [])
+  ).filter((c) => c && c.length >= 3)
+
+  if (creds.length === 0) return htmlString
+
+  const wrap = (val: string) => `<span class="credential"><span class="credential-value">${val}</span></span>`
+
+  return creds.reduce((acc, credential) => acc.split(credential).join(wrap(credential as string)), htmlString)
 }
 
 /**

@@ -78,34 +78,29 @@ onMounted(() => config?.onLoaded?.())
           <SectionHeaderTag :level="1">
             {{ document.info?.title }}
           </SectionHeaderTag>
-          <template #links>
-            <LinkList>
-              <ExternalDocs :value="document.externalDocs" />
-              <Contact
-                v-if="document.info?.contact"
-                :value="document.info?.contact" />
-              <License
-                v-if="document.info?.license"
-                :value="document.info?.license" />
-              <TermsOfService
-                v-if="document.info?.termsOfService"
-                :value="document.info?.termsOfService" />
-            </LinkList>
-          </template>
+          <!-- Links removed to reduce header gap -->
         </SectionHeader>
-        <SectionColumns>
-          <SectionColumn>
-            <div class="links">
-              <DownloadLink :title="document.info?.title" />
-            </div>
-            <Description :value="document.info?.description" />
-          </SectionColumn>
-          <SectionColumn v-if="$slots.aside">
-            <div class="sticky-cards">
-              <slot name="aside" />
-            </div>
-          </SectionColumn>
-        </SectionColumns>
+        <!-- Full-width content inserted above the two-column layout -->
+        <slot name="above-columns" />
+        <!-- Intro description and a compact download link above columns -->
+        <Description :value="document.info?.description" />
+        <div class="links mb4 mt-4">
+          <DownloadLink :title="document.info?.title" />
+        </div>
+
+        <!-- Allow consumers to fully control the two-column layout -->
+        <slot name="columns">
+          <SectionColumns>
+            <SectionColumn>
+              <!-- Default left column left intentionally minimal -->
+            </SectionColumn>
+            <SectionColumn v-if="$slots.aside">
+              <div class="sticky-cards">
+                <slot name="aside" />
+              </div>
+            </SectionColumn>
+          </SectionColumns>
+        </slot>
         <SpecificationExtension :value="document" />
         <SpecificationExtension :value="document.info" />
       </SectionContent>

@@ -9,10 +9,20 @@ type DisplayScheme = {
 }
 
 /** Format a scheme object into a display object */
-export const formatScheme = (s: DisplayScheme) => ({
-  id: s.uid,
-  label: s.type === 'openIdConnect' ? `${s.nameKey} (coming soon)` : s.nameKey,
-})
+export const formatScheme = (s: DisplayScheme) => {
+  // Hard-coded mapping for DocSpring authentication
+  if (s.nameKey === 'api_token_basic') {
+    return {
+      id: s.uid,
+      label: 'API Token via Basic Auth',
+    }
+  }
+
+  return {
+    id: s.uid,
+    label: s.type === 'openIdConnect' ? `${s.nameKey} (coming soon)` : s.nameKey,
+  }
+}
 
 /** Formats complex security schemes */
 export const formatComplexScheme = (uids: string[], securitySchemes: Record<string, DisplayScheme>) =>

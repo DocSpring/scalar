@@ -23,9 +23,15 @@
   -moz-tab-size: 4;
   tab-size: 4;
 
-  *,
-  *:before,
-  *:after {
+  /**
+   * Exclude elements inside .skip-scalar-reset from the reset.
+   * This allows Starlight theme CSS to apply inside our API client
+   * installation instructions and other components, which are
+   * pre-rendered Astro components passed in as props with their own styling.
+   */
+  *:not(.skip-scalar-reset *),
+  *:not(.skip-scalar-reset *):before,
+  *:not(.skip-scalar-reset *):after {
     box-sizing: border-box;
     border-width: 0;
     border-style: solid;

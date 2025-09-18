@@ -1,11 +1,79 @@
 import { describe, expect, it } from 'vitest'
 import { getFeaturedClients, isFeaturedClient } from './featured-clients'
-import type { ClientOptionGroup } from '@/v2/blocks/scalar-request-example-block/types'
-import type { AvailableClients } from '@scalar/snippetz'
+import type { ClientOptionGroup } from '@scalar/api-reference/v2/blocks/scalar-request-example-block/types'
+
+// Use our custom DocSpring clients for testing
+const DEFAULT_FEATURED_CLIENTS = [
+  'custom/ruby',
+  'custom/python',
+  'custom/js',
+  'custom/php',
+  'custom/java',
+  'custom/csharp',
+] as const
 
 describe('featured-clients', () => {
   // Test data setup
   const mockClientOptions: ClientOptionGroup[] = [
+    {
+      label: 'DocSpring API Clients',
+      options: [
+        {
+          id: 'custom/ruby',
+          label: 'DocSpring Ruby',
+          lang: 'ruby',
+          title: 'DocSpring Ruby',
+          targetKey: 'custom',
+          targetTitle: 'DocSpring',
+          clientKey: 'ruby',
+        },
+        {
+          id: 'custom/python',
+          label: 'DocSpring Python',
+          lang: 'python',
+          title: 'DocSpring Python',
+          targetKey: 'custom',
+          targetTitle: 'DocSpring',
+          clientKey: 'python',
+        },
+        {
+          id: 'custom/js',
+          label: 'DocSpring JavaScript',
+          lang: 'js',
+          title: 'DocSpring JavaScript',
+          targetKey: 'custom',
+          targetTitle: 'DocSpring',
+          clientKey: 'js',
+        },
+        {
+          id: 'custom/php',
+          label: 'DocSpring PHP',
+          lang: 'php',
+          title: 'DocSpring PHP',
+          targetKey: 'custom',
+          targetTitle: 'DocSpring',
+          clientKey: 'php',
+        },
+        {
+          id: 'custom/java',
+          label: 'DocSpring Java',
+          lang: 'java',
+          title: 'DocSpring Java',
+          targetKey: 'custom',
+          targetTitle: 'DocSpring',
+          clientKey: 'java',
+        },
+        {
+          id: 'custom/csharp',
+          label: 'DocSpring C#',
+          lang: 'csharp',
+          title: 'DocSpring C#',
+          targetKey: 'custom',
+          targetTitle: 'DocSpring',
+          clientKey: 'csharp',
+        },
+      ],
+    },
     {
       label: 'Shell',
       options: [
@@ -30,77 +98,8 @@ describe('featured-clients', () => {
       ],
     },
     {
-      label: 'Ruby',
-      options: [
-        {
-          id: 'ruby/native',
-          label: 'Native',
-          lang: 'ruby',
-          title: 'Ruby Native',
-          targetKey: 'ruby',
-          targetTitle: 'Ruby',
-          clientKey: 'native',
-        },
-      ],
-    },
-    {
-      label: 'Node.js',
-      options: [
-        {
-          id: 'node/undici',
-          label: 'Undici',
-          lang: 'node',
-          title: 'Node.js Undici',
-          targetKey: 'node',
-          targetTitle: 'Node.js',
-          clientKey: 'undici',
-        },
-        {
-          id: 'node/fetch',
-          label: 'Fetch',
-          lang: 'node',
-          title: 'Node.js Fetch',
-          targetKey: 'node',
-          targetTitle: 'Node.js',
-          clientKey: 'fetch',
-        },
-      ],
-    },
-    {
-      label: 'PHP',
-      options: [
-        {
-          id: 'php/guzzle',
-          label: 'Guzzle',
-          lang: 'php',
-          title: 'PHP Guzzle',
-          targetKey: 'php',
-          targetTitle: 'PHP',
-          clientKey: 'guzzle',
-        },
-        {
-          id: 'php/curl',
-          label: 'cURL',
-          lang: 'php',
-          title: 'PHP cURL',
-          targetKey: 'php',
-          targetTitle: 'PHP',
-          clientKey: 'curl',
-        },
-      ],
-    },
-    {
       label: 'Python',
       options: [
-        {
-          id: 'python/python3',
-          label: 'Python3',
-          lang: 'python',
-          title: 'Python Python3',
-          targetKey: 'python',
-          targetTitle: 'Python',
-          clientKey: 'python3',
-        },
         {
           id: 'python/requests',
           label: 'Requests',
@@ -116,28 +115,33 @@ describe('featured-clients', () => {
 
   describe('isFeaturedClient', () => {
     describe('when clientId is a featured client', () => {
-      it('should return true for shell/curl', () => {
-        const result = isFeaturedClient('shell/curl')
+      it('should return true for custom/ruby', () => {
+        const result = isFeaturedClient('custom/ruby')
         expect(result).toBe(true)
       })
 
-      it('should return true for ruby/native', () => {
-        const result = isFeaturedClient('ruby/native')
+      it('should return true for custom/python', () => {
+        const result = isFeaturedClient('custom/python')
         expect(result).toBe(true)
       })
 
-      it('should return true for node/undici', () => {
-        const result = isFeaturedClient('node/undici')
+      it('should return true for custom/js', () => {
+        const result = isFeaturedClient('custom/js')
         expect(result).toBe(true)
       })
 
-      it('should return true for php/guzzle', () => {
-        const result = isFeaturedClient('php/guzzle')
+      it('should return true for custom/php', () => {
+        const result = isFeaturedClient('custom/php')
         expect(result).toBe(true)
       })
 
-      it('should return true for python/python3', () => {
-        const result = isFeaturedClient('python/python3')
+      it('should return true for custom/java', () => {
+        const result = isFeaturedClient('custom/java')
+        expect(result).toBe(true)
+      })
+
+      it('should return true for custom/csharp', () => {
+        const result = isFeaturedClient('custom/csharp')
         expect(result).toBe(true)
       })
     })
@@ -168,19 +172,19 @@ describe('featured-clients', () => {
 
     describe('with custom featured clients list', () => {
       it('should use custom featured clients list', () => {
-        const customFeaturedClients = ['js/fetch', 'python/requests'] satisfies AvailableClients[number][]
-        const result = isFeaturedClient('js/fetch', customFeaturedClients)
+        const customFeaturedClients = ['node/fetch', 'python/requests'] as any
+        const result = isFeaturedClient('node/fetch', customFeaturedClients)
         expect(result).toBe(true)
       })
 
       it('should return false for client not in custom list', () => {
-        const customFeaturedClients = ['js/fetch', 'python/requests'] satisfies AvailableClients[number][]
+        const customFeaturedClients = ['node/fetch', 'python/requests'] as any
         const result = isFeaturedClient('shell/curl', customFeaturedClients)
         expect(result).toBe(false)
       })
 
       it('should return false for undefined with custom list', () => {
-        const customFeaturedClients = ['js/fetch', 'python/requests'] satisfies AvailableClients[number][]
+        const customFeaturedClients = ['node/fetch', 'python/requests'] as any
         const result = isFeaturedClient(undefined, customFeaturedClients)
         expect(result).toBe(false)
       })
@@ -194,8 +198,8 @@ describe('featured-clients', () => {
       })
 
       it('should handle single item featured clients list', () => {
-        const singleFeaturedClient = ['js/fetch'] satisfies AvailableClients[number][]
-        const result = isFeaturedClient('js/fetch', singleFeaturedClient)
+        const singleFeaturedClient = ['node/fetch'] as any
+        const result = isFeaturedClient('node/fetch', singleFeaturedClient)
         expect(result).toBe(true)
       })
     })
@@ -206,13 +210,14 @@ describe('featured-clients', () => {
       it('should return only featured clients from the options', () => {
         const result = getFeaturedClients(mockClientOptions)
 
-        expect(result).toHaveLength(5)
+        expect(result).toHaveLength(6)
         expect(result.map((client) => client.id)).toEqual([
-          'shell/curl',
-          'ruby/native',
-          'node/undici',
-          'php/guzzle',
-          'python/python3',
+          'custom/ruby',
+          'custom/python',
+          'custom/js',
+          'custom/php',
+          'custom/java',
+          'custom/csharp',
         ])
       })
 
@@ -220,11 +225,12 @@ describe('featured-clients', () => {
         const result = getFeaturedClients(mockClientOptions)
 
         // Check that the order matches the FEATURED_CLIENTS constant
-        expect(result[0].id).toBe('shell/curl')
-        expect(result[1].id).toBe('ruby/native')
-        expect(result[2].id).toBe('node/undici')
-        expect(result[3].id).toBe('php/guzzle')
-        expect(result[4].id).toBe('python/python3')
+        expect(result[0].id).toBe('custom/ruby')
+        expect(result[1].id).toBe('custom/python')
+        expect(result[2].id).toBe('custom/js')
+        expect(result[3].id).toBe('custom/php')
+        expect(result[4].id).toBe('custom/java')
+        expect(result[5].id).toBe('custom/csharp')
       })
 
       it('should include all required properties for each client', () => {
@@ -244,18 +250,18 @@ describe('featured-clients', () => {
 
     describe('with custom featured clients list', () => {
       it('should return only clients from custom featured list', () => {
-        const customFeaturedClients = ['js/fetch', 'python/httpx_sync'] satisfies AvailableClients[number][]
+        const customFeaturedClients = ['node/fetch', 'ruby/httpx'] as any
         const result = getFeaturedClients(mockClientOptions, customFeaturedClients)
 
         expect(result).toHaveLength(0) // None of these are in our mock data
       })
 
       it('should return clients that exist in both options and custom list', () => {
-        const customFeaturedClients = ['shell/curl', 'python/python3'] satisfies AvailableClients[number][]
+        const customFeaturedClients = ['shell/curl', 'custom/python'] as any
         const result = getFeaturedClients(mockClientOptions, customFeaturedClients)
 
         expect(result).toHaveLength(2)
-        expect(result.map((client) => client.id)).toEqual(['shell/curl', 'python/python3'])
+        expect(result.map((client) => client.id)).toEqual(['shell/curl', 'custom/python'])
       })
     })
 
@@ -263,15 +269,15 @@ describe('featured-clients', () => {
       it('should return empty array when no featured clients are found', () => {
         const nonFeaturedOptions: ClientOptionGroup[] = [
           {
-            label: 'JavaScript',
+            label: 'Other Clients',
             options: [
               {
-                id: 'js/fetch',
+                id: 'node/fetch',
                 label: 'Fetch',
-                lang: 'js',
-                title: 'JavaScript Fetch',
-                targetKey: 'js',
-                targetTitle: 'JavaScript',
+                lang: 'node',
+                title: 'Node.js Fetch',
+                targetKey: 'node',
+                targetTitle: 'Node.js',
                 clientKey: 'fetch',
               },
             ],
@@ -297,13 +303,13 @@ describe('featured-clients', () => {
             label: 'Valid Group',
             options: [
               {
-                id: 'shell/curl',
-                label: 'cURL',
-                lang: 'curl',
-                title: 'Shell cURL',
-                targetKey: 'shell',
-                targetTitle: 'Shell',
-                clientKey: 'curl',
+                id: 'custom/ruby',
+                label: 'DocSpring Ruby',
+                lang: 'ruby',
+                title: 'DocSpring Ruby',
+                targetKey: 'custom',
+                targetTitle: 'DocSpring',
+                clientKey: 'ruby',
               },
             ],
           },
@@ -311,21 +317,21 @@ describe('featured-clients', () => {
 
         const result = getFeaturedClients(emptyGroups)
         expect(result).toHaveLength(1)
-        expect(result[0].id).toBe('shell/curl')
+        expect(result[0].id).toBe('custom/ruby')
       })
 
       it('should handle empty featured clients list', () => {
-        const emptyFeaturedClients: AvailableClients[number][] = []
+        const emptyFeaturedClients: any[] = []
         const result = getFeaturedClients(mockClientOptions, emptyFeaturedClients)
         expect(result).toEqual([])
       })
 
       it('should handle single item featured clients list', () => {
-        const singleFeaturedClient = ['shell/curl'] as AvailableClients[number][]
+        const singleFeaturedClient = ['custom/ruby'] as any[]
         const result = getFeaturedClients(mockClientOptions, singleFeaturedClient)
 
         expect(result).toHaveLength(1)
-        expect(result[0].id).toBe('shell/curl')
+        expect(result[0].id).toBe('custom/ruby')
       })
     })
 
@@ -333,15 +339,15 @@ describe('featured-clients', () => {
       it('should preserve all client properties', () => {
         const result = getFeaturedClients(mockClientOptions)
 
-        const curlClient = result.find((client) => client.id === 'shell/curl')
-        expect(curlClient).toEqual({
-          id: 'shell/curl',
-          label: 'cURL',
-          lang: 'curl',
-          title: 'Shell cURL',
-          targetKey: 'shell',
-          targetTitle: 'Shell',
-          clientKey: 'curl',
+        const rubyClient = result.find((client) => client.id === 'custom/ruby')
+        expect(rubyClient).toEqual({
+          id: 'custom/ruby',
+          label: 'DocSpring Ruby',
+          lang: 'ruby',
+          title: 'DocSpring Ruby',
+          targetKey: 'custom',
+          targetTitle: 'DocSpring',
+          clientKey: 'ruby',
         })
       })
 

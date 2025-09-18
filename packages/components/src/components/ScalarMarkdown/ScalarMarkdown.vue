@@ -7,12 +7,18 @@ const props = withDefaults(
   defineProps<{
     value?: string
     withImages?: boolean
+    allowTags?: string[]
     transform?: (node: Record<string, any>) => Record<string, any>
     transformType?: string
     clamp?: string | boolean
     class?: string
     withAnchors?: boolean
     anchorPrefix?: string
+    /**
+     * Map of placeholders -> secret values (unmasked). Each entry will be replaced
+     * AFTER markdown is rendered with a masked span structure to avoid HTML escaping.
+     */
+    replaceAndMaskCredentials?: Record<string, string | undefined>
   }>(),
   {
     withImages: false,
@@ -50,14 +56,27 @@ const transformHeading = (node: Record<string, any>) => {
 }
 
 const html = computed(() => {
-  return htmlFromMarkdown(props.value ?? '', {
+  let out = htmlFromMarkdown(props.value ?? '', {
     removeTags: props.withImages ? [] : ['img', 'picture'],
+    allowTags: props.allowTags,
     transform:
       props.withAnchors && props.transformType === 'heading'
         ? transformHeading
         : props.transform,
     transformType: props.transformType,
   })
+  // Perform targeted placeholder -> masked secret replacement post-render
+  if (props.replaceAndMaskCredentials) {
+    const wrap = (val: string) =>
+      `<span class=\"credential\"><span class=\"credential-value\">${val}</span></span>`
+    for (const [placeholder, value] of Object.entries(
+      props.replaceAndMaskCredentials,
+    )) {
+      if (!value) continue
+      out = out.split(placeholder).join(wrap(value))
+    }
+  }
+  return out
 })
 </script>
 <template>

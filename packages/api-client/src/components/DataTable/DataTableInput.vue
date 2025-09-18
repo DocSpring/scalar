@@ -75,7 +75,7 @@ const handleLabelClick = () => {
     :class="containerClass">
     <div
       v-if="$slots.default"
-      class="text-c-1 flex items-center pr-0 pl-3"
+      class="text-c-1 mr-2 flex items-center pr-0 pl-3"
       :for="id ?? ''"
       @click="handleLabelClick">
       <slot />:

@@ -66,22 +66,38 @@ const currentIndex = computed(() => {
 })
 
 /**
+ * Simple windowed virtualization: only render a slice of entries around the current index.
+ * This dramatically reduces DOM and reactive work on large pages.
+ */
+const WINDOW_BEFORE = 20
+const WINDOW_AFTER = 20
+const visibleEntries = computed(() => {
+  const total = entries.length
+  if (total === 0) return entries
+  const idx = Math.min(Math.max(currentIndex.value, 0), total - 1)
+  const start = Math.max(0, idx - WINDOW_BEFORE)
+  const end = Math.min(total, idx + WINDOW_AFTER)
+  return entries.slice(start, end)
+})
+
+/**
  * Check if the entry should be lazy loaded
  * We care more about the previous entries so we track those
  */
-const isLazy = (entry: TraversedEntry, index: number) => {
+const isLazy = (entry: TraversedEntry) => {
   // Don't be lazy if we are a tag group
   if (isTagGroup(entry)) {
     return null
   }
 
   // Make all previous entries lazy
-  if (index < currentIndex.value) {
+  const idx = entries.findIndex((e) => e.id === (entry as any).id)
+  if (idx !== -1 && idx < currentIndex.value) {
     return 'prev'
   }
 
   // We make the next two siblings not lazy
-  if (index > currentIndex.value + 2) {
+  if (idx !== -1 && idx > currentIndex.value + 2) {
     return 'after'
   }
 
@@ -95,11 +111,11 @@ defineExpose({
 
 <template>
   <Lazy
-    v-for="(entry, index) in entries"
+    v-for="entry in visibleEntries"
     :key="entry.id"
     :id="entry.id"
-    :prev="isLazy(entry, index) === 'prev'"
-    :isLazy="Boolean(isLazy(entry, index))">
+    :prev="isLazy(entry) === 'prev'"
+    :isLazy="Boolean(isLazy(entry))">
     <template v-if="isOperation(entry) || isWebhook(entry)">
       <!-- Operation or Webhook -->
       <SectionContainer :omit="!isRootLevel">

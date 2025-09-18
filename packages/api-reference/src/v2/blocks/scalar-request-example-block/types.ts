@@ -7,8 +7,8 @@ import type { AvailableClients, ClientId, TargetId } from '@scalar/snippetz'
  * for generating code examples in different programming languages.
  */
 export type ClientOption = ScalarComboboxOption & {
-  /** A more specific ID */
-  id: AvailableClients[number]
+  /** A more specific ID - can be built-in client or custom client like 'custom/ruby' */
+  id: AvailableClients[number] | string
   /** Programming language or tool for code generation (e.g., 'javascript', 'python', 'curl') */
   lang: TargetId | 'curl' | 'plaintext'
   /** Title shows when the client is selected in the dropdown */
@@ -18,7 +18,7 @@ export type ClientOption = ScalarComboboxOption & {
   /** Title of the target */
   targetTitle: string
   /** Client key for the client */
-  clientKey: ClientId<TargetId>
+  clientKey: ClientId<TargetId> | string
 }
 
 /**

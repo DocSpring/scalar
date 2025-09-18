@@ -23,7 +23,7 @@ export type ApiReferenceEvents = {
   }
   /** Controls the selected client in our code example blocks */
   'scalar-update-selected-client': {
-    detail: AvailableClients[number]
+    detail: AvailableClients[number] | string
   }
   /** Controls the selected example key in our operation blocks + children */
   'scalar-update-selected-example': {

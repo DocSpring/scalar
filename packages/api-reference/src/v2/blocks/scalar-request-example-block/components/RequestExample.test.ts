@@ -710,4 +710,94 @@ describe('RequestExample', () => {
       }
     })
   })
+
+  describe('DocSpring Fallback Logic', () => {
+    it('should fallback to js/fetch when custom/js is selected but no code sample exists', () => {
+      const wrapper = mount(RequestExample, {
+        props: {
+          ...defaultProps,
+          selectedClient: 'custom/js', // DocSpring JavaScript selected
+          operation: {
+            summary: 'Test operation without custom examples',
+            // No x-code-samples, x-codeSamples, or x-custom-examples
+          },
+        },
+      })
+
+      // The component should internally use the fallback client (js/fetch)
+      // We check this by looking at the generated code block's language
+      const codeBlock = wrapper.findComponent({ name: 'ScalarCodeBlock' })
+      expect(codeBlock.exists()).toBe(true)
+
+      // Since it should fallback to js/fetch, the language should be 'js'
+      // This assumes the fallback logic is working correctly
+      expect(codeBlock.props('lang')).toBe('js')
+    })
+
+    it('should fallback to shell/curl when custom language has no matching HTTP client', () => {
+      const wrapper = mount(RequestExample, {
+        props: {
+          ...defaultProps,
+          selectedClient: 'custom/unsupported', // DocSpring language not in clientOptions
+          operation: {
+            summary: 'Test operation without custom examples',
+          },
+        },
+      })
+
+      const codeBlock = wrapper.findComponent({ name: 'ScalarCodeBlock' })
+      expect(codeBlock.exists()).toBe(true)
+
+      // Should fallback to shell/curl
+      expect(codeBlock.props('lang')).toBe('curl')
+    })
+
+    it('should use custom example when it exists', () => {
+      const wrapper = mount(RequestExample, {
+        props: {
+          ...defaultProps,
+          selectedClient: 'custom/js',
+          operation: {
+            summary: 'Test operation with custom examples',
+            'x-code-samples': [
+              {
+                lang: 'js',
+                label: 'DocSpring JavaScript',
+                source: 'console.log("DocSpring custom example");',
+              },
+            ],
+          },
+        },
+      })
+
+      const codeBlock = wrapper.findComponent({ name: 'ScalarCodeBlock' })
+      expect(codeBlock.exists()).toBe(true)
+
+      // Should use the custom example source
+      expect(codeBlock.props('content')).toContain('DocSpring custom example')
+    })
+
+    it('should never show "No snippet found" error', () => {
+      const wrapper = mount(RequestExample, {
+        props: {
+          ...defaultProps,
+          selectedClient: 'custom/js',
+          operation: {
+            summary: 'Test operation that could fail',
+          },
+        },
+      })
+
+      const codeBlock = wrapper.findComponent({ name: 'ScalarCodeBlock' })
+      expect(codeBlock.exists()).toBe(true)
+
+      // Should never contain error messages
+      expect(codeBlock.props('content')).not.toContain('No snippet found')
+      expect(codeBlock.props('content')).not.toContain('Custom example not found')
+
+      // Should have some valid content (fallback)
+      expect(codeBlock.props('content')).toBeTruthy()
+      expect(codeBlock.props('content').length).toBeGreaterThan(0)
+    })
+  })
 })

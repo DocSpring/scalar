@@ -56,15 +56,5 @@ export const findClient = (
     }
   }
 
-  // If we dont have any custom examples, lets select the default client
-  if (!firstOption?.id.startsWith('custom')) {
-    for (const group of clientGroups) {
-      const option = group.options.find((option) => option.id === DEFAULT_CLIENT)
-      if (option) {
-        return option
-      }
-    }
-  }
-
-  return firstOption
+  return undefined
 }

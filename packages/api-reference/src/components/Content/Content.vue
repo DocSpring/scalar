@@ -24,7 +24,7 @@ const config = useConfig()
  * Generate all client options so that it can be shared between the top client picker and the operations
  */
 const clientOptions = computed(() =>
-  generateClientOptions(config.value.hiddenClients),
+  generateClientOptionsWithDocSpring(config.value.hiddenClients),
 )
 </script>
 <template>
@@ -39,7 +39,11 @@ const clientOptions = computed(() =>
       :document
       :store
       :clientOptions
-      :config />
+      :config>
+      <template #after-auth>
+        <slot name="after-auth" />
+      </template>
+    </Introduction>
 
     <!-- Empty State -->
     <slot

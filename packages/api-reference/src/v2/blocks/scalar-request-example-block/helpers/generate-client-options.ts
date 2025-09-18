@@ -7,6 +7,94 @@ import { capitalize } from 'vue'
 /** Helper to generate an ID for custom code samples */
 export const generateCustomId = (example: XCodeSample) => `custom/${example.lang}`
 
+/** DocSpring API Clients that are always shown at the top */
+const docSpringClients: ClientOptionGroup = {
+  label: 'DocSpring API Clients',
+  options: [
+    {
+      id: 'custom/ruby',
+      lang: 'ruby',
+      title: 'DocSpring Ruby',
+      label: 'DocSpring Ruby',
+      targetKey: 'ruby',
+      targetTitle: 'Ruby',
+      clientKey: 'ruby',
+    },
+    {
+      id: 'custom/python',
+      lang: 'python',
+      title: 'DocSpring Python',
+      label: 'DocSpring Python',
+      targetKey: 'python',
+      targetTitle: 'Python',
+      clientKey: 'python',
+    },
+    {
+      id: 'custom/typescript',
+      lang: 'typescript',
+      title: 'DocSpring TypeScript',
+      label: 'DocSpring TypeScript',
+      targetKey: 'typescript',
+      targetTitle: 'TypeScript',
+      clientKey: 'typescript',
+    },
+    {
+      id: 'custom/js',
+      lang: 'js',
+      title: 'DocSpring JavaScript',
+      label: 'DocSpring JavaScript',
+      targetKey: 'js',
+      targetTitle: 'JavaScript',
+      clientKey: 'js',
+    },
+    {
+      id: 'custom/php',
+      lang: 'php',
+      title: 'DocSpring PHP',
+      label: 'DocSpring PHP',
+      targetKey: 'php',
+      targetTitle: 'PHP',
+      clientKey: 'php',
+    },
+    {
+      id: 'custom/java',
+      lang: 'java',
+      title: 'DocSpring Java',
+      label: 'DocSpring Java',
+      targetKey: 'java',
+      targetTitle: 'Java',
+      clientKey: 'java',
+    },
+    {
+      id: 'custom/csharp',
+      lang: 'csharp',
+      title: 'DocSpring C#',
+      label: 'DocSpring C#',
+      targetKey: 'csharp',
+      targetTitle: 'C#',
+      clientKey: 'csharp',
+    },
+    {
+      id: 'custom/go',
+      lang: 'go',
+      title: 'DocSpring Go',
+      label: 'DocSpring Go',
+      targetKey: 'go',
+      targetTitle: 'Go',
+      clientKey: 'go',
+    },
+    {
+      id: 'custom/elixir',
+      lang: 'elixir',
+      title: 'DocSpring Elixir',
+      label: 'DocSpring Elixir',
+      targetKey: 'elixir',
+      targetTitle: 'Elixir',
+      clientKey: 'elixir',
+    },
+  ],
+}
+
 /**
  * Generates client options for the request example block by filtering and organizing
  * built-in snippets based on the hiddenClients configuration. This function creates
@@ -78,4 +166,16 @@ export const generateClientOptions = (
     })
 
   return options
+}
+
+/** Get just the DocSpring clients for use in other components */
+export const getDocSpringClients = () => docSpringClients
+
+/** Generate client options with DocSpring clients at the top (for RequestExample) */
+export const generateClientOptionsWithDocSpring = (
+  hiddenClients: ApiReferenceConfiguration['hiddenClients'],
+): ClientOptionGroup[] => {
+  const options = generateClientOptions(hiddenClients)
+  // Always put DocSpring clients at the top
+  return [docSpringClients, ...options]
 }

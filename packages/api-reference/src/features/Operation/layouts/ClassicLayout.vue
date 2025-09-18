@@ -177,17 +177,26 @@ const handleDiscriminatorChange = (type: string) => {
         </LinkList>
         <!-- Request Example -->
         <ScalarErrorBoundary>
-          <RequestExample
-            class="operation-example-card"
-            :method="method"
-            :selectedServer="server"
-            :clientOptions="clientOptions"
-            :selectedClient="store.workspace['x-scalar-default-client']"
-            :securitySchemes="securitySchemes"
-            :path="path"
-            fallback
-            :operation="operation"
-            @update:modelValue="handleDiscriminatorChange" />
+          <VisibleOnIntersect>
+            <template #default>
+              <RequestExample
+                class="operation-example-card"
+                :method="method"
+                :selectedServer="server"
+                :clientOptions="clientOptions"
+                :selectedClient="store.workspace['x-scalar-default-client']"
+                :securitySchemes="securitySchemes"
+                :path="path"
+                fallback
+                :operation="operation"
+                @update:modelValue="handleDiscriminatorChange" />
+            </template>
+            <template #placeholder>
+              <div
+                class="operation-example-card"
+                style="min-height: 140px"></div>
+            </template>
+          </VisibleOnIntersect>
         </ScalarErrorBoundary>
       </div>
     </div>

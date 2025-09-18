@@ -69,12 +69,21 @@ const activeServer = computed(() => {
 const { items } = useSidebar()
 const { hash, isIntersectionEnabled } = useNavState()
 
-/** Tries to freeze the scroll position of the element */
-const unfreeze = freezeAtTop(hash.value)
+const attachFreeze = (targetHash: string | undefined | null) => {
+  if (!targetHash) {
+    return null
+  }
+  return freezeAtTop(targetHash)
+}
+
+const freezeCleanup = ref<ReturnType<typeof freezeAtTop> | null>(
+  attachFreeze(hash.value),
+)
 
 /** Resume scrolling */
 const resume = () => {
-  unfreeze?.()
+  freezeCleanup.value?.()
+  freezeCleanup.value = null
   hasLazyLoaded.value = true
   isIntersectionEnabled.value = true
 }
@@ -111,7 +120,18 @@ lazyBus.on(({ loading, loaded, save }) => {
 })
 
 // Resume scrolling after 5 seconds as a failsafe
-setTimeout(() => resume(), 5000)
+setTimeout(() => {
+  resume()
+}, 5000)
+
+watch(
+  () => hash.value,
+  (value) => {
+    freezeCleanup.value?.()
+    freezeCleanup.value = attachFreeze(value)
+  },
+  { immediate: false },
+)
 </script>
 
 <template>

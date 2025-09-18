@@ -9,7 +9,7 @@ export type RequestExampleProps = {
    *
    * @defaults to shell/curl or a custom sample if one is available
    */
-  selectedClient?: AvailableClients[number]
+  selectedClient?: AvailableClients[number] | string
   /**
    * Which server from the spec to use for the code example
    */
@@ -150,11 +150,61 @@ const customRequestExamples = computed(() => {
   )
 })
 
+type ExtendedXCodeSample = XCodeSample & { description?: string }
+
+const selectedCustomDescription = computed<string | undefined>(() => {
+  if (!localSelectedClient.value?.id?.startsWith?.('custom')) return undefined
+  const sample = (customRequestExamples.value as ExtendedXCodeSample[]).find(
+    (example) => generateCustomId(example) === localSelectedClient.value?.id,
+  )
+  return sample?.description
+})
+
+/** Placeholder -> secret mapping for targeted replace+mask in markdown */
+const descriptionReplaceAndMask = computed<Record<string, string>>(() => {
+  const basic = securitySchemes.find(
+    (scheme) => scheme.type === 'http' && scheme.scheme === 'basic',
+  ) as any
+  const password = basic?.['x-scalar-secret-password'] as string | undefined
+  const map: Record<string, string> = {}
+  if (password && password.length >= 1) {
+    map['API_TOKEN_SECRET'] = password
+  }
+  return map
+})
+
+/** Apply API_TOKEN_ID substitution to the description; keep API_TOKEN_SECRET as a placeholder
+ * so ScalarMarkdown can replace+mask it safely.
+ */
+const processedCustomDescription = computed<string | undefined>(() => {
+  const desc = selectedCustomDescription.value
+  if (!desc) return undefined
+
+  const basicAuthScheme = securitySchemes.find(
+    (scheme) => scheme.type === 'http' && scheme.scheme === 'basic',
+  )
+
+  if (!basicAuthScheme) return desc
+
+  const username = (basicAuthScheme as any)['x-scalar-secret-username'] as
+    | string
+    | undefined
+  const password = (basicAuthScheme as any)['x-scalar-secret-password'] as
+    | string
+    | undefined
+
+  let out = desc
+  // Show the token ID openly, but DO NOT replace the secret here –
+  // masking happens in <ScalarMarkdown> via replaceAndMaskCredentials.
+  if (username) out = out.replace(/API_TOKEN_ID/g, username)
+  return out
+})
+
 /**
  * Group plugins by target/language to show in a dropdown
  */
 const clients = computed(() => {
-  // Handle custom code examples
+  // Handle custom code examples from the OpenAPI spec
   if (customRequestExamples.value.length) {
     const customClients = customRequestExamples.value.map((sample) => {
       const id = generateCustomId(sample)
@@ -168,54 +218,175 @@ const clients = computed(() => {
       } as ClientOption // We yolo assert this as the other properties are only needed in the top selector
     })
 
+    // Always show custom examples first, then regular HTTP clients
     return [
       {
-        label: 'Code Examples',
+        label: 'DocSpring API Clients',
         options: customClients,
       },
-      ...clientOptions,
+      ...clientOptions.filter(
+        (group) => group.label !== 'DocSpring API Clients',
+      ), // Remove any DocSpring clients from props
     ]
   }
 
-  return clientOptions
+  // If no custom examples, only show regular HTTP clients (no DocSpring clients)
+  return clientOptions.filter(
+    (group) => group.label !== 'DocSpring API Clients',
+  )
 })
+
+/** Helper function to find a fallback client when DocSpring client is selected but no code sample exists */
+const findFallbackClient = (
+  selectedClientId: string | undefined,
+): ClientOption => {
+  // If it's a custom DocSpring client
+  if (selectedClientId?.startsWith('custom/')) {
+    // Check if we have a custom code sample for it
+    const hasCustomSample = customRequestExamples.value.some(
+      (sample) => generateCustomId(sample) === selectedClientId,
+    )
+
+    // If we have a custom sample, return the custom client
+    if (hasCustomSample) {
+      const client = findClient(clients.value, selectedClientId)
+      if (client) {
+        return client
+      }
+    }
+
+    // No custom sample exists - extract language and find fallback HTTP client
+    const lang = selectedClientId.substring('custom/'.length)
+
+    const fallbackClient = clientOptions
+      .flatMap((group) => group.options)
+      .find((client) => {
+        // Skip DocSpring clients - we only want HTTP clients for fallback
+        if (client.id.startsWith('custom/')) {
+          return false
+        }
+
+        // For JavaScript, prefer js/fetch over node clients
+        if (lang === 'js') {
+          return (
+            client.id === 'js/fetch' ||
+            client.targetKey === 'js' ||
+            client.targetKey === 'node'
+          )
+        }
+        // For C#, match 'csharp' target
+        if (lang === 'csharp') {
+          return client.targetKey === 'csharp'
+        }
+        // For other languages, match exactly
+        return client.targetKey === lang
+      })
+
+    if (fallbackClient) {
+      return fallbackClient
+    }
+  } else {
+    // It's a regular client, find it normally in the filtered clients
+    const client = findClient(clients.value, selectedClientId)
+    if (client) {
+      return client
+    }
+  }
+
+  // FINAL fallback to shell/curl - this should NEVER be null
+  const curlClient = clientOptions
+    .flatMap((group) => group.options)
+    .find((client) => client.id === 'shell/curl')
+
+  if (curlClient) {
+    return curlClient
+  }
+
+  // If somehow shell/curl doesn't exist, return the first available client
+  const firstClient = clientOptions.flatMap((group) => group.options)[0]
+  if (firstClient) {
+    return firstClient
+  }
+
+  // This should NEVER happen, but if it does, create a minimal curl client
+  return {
+    id: 'shell/curl',
+    lang: 'shell',
+    title: 'cURL',
+    label: 'cURL',
+    targetKey: 'shell',
+    targetTitle: 'Shell',
+    clientKey: 'curl',
+  }
+}
 
 /** The locally selected client which would include code samples from this operation only */
 const localSelectedClient = ref<ClientOption>(
-  findClient(clients.value, selectedClient) ?? null,
+  findFallbackClient(selectedClient),
 )
 
 /** If the globally selected client changes we can update the local one */
 watch(
   () => selectedClient,
   (newClient) => {
-    const client = findClient(clients.value, newClient)
-    if (client) {
-      localSelectedClient.value = client
-    }
+    localSelectedClient.value = findFallbackClient(newClient)
   },
 )
 
 /** Generate the code snippet for the selected example */
 const generatedCode = computed<string>(() => {
   try {
-    // Use the selected custom example
+    // Only use custom example if it actually exists and has source
     if (localSelectedClient.value?.id.startsWith('custom')) {
-      return (
-        customRequestExamples.value.find(
-          (example) =>
-            generateCustomId(example) === localSelectedClient.value?.id,
-        )?.source ?? 'Custom example not found'
+      const customExample = customRequestExamples.value.find(
+        (example) =>
+          generateCustomId(example) === localSelectedClient.value?.id,
       )
+
+      if (customExample && customExample.source) {
+        // Replace API_TOKEN_ID and API_TOKEN_SECRET with actual credentials
+        let processedSource = customExample.source
+
+        // Find basic auth credentials
+        const basicAuthScheme = securitySchemes.find(
+          (scheme) => scheme.type === 'http' && scheme.scheme === 'basic',
+        )
+
+        if (basicAuthScheme) {
+          const username = basicAuthScheme['x-scalar-secret-username']
+          const password = basicAuthScheme['x-scalar-secret-password']
+
+          // Only replace if we have actual values, otherwise keep the placeholders
+          if (username) {
+            processedSource = processedSource.replace(/API_TOKEN_ID/g, username)
+          }
+          if (password) {
+            processedSource = processedSource.replace(
+              /API_TOKEN_SECRET/g,
+              password,
+            )
+          }
+        }
+
+        return processedSource
+      }
     }
 
+    // For all other cases (including fallback clients), generate code snippet
     const selectedExample =
       operationExamples.value[selectedExampleKey.value || '']
     const example =
       (selectedExample as ExampleObject)?.value ?? selectedExample?.summary
 
+    // Use the actual fallback client ID for code generation, not the custom ID
+    const clientIdForGeneration = localSelectedClient.value?.id.startsWith(
+      'custom/',
+    )
+      ? findFallbackClient(localSelectedClient.value.id).id
+      : localSelectedClient.value?.id
+
     return generateCodeSnippet({
-      clientId: localSelectedClient.value?.id as AvailableClients[number],
+      clientId: clientIdForGeneration as AvailableClients[number],
       operation,
       method,
       server: selectedServer,
@@ -226,7 +397,23 @@ const generatedCode = computed<string>(() => {
     })
   } catch (error) {
     console.error('[generateSnippet]', error)
-    return ''
+
+    // Final fallback - try shell/curl
+    try {
+      return generateCodeSnippet({
+        clientId: 'shell/curl',
+        operation,
+        method,
+        server: selectedServer,
+        securitySchemes,
+        contentType: selectedContentType,
+        path,
+        example: undefined,
+      })
+    } catch (fallbackError) {
+      console.error('[generateSnippet fallback]', fallbackError)
+      return ''
+    }
   }
 })
 
@@ -248,10 +435,8 @@ const selectClient = (option: ClientOption) => {
   // Update to the local example
   localSelectedClient.value = option
 
-  // Emit the change if it's not a custom example
-  if (!option.id.startsWith('custom')) {
-    emitCustomEvent(elem.value?.$el, 'scalar-update-selected-client', option.id)
-  }
+  // Emit the change for all clients (including custom)
+  emitCustomEvent(elem.value?.$el, 'scalar-update-selected-client', option.id)
 }
 
 const id = useId()
@@ -259,8 +444,8 @@ const id = useId()
 <template>
   <ScalarCard
     v-if="generatedCode"
-    class="request-card dark-mode"
-    ref="elem">
+    ref="elem"
+    class="request-card dark-mode">
     <!-- Header -->
     <ScalarCardHeader class="pr-2.5">
       <span class="sr-only">Request Example for</span>
@@ -276,33 +461,59 @@ const id = useId()
         name="header" />
       <!-- Client picker -->
       <template
-        #actions
-        v-if="clients.length">
+        v-if="clients.length"
+        #actions>
         <ScalarCombobox
           class="max-h-80"
           :modelValue="localSelectedClient"
           :options="clients"
-          teleport
           placement="bottom-end"
+          teleport
           @update:modelValue="selectClient($event as ClientOption)">
           <ScalarButton
-            data-testid="client-picker"
             class="text-c-2 hover:text-c-1 flex h-full w-fit gap-1.5 px-0.5"
+            data-testid="client-picker"
             fullWidth
             variant="ghost">
             <span class="text-base font-normal">{{
-              localSelectedClient.title
+              localSelectedClient?.title || 'Select Client'
             }}</span>
             <ScalarIconCaretDown
-              weight="bold"
-              class="ui-open:rotate-180 mt-0.25 size-3 transition-transform duration-100" />
+              class="ui-open:rotate-180 mt-0.25 size-3 transition-transform duration-100"
+              weight="bold" />
           </ScalarButton>
         </ScalarCombobox>
       </template>
     </ScalarCardHeader>
 
     <!-- Code snippet -->
-    <ScalarCardSection class="request-editor-section custom-scroll p-0">
+    <ScalarCardSection
+      class="request-editor-section custom-scroll flex-col p-0">
+      <!-- Optional description rendered as markdown above the code -->
+      <!-- <div
+        v-if="processedCustomDescription"
+        class="code-description mt-5 p-3">
+        <ScalarMarkdown
+          :allowTags="['span']"
+          :replaceAndMaskCredentials="descriptionReplaceAndMask"
+          :value="processedCustomDescription" />
+      </div> -->
+
+      <!-- <div class="flex flex-row gap-2 p-3">
+        <StarlightCard
+          classNames="flex-1 sl-link-card-small"
+          description="Set up the API client"
+          href="#client-libraries"
+          title="Install DocSpring" />
+
+        <StarlightCard
+          v-if="operation.operationId != 'testAuthentication'"
+          classNames="flex-1 sl-link-card-small"
+          description="Make sure your API token works"
+          href="#tag/authentication/get/authentication"
+          title="Test Authentication" />
+      </div> -->
+
       <div
         :id="`${id}-example`"
         class="code-snippet">
@@ -324,8 +535,8 @@ const id = useId()
         v-if="Object.keys(operationExamples).length"
         class="request-card-footer-addon">
         <ExamplePicker
-          :examples="operationExamples"
           v-model="selectedExampleKey"
+          :examples="operationExamples"
           @update:modelValue="
             emitCustomEvent(elem?.$el, 'scalar-update-selected-example', $event)
           " />
@@ -392,4 +603,7 @@ const id = useId()
   flex-direction: column;
   width: 100%;
 }
+/*.code-description {
+  border-bottom: var(--scalar-border-width) solid var(--scalar-border-color);
+}*/
 </style>

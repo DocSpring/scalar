@@ -408,6 +408,9 @@ watch(hash, (newHash, oldHash) => {
           :document="dereferencedDocument"
           :config="configuration"
           :store="store">
+          <template #after-auth>
+            <slot name="after-auth" />
+          </template>
           <template #start>
             <slot
               v-bind="referenceSlotProps"
@@ -467,7 +470,7 @@ watch(hash, (newHash, oldHash) => {
   <ScalarToasts />
 </template>
 <style>
-@import '@/style.css';
+/* @import '@scalar/api-reference/style.css'; */ /* Commented out to allow external style loading */
 
 /** Used to check if css is loaded */
 :root {

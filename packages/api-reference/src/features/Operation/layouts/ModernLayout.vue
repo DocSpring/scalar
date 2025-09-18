@@ -77,8 +77,8 @@ const handleDiscriminatorChange = (type: string) => {
     tabindex="-1">
     <SectionContent :loading="config.isLoading">
       <Badge
-        class="capitalize"
         v-if="getOperationStability(operation)"
+        class="capitalize"
         :class="getOperationStabilityColor(operation)">
         {{ getOperationStability(operation) }}
       </Badge>
@@ -103,11 +103,15 @@ const handleDiscriminatorChange = (type: string) => {
         <SectionColumn>
           <div class="operation-details">
             <ScalarMarkdown
-              :value="operation.description"
-              withImages
-              withAnchors
+              :anchorPrefix="id"
               transformType="heading"
-              :anchorPrefix="id" />
+              :value="operation.description"
+              withAnchors
+              withImages />
+
+            <!-- Cached S3 Upload Link -->
+            <CachedS3UploadLink :operation="operation" />
+
             <OperationParameters
               :breadcrumb="[id]"
               :parameters
@@ -123,11 +127,11 @@ const handleDiscriminatorChange = (type: string) => {
             <!-- Callbacks -->
             <ScalarErrorBoundary>
               <Callbacks
-                class="mt-6"
                 v-if="operation.callbacks"
-                :path="path"
                 :callbacks="operation.callbacks"
+                class="mt-6"
                 :method="method"
+                :path="path"
                 :schemas="schemas" />
             </ScalarErrorBoundary>
           </div>
@@ -139,32 +143,55 @@ const handleDiscriminatorChange = (type: string) => {
               <ExternalDocs :value="operation.externalDocs" />
             </LinkList>
 
+            <div class="mb-2 flex flex-row gap-4">
+              <!-- description="Set up the API client" -->
+              <StarlightCard
+                classNames="flex-1 sl-link-card-small mb-3 flex-1"
+                href="#client-libraries"
+                title="Install DocSpring Client" />
+              <!-- description="Make sure your API token works" -->
+              <StarlightCard
+                v-if="operation.operationId != 'testAuthentication'"
+                classNames="flex-1 sl-link-card-small mb-3 flex-1"
+                href="#tag/authentication/get/authentication"
+                title="Test Authentication" />
+            </div>
+
             <!-- New Example Request -->
             <ScalarErrorBoundary>
-              <RequestExample
-                :method="method"
-                :selectedServer="server"
-                :clientOptions="clientOptions"
-                :securitySchemes="securitySchemes"
-                :selectedClient="store.workspace['x-scalar-default-client']"
-                :path="path"
-                fallback
-                :operation="operation"
-                @update:modelValue="handleDiscriminatorChange">
-                <template #header>
-                  <OperationPath
-                    class="font-code text-c-2 [&_em]:text-c-1 [&_em]:not-italic"
-                    :deprecated="operation?.deprecated"
-                    :path="path" />
-                </template>
-                <template
-                  #footer
-                  v-if="!isWebhook">
-                  <TestRequestButton
+              <VisibleOnIntersect>
+                <template #default>
+                  <RequestExample
+                    :clientOptions="clientOptions"
+                    fallback
                     :method="method"
-                    :path="path" />
+                    :operation="operation"
+                    :path="path"
+                    :securitySchemes="securitySchemes"
+                    :selectedClient="store.workspace['x-scalar-default-client']"
+                    :selectedServer="server"
+                    @update:modelValue="handleDiscriminatorChange">
+                    <template #header>
+                      <OperationPath
+                        class="font-code text-c-2 [&_em]:text-c-1 [&_em]:not-italic"
+                        :deprecated="operation?.deprecated"
+                        :path="path" />
+                    </template>
+                    <template
+                      v-if="!isWebhook"
+                      #footer>
+                      <TestRequestButton
+                        :method="method"
+                        :path="path" />
+                    </template>
+                  </RequestExample>
                 </template>
-              </RequestExample>
+                <template #placeholder>
+                  <div
+                    class="operation-example-card"
+                    style="min-height: 140px"></div>
+                </template>
+              </VisibleOnIntersect>
             </ScalarErrorBoundary>
 
             <ScalarErrorBoundary>

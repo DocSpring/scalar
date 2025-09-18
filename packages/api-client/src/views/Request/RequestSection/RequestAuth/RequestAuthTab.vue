@@ -213,7 +213,7 @@ const dataTableInputProps = {
             placeholder="janedoe"
             required
             @update:modelValue="(v) => updateScheme(scheme.uid, 'username', v)">
-            Username
+            API Token ID
           </RequestAuthDataTableInput>
         </DataTableRow>
         <DataTableRow>
@@ -223,7 +223,7 @@ const dataTableInputProps = {
             placeholder="********"
             type="password"
             @update:modelValue="(v) => updateScheme(scheme.uid, 'password', v)">
-            Password
+            API Token Secret
           </RequestAuthDataTableInput>
         </DataTableRow>
       </template>

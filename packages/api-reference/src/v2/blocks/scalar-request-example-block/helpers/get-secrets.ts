@@ -11,7 +11,8 @@ export const getSecrets = (securitySchemes: SecuritySchemeObject[]) =>
       if (scheme?.type === 'http') {
         return [
           scheme['x-scalar-secret-token'],
-          scheme['x-scalar-secret-username'],
+          // our API token IDs are not sensitive, so we want to show them
+          // scheme['x-scalar-secret-username'],
           scheme['x-scalar-secret-password'],
           btoa(`${scheme['x-scalar-secret-username']}:${scheme['x-scalar-secret-password']}`),
         ]

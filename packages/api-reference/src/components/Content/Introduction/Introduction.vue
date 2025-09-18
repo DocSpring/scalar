@@ -67,53 +67,58 @@ const { hash } = useNavState()
 <template>
   <Lazy
     id="introduction-card"
-    prev
-    :isLazy="Boolean(hash) && !hash.startsWith('description')">
+    :isLazy="Boolean(hash) && !hash.startsWith('description')"
+    prev>
     <IntroductionSection
-      :document="document"
-      :config="config">
-      <template #[introCardsSlot]>
+      :config="config"
+      :document="document">
+      <!-- Provide a full custom two-column layout -->
+      <template #columns>
         <ScalarErrorBoundary>
-          <div
-            class="introduction-card"
-            :class="{ 'introduction-card-row': config?.layout === 'classic' }">
-            <div
-              v-if="activeCollection?.servers?.length"
-              class="scalar-reference-intro-server scalar-client introduction-card-item text-base leading-normal [--scalar-address-bar-height:0px]">
-              <BaseUrl
-                :collection="activeCollection"
-                :server="activeServer" />
-            </div>
-            <div
-              v-if="
-                activeCollection &&
-                activeWorkspace &&
-                Object.keys(securitySchemes ?? {}).length
-              "
-              class="scalar-reference-intro-auth scalar-client introduction-card-item leading-normal">
-              <RequestAuth
-                :collection="activeCollection"
-                :envVariables="activeEnvVariables"
-                :environment="activeEnvironment"
-                layout="reference"
-                :persistAuth="config?.persistAuth"
-                :selectedSecuritySchemeUids="
-                  activeCollection?.selectedSecuritySchemeUids ?? []
+          <div class="section-columns custom-intro-columns">
+            <!-- Left: Client libraries and instructions -->
+            <div class="section-column">
+              <ClientLibraries
+                v-if="
+                  config?.hiddenClients !== true &&
+                  clientOptions.length &&
+                  store.workspace.activeDocument
                 "
-                :server="activeServer"
-                title="Authentication"
-                :workspace="activeWorkspace" />
+                :clientOptions
+                :document="store.workspace.activeDocument"
+                :selectedClient="store.workspace['x-scalar-default-client']" />
             </div>
-            <ClientLibraries
-              v-if="
-                config?.hiddenClients !== true &&
-                clientOptions.length &&
-                store.workspace.activeDocument
-              "
-              :clientOptions
-              :document="store.workspace.activeDocument"
-              :selectedClient="store.workspace['x-scalar-default-client']"
-              class="introduction-card-item scalar-reference-intro-clients" />
+            <!-- Right: Server and Authentication (slightly narrower) -->
+            <div class="section-column">
+              <div
+                v-if="activeCollection?.servers?.length"
+                class="scalar-reference-intro-server scalar-client text-base leading-normal [--scalar-address-bar-height:0px]">
+                <BaseUrl
+                  :collection="activeCollection"
+                  :server="activeServer" />
+              </div>
+              <div
+                v-if="
+                  activeCollection &&
+                  activeWorkspace &&
+                  Object.keys(securitySchemes ?? {}).length
+                "
+                class="scalar-reference-intro-auth scalar-client leading-normal">
+                <RequestAuth
+                  :collection="activeCollection"
+                  :envVariables="activeEnvVariables"
+                  :environment="activeEnvironment"
+                  layout="reference"
+                  :persistAuth="config?.persistAuth"
+                  :selectedSecuritySchemeUids="
+                    activeCollection?.selectedSecuritySchemeUids ?? []
+                  "
+                  :server="activeServer"
+                  title="Authentication"
+                  :workspace="activeWorkspace" />
+                <slot name="after-auth" />
+              </div>
+            </div>
           </div>
         </ScalarErrorBoundary>
       </template>
@@ -201,5 +206,32 @@ const { hash } = useNavState()
       + .scalar-card-content
   ) {
   margin-top: 0;
+}
+
+/* Custom two-column layout sizing: left wider, right slightly narrower */
+.custom-intro-columns {
+  display: flex;
+  gap: 48px;
+  margin-top: 3rem;
+}
+.custom-intro-columns > .section-column:first-of-type {
+  flex: 0 1 62%;
+  min-width: 0;
+}
+.custom-intro-columns > .section-column:last-of-type {
+  flex: 0 1 38%;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+@container narrow-references-container (max-width: 900px) {
+  .custom-intro-columns {
+    flex-direction: column;
+    gap: 24px;
+  }
+  .custom-intro-columns > .section-column {
+    flex: 1 1 auto;
+  }
 }
 </style>

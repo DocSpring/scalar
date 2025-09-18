@@ -1,29 +1,31 @@
 <script setup lang="ts">
 import { Tab } from '@headlessui/vue'
+import { findClient } from '@scalar/api-reference/v2/blocks/scalar-request-example-block/helpers/find-client'
+import type {
+  ClientOption,
+  ClientOptionGroup,
+} from '@scalar/api-reference/v2/blocks/scalar-request-example-block/types'
+import { emitCustomEvent } from '@scalar/api-reference/v2/events/definitions'
 import { ScalarCombobox, ScalarIcon } from '@scalar/components'
 import { freezeElement } from '@scalar/helpers/dom/freeze-element'
 import type { AvailableClients, TargetId } from '@scalar/types/snippetz'
 import { computed, ref } from 'vue'
 
-import { findClient } from '@/v2/blocks/scalar-request-example-block/helpers/find-client'
-import type {
-  ClientOption,
-  ClientOptionGroup,
-} from '@/v2/blocks/scalar-request-example-block/types'
-import { emitCustomEvent } from '@/v2/events/definitions'
-
-import { isFeaturedClient } from './featured-clients'
-
-const { selectedClient } = defineProps<{
+const props = defineProps<{
   /** Client options */
   clientOptions: ClientOptionGroup[]
   /** The currently selected Http Client */
-  selectedClient?: AvailableClients[number]
+  selectedClient?: AvailableClients[number] | string
   /** List of featured clients */
   featuredClients: ClientOption[]
   /** The id of the tab panel that contains for the non featured clients */
   morePanel?: string
 }>()
+
+// Use the DocSpring clients directly since they're already included in clientOptions from generate-client-options
+const enhancedClientOptions = computed(() => {
+  return props.clientOptions
+})
 
 const containerRef = ref<HTMLElement>()
 
@@ -31,8 +33,11 @@ const containerRef = ref<HTMLElement>()
  * Icons have longer names to appear in icon searches, e.g. "javascript-js" instead of just "javascript". This function
  * maps the language key to the icon name.
  */
-const getIconByLanguageKey = (targetKey: TargetId) =>
-  `programming-language-${targetKey === 'js' ? 'javascript' : targetKey}` as const
+const getIconByLanguageKey = (targetKey: TargetId) => {
+  const key = targetKey === 'js' ? 'javascript' : targetKey
+  // elixir now uses a custom droplet icon: programming-language-elixir
+  return `programming-language-${key}` as const
+}
 
 /** Set custom example, or update the selected HTTP client globally */
 const selectClient = (option: ClientOption) => {
@@ -56,8 +61,13 @@ const selectClient = (option: ClientOption) => {
 
 /** Calculates the targetKey from the selected client id */
 const selectedTargetKey = computed(
-  () => selectedClient?.split('/')[0] as TargetId | undefined,
+  () => props.selectedClient?.split('/')[0] as TargetId | undefined,
 )
+
+/** Find the currently selected client for the combobox */
+const comboboxSelectedValue = computed(() => {
+  return findClient(enhancedClientOptions.value, props.selectedClient)
+})
 </script>
 <template>
   <div
@@ -69,7 +79,8 @@ const selectedTargetKey = computed(
       class="client-libraries rendered-code-sdks"
       :class="{
         'client-libraries__active': featuredClient.id === selectedClient,
-      }">
+      }"
+      @click="selectClient(featuredClient)">
       <div :class="`client-libraries-icon__${featuredClient.targetKey}`">
         <ScalarIcon
           class="client-libraries-icon"
@@ -82,25 +93,31 @@ const selectedTargetKey = computed(
 
     <!-- Client Dropdown -->
     <ScalarCombobox
-      :options="clientOptions"
-      :modelValue="findClient(clientOptions, selectedClient)"
-      @update:modelValue="selectClient($event as ClientOption)"
+      class="client-selector-dropdown"
+      :modelValue="comboboxSelectedValue"
+      :options="enhancedClientOptions"
       placement="bottom-end"
-      teleport>
+      teleport
+      @update:modelValue="selectClient($event as ClientOption)">
       <button
         class="client-libraries client-libraries__select"
         :class="{
           'client-libraries__active':
-            selectedClient && !isFeaturedClient(selectedClient),
+            selectedClient &&
+            !featuredClients.some((c) => c.id === selectedClient),
         }">
         <div
           aria-hidden="true"
           class="client-libraries-icon__more">
-          <template v-if="selectedClient && !isFeaturedClient(selectedClient)">
+          <template
+            v-if="
+              selectedClient &&
+              !featuredClients.some((c) => c.id === selectedClient)
+            ">
             <div :class="`client-libraries-icon__${selectedTargetKey}`">
               <ScalarIcon
-                class="client-libraries-icon"
                 v-if="selectedTargetKey"
+                class="client-libraries-icon"
                 :icon="getIconByLanguageKey(selectedTargetKey)" />
             </div>
           </template>
@@ -135,9 +152,11 @@ const selectedTargetKey = computed(
 .client-libraries-content {
   container: client-libraries-content / inline-size;
   display: flex;
-  justify-content: center;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 6px;
   overflow: hidden;
-  padding: 0 12px;
+  padding: 6px 12px 0;
   background-color: var(--scalar-background-1);
   border-left: var(--scalar-border-width) solid var(--scalar-border-color);
   border-right: var(--scalar-border-width) solid var(--scalar-border-color);
@@ -146,11 +165,11 @@ const selectedTargetKey = computed(
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
+  width: auto;
   position: relative;
   cursor: pointer;
   white-space: nowrap;
-  padding: 8px 2px;
+  padding: 6px 8px;
   gap: 6px;
   color: var(--scalar-color-3);
   border-bottom: 1px solid transparent;
@@ -175,17 +194,11 @@ const selectedTargetKey = computed(
   outline: none;
   box-shadow: inset 0 0 0 1px var(--scalar-color-accent);
 }
-/* remove php and c on mobile */
-@media screen and (max-width: 450px) {
-  .client-libraries:nth-of-type(4),
-  .client-libraries:nth-of-type(5) {
-    display: none;
-  }
-}
+/* allow wrapping instead of hiding on small screens */
 .client-libraries-icon {
-  max-width: 14px;
-  max-height: 14px;
-  min-width: 14px;
+  max-width: 22px;
+  max-height: 22px;
+  min-width: 22px;
   width: 100%;
   aspect-ratio: 1;
   display: flex;
@@ -207,10 +220,7 @@ const selectedTargetKey = computed(
     }
   }
 }
-@container client-libraries-content (width < 380px) {
-  .client-libraries {
-    width: 100%;
-  }
+@container client-libraries-content (width < 420px) {
   .client-libraries span {
     display: none;
   }

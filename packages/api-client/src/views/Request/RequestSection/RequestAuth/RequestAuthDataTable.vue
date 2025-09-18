@@ -63,6 +63,12 @@ const hasActiveSchemes = computed(() => {
   return activeScheme.value.length > 0
 })
 
+/** Compute the API tokens URL based on the selected server */
+const apiTokensUrl = computed(() => {
+  const subdomain = server?.url?.includes('-eu.') ? 'app-eu' : 'app'
+  return `https://${subdomain}.docspring.com/api_tokens`
+})
+
 watch(
   () => selectedSchemeOptions,
   (newOptions) => {
@@ -112,6 +118,33 @@ watch(
         :securitySchemeUids="activeScheme"
         :server="server"
         :workspace="workspace" />
+      <!-- API Tokens link for DocSpring -->
+      <div
+        v-if="
+          layout === 'reference' &&
+          selectedSchemeOptions.some(
+            (opt) => opt.label === 'API Token via Basic Auth',
+          )
+        "
+        class="api-tokens-footer">
+        <a
+          class="api-tokens-link"
+          :href="apiTokensUrl"
+          rel="noopener noreferrer"
+          target="_blank">
+          Manage API tokens in DocSpring
+          <svg
+            aria-hidden="true"
+            class="api-tokens-icon"
+            fill="currentColor"
+            height="16"
+            viewBox="0 0 24 24"
+            width="16">
+            <path
+              d="M17.92 11.62a1.001 1.001 0 0 0-.21-.33l-5-5a1.003 1.003 0 1 0-1.42 1.42l3.3 3.29H7a1 1 0 0 0 0 2h7.59l-3.3 3.29a1.002 1.002 0 0 0 .325 1.639 1 1 0 0 0 1.095-.219l5-5a1 1 0 0 0 .21-.33 1 1 0 0 0 0-.76Z"></path>
+          </svg>
+        </a>
+      </div>
     </DataTable>
 
     <div
@@ -184,6 +217,32 @@ watch(
   15% {
     opacity: 1;
   }
+}
+
+/* API Tokens footer styles */
+.api-tokens-footer {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0.5rem 1rem;
+  border-top: 1px solid var(--scalar-border-color);
+}
+
+.api-tokens-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  color: var(--sl-color-gray-3);
+  text-decoration: none;
+  font-size: var(--scalar-font-size-4);
+  transition: color 0.15s ease;
+}
+
+.api-tokens-link:hover {
+  color: var(--sl-color-text-accent);
+}
+
+.api-tokens-icon {
+  flex-shrink: 0;
 }
 
 /* .references-auth-data-table :deep(table td) {
