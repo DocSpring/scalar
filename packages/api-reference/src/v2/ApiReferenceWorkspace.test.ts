@@ -3,7 +3,7 @@ import { flushPromises, mount, type VueWrapper } from '@vue/test-utils'
 import { nextTick } from 'vue'
 import ApiReferenceWorkspace from './ApiReferenceWorkspace.vue'
 import type { WorkspaceStore } from '@scalar/workspace-store/client'
-import { createMockLocalStorage, createMockStore } from '@/helpers/test-utils'
+import { createMockLocalStorage, createMockStore } from '@scalar/api-reference/helpers/test-utils'
 import { REFERENCE_LS_KEYS } from '@scalar/helpers/object/local-storage'
 
 // vi.mock('@scalar/oas-utils/helpers', async () => ({
@@ -14,15 +14,15 @@ vi.mock('@unhead/vue', () => ({
   useSeoMeta: vi.fn(),
 }))
 
-vi.mock('@/v2/events')
+vi.mock('@scalar/api-reference/v2/events')
 
 vi.mock('@vueuse/core', async () => ({
   ...(await import('@vueuse/core')),
   useFavicon: vi.fn(),
 }))
 
-vi.mock('@/hooks/useNavState', async () => ({
-  ...(await import('@/hooks/useNavState')),
+vi.mock('@scalar/api-reference/hooks/useNavState', async () => ({
+  ...(await import('@scalar/api-reference/hooks/useNavState')),
   NAV_STATE_SYMBOL: Symbol('nav-state'),
 }))
 
@@ -191,7 +191,7 @@ describe('ApiReferenceWorkspace', () => {
     })
 
     it('handles dark mode toggle event', async () => {
-      const { onCustomEvent } = await import('@/v2/events')
+      const { onCustomEvent } = await import('@scalar/api-reference/v2/events')
       const mockOnCustomEvent = vi.mocked(onCustomEvent)
 
       wrapper = mount(ApiReferenceWorkspace, {
@@ -245,7 +245,7 @@ describe('ApiReferenceWorkspace', () => {
     })
 
     it('handles client selection event', async () => {
-      const { onCustomEvent } = await import('@/v2/events')
+      const { onCustomEvent } = await import('@scalar/api-reference/v2/events')
       const mockOnCustomEvent = vi.mocked(onCustomEvent)
 
       wrapper = mount(ApiReferenceWorkspace, {
@@ -269,7 +269,7 @@ describe('ApiReferenceWorkspace', () => {
 
   describe('document selection', () => {
     it('handles active document update event', async () => {
-      const { onCustomEvent } = await import('@/v2/events')
+      const { onCustomEvent } = await import('@scalar/api-reference/v2/events')
       const mockOnCustomEvent = vi.mocked(onCustomEvent)
 
       wrapper = mount(ApiReferenceWorkspace, {

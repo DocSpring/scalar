@@ -4,11 +4,10 @@ import {
   ServerVariablesForm,
 } from '@scalar/api-client/components/Server'
 import { useWorkspace } from '@scalar/api-client/store'
+import { useConfig } from '@scalar/api-reference/hooks/useConfig'
 import { ScalarMarkdown } from '@scalar/components'
 import type { Collection, Server } from '@scalar/oas-utils/entities/spec'
 import { useId } from 'vue'
-
-import { useConfig } from '@/hooks/useConfig'
 
 const { collection, server } = defineProps<{
   collection: Collection

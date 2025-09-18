@@ -11,7 +11,7 @@ import { AVAILABLE_CLIENTS, type ClientId, type TargetId } from '@scalar/snippet
 import { beforeEach, describe, expect, it } from 'vitest'
 
 import { getSnippet } from './get-snippet'
-import { getHarRequest } from '@/views/Components/CodeSnippet/helpers/get-har-request'
+import { getHarRequest } from '@scalar/api-client/views/Components/CodeSnippet/helpers/get-har-request'
 
 describe('getSnippet', () => {
   let operation: Operation

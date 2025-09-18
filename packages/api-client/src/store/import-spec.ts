@@ -1,5 +1,5 @@
-import { type ErrorResponse, normalizeError } from '@/libs'
-import type { StoreContext } from '@/store/store-context'
+import { type ErrorResponse, normalizeError } from '@scalar/api-client/libs'
+import type { StoreContext } from '@scalar/api-client/store/store-context'
 import type { Workspace } from '@scalar/oas-utils/entities/workspace'
 import { createHash, fetchDocument } from '@scalar/oas-utils/helpers'
 import { type ImportSpecToWorkspaceArgs, importSpecToWorkspace } from '@scalar/oas-utils/transforms'

@@ -1,10 +1,9 @@
 <script setup lang="ts">
+import IconSelector from '@scalar/api-client/components/IconSelector.vue'
+import SidebarListElementForm from '@scalar/api-client/components/Sidebar/Actions/SidebarListElementForm.vue'
 import { ScalarButton, ScalarTextInput } from '@scalar/components'
 import { LibraryIcon } from '@scalar/icons/library'
 import { ref } from 'vue'
-
-import IconSelector from '@/components/IconSelector.vue'
-import SidebarListElementForm from '@/components/Sidebar/Actions/SidebarListElementForm.vue'
 
 const props = defineProps<{
   name: string

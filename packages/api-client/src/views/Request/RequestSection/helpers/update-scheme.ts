@@ -1,7 +1,7 @@
 import type { SecurityScheme } from '@scalar/oas-utils/entities/spec'
 import type { Path, PathValue } from '@scalar/object-utils/nested'
 import { CLIENT_LS_KEYS, safeLocalStorage } from '@scalar/helpers/object/local-storage'
-import type { WorkspaceStore } from '@/store/store'
+import type { WorkspaceStore } from '@scalar/api-client/store/store'
 
 /** Shape of the local storage auth object */
 export type Auth<P extends Path<SecurityScheme>> = Record<string, Record<P, NonNullable<PathValue<SecurityScheme, P>>>>

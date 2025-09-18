@@ -7,9 +7,8 @@
     // TODO: Reenable when we can fix all the issues
     "exactOptionalPropertyTypes": false,
     "paths": {
-      "@/*": ["./src/*"],
-      "@v2/*": ["./src/v2/*"],
-      "@test/*": ["./test/*"]
+      "@scalar/api-reference/*": ["./src/*"],
+      "@scalar/api-reference-test/*": ["./test/*"]
     },
     "types": ["vite/client", "node"]
   }

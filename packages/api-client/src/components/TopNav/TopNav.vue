@@ -1,4 +1,9 @@
 <script setup lang="ts">
+import ScalarHotkey from '@scalar/api-client/components/ScalarHotkey.vue'
+import { ROUTES } from '@scalar/api-client/constants'
+import type { HotKeyEvent } from '@scalar/api-client/libs'
+import { useWorkspace } from '@scalar/api-client/store'
+import { useActiveEntities } from '@scalar/api-client/store/active-entities'
 import {
   ScalarContextMenu,
   ScalarDropdownButton,
@@ -12,12 +17,6 @@ import type { Collection } from '@scalar/oas-utils/entities/spec'
 import { useClipboard } from '@scalar/use-hooks/useClipboard'
 import { computed, onBeforeUnmount, onMounted, reactive, ref, watch } from 'vue'
 import { useRouter } from 'vue-router'
-
-import ScalarHotkey from '@/components/ScalarHotkey.vue'
-import { ROUTES } from '@/constants'
-import type { HotKeyEvent } from '@/libs'
-import { useWorkspace } from '@/store'
-import { useActiveEntities } from '@/store/active-entities'
 
 import TopNavItem from './TopNavItem.vue'
 

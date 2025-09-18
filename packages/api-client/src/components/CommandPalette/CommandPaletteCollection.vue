@@ -1,12 +1,11 @@
 <script setup lang="ts">
+import IconSelector from '@scalar/api-client/components/IconSelector.vue'
+import { useWorkspace } from '@scalar/api-client/store'
+import { useActiveEntities } from '@scalar/api-client/store/active-entities'
 import { ScalarButton } from '@scalar/components'
 import { LibraryIcon } from '@scalar/icons/library'
 import { useToasts } from '@scalar/use-toasts'
 import { ref } from 'vue'
-
-import IconSelector from '@/components/IconSelector.vue'
-import { useWorkspace } from '@/store'
-import { useActiveEntities } from '@/store/active-entities'
 
 import CommandActionForm from './CommandActionForm.vue'
 import CommandActionInput from './CommandActionInput.vue'

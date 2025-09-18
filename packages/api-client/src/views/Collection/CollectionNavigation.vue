@@ -1,10 +1,9 @@
 <script setup lang="ts">
+import { PathId } from '@scalar/api-client/routes'
+import { useActiveEntities } from '@scalar/api-client/store'
 import { LibraryIcon } from '@scalar/icons/library'
 import { computed } from 'vue'
 import { RouterLink, useRouter, type RouteLocationNamedRaw } from 'vue-router'
-
-import { PathId } from '@/routes'
-import { useActiveEntities } from '@/store'
 
 import CollectionInfoForm from './CollectionInfoForm.vue'
 

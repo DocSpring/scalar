@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import Keycap from '@/assets/keycap.ascii?raw'
+import Keycap from '@scalar/api-client/assets/keycap.ascii?raw'
 
 import ScalarAsciiArt from './ScalarAsciiArt.vue'
 import ScalarHotkey from './ScalarHotkey.vue'

@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import type { TraversedEntry } from '@/features/traverse-schema/types'
+import type { TraversedEntry } from '@scalar/api-reference/features/traverse-schema/types'
 import { getCurrentIndex } from './get-current-index'
 
 // Mock data for testing

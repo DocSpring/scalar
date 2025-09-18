@@ -1,4 +1,4 @@
-import { isTextMediaType } from '@/views/Request/consts'
+import { isTextMediaType } from '@scalar/api-client/views/Request/consts'
 import MimeTypeParser from 'whatwg-mimetype'
 
 // TODO: This should return `unknown` to acknowledge we don't know type, shouldn't it?

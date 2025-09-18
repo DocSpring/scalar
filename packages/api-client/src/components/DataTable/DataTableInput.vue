@@ -1,12 +1,11 @@
 <script setup lang="ts">
+import CodeInput from '@scalar/api-client/components/CodeInput/CodeInput.vue'
+import type { EnvVariable } from '@scalar/api-client/store/active-entities'
+import type { VueClassProp } from '@scalar/api-client/types/vue'
 import { ScalarIconButton } from '@scalar/components'
 import type { Environment } from '@scalar/oas-utils/entities/environment'
 import type { Workspace } from '@scalar/oas-utils/entities/workspace'
 import { computed, ref } from 'vue'
-
-import CodeInput from '@/components/CodeInput/CodeInput.vue'
-import type { EnvVariable } from '@/store/active-entities'
-import type { VueClassProp } from '@/types/vue'
 
 import DataTableCell from './DataTableCell.vue'
 import DataTableInputSelect from './DataTableInputSelect.vue'

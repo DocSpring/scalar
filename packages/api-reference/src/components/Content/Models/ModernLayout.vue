@@ -1,18 +1,17 @@
 <script setup lang="ts">
-import { ScalarErrorBoundary } from '@scalar/components'
-import type { OpenAPIV3_1 } from '@scalar/openapi-types'
-import { computed, useId } from 'vue'
-
 import {
   CompactSection,
   Section,
   SectionContainer,
   SectionHeader,
   SectionHeaderTag,
-} from '@/components/Section'
-import ShowMoreButton from '@/components/ShowMoreButton.vue'
-import { useSidebar } from '@/features/sidebar'
-import { useNavState } from '@/hooks/useNavState'
+} from '@scalar/api-reference/components/Section'
+import ShowMoreButton from '@scalar/api-reference/components/ShowMoreButton.vue'
+import { useSidebar } from '@scalar/api-reference/features/sidebar'
+import { useNavState } from '@scalar/api-reference/hooks/useNavState'
+import { ScalarErrorBoundary } from '@scalar/components'
+import type { OpenAPIV3_1 } from '@scalar/openapi-types'
+import { computed, useId } from 'vue'
 
 import { Schema, SchemaHeading } from '../Schema'
 

@@ -5,16 +5,22 @@ import { createWorkspaceStore } from '@scalar/workspace-store/client'
 import { mount } from '@vue/test-utils'
 import { describe, expect, it, vi } from 'vitest'
 
-import type { TraversedEntry, TraversedOperation, TraversedTag } from '@/features/traverse-schema'
-import type { TraversedWebhook } from '@/features/traverse-schema/types'
+import type { TraversedEntry, TraversedOperation, TraversedTag } from '@scalar/api-reference/features/traverse-schema'
+import type { TraversedWebhook } from '@scalar/api-reference/features/traverse-schema/types'
 
 import TraversedEntryComponent from './TraversedEntry.vue'
-import { createMockNavState, createMockPluginManager, createMockSidebar } from '@/helpers/test-utils'
-import { useNavState } from '@/hooks/useNavState'
+import {
+  createMockNavState,
+  createMockPluginManager,
+  createMockSidebar,
+} from '@scalar/api-reference/helpers/test-utils'
+import { useNavState } from '@scalar/api-reference/hooks/useNavState'
 
-vi.mock('@/features/sidebar', () => ({ useSidebar: vi.fn(() => createMockSidebar()) }))
-vi.mock('@/hooks/useNavState', () => ({ useNavState: vi.fn(() => createMockNavState('')) }))
-vi.mock('@/plugins/hooks/usePluginManager', () => ({ usePluginManager: () => createMockPluginManager() }))
+vi.mock('@scalar/api-reference/features/sidebar', () => ({ useSidebar: vi.fn(() => createMockSidebar()) }))
+vi.mock('@scalar/api-reference/hooks/useNavState', () => ({ useNavState: vi.fn(() => createMockNavState('')) }))
+vi.mock('@scalar/api-reference/plugins/hooks/usePluginManager', () => ({
+  usePluginManager: () => createMockPluginManager(),
+}))
 
 vi.mock('@scalar/api-client/store', () => ({
   useWorkspace: () => ({

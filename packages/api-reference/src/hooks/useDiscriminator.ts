@@ -1,4 +1,4 @@
-import type { Schemas } from '@/features/Operation/types/schemas'
+import type { Schemas } from '@scalar/api-reference/features/Operation/types/schemas'
 import type { OpenAPIV3_1 } from '@scalar/openapi-types'
 
 import { computed, ref, watch, type InjectionKey, type ComputedRef } from 'vue'

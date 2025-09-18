@@ -1,5 +1,5 @@
-import { findDataAttributes, getConfigurationFromDataAttributes } from '@/standalone/lib/html-api'
-import { registerGlobals } from '@/standalone/lib/register-globals'
+import { findDataAttributes, getConfigurationFromDataAttributes } from '@scalar/api-reference/standalone/lib/html-api'
+import { registerGlobals } from '@scalar/api-reference/standalone/lib/register-globals'
 
 // Log the package version
 if (process.env.SCALAR_API_REFERENCE_VERSION) {

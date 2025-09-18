@@ -1,4 +1,8 @@
-import type { TraversedEntry, TraversedOperation, TraversedTag } from '@/features/traverse-schema/types'
+import type {
+  TraversedEntry,
+  TraversedOperation,
+  TraversedTag,
+} from '@scalar/api-reference/features/traverse-schema/types'
 import type { HttpMethod } from '@scalar/helpers/http/http-methods'
 import type { OpenAPIV3_1 } from '@scalar/openapi-types'
 import type { TagGroup } from '@scalar/types/legacy'

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import SidebarListElementActions from '@scalar/api-client/components/Sidebar/SidebarListElementActions.vue'
 import { ScalarIcon, type Icon } from '@scalar/components'
 import {
   Draggable,
@@ -8,8 +9,6 @@ import {
 } from '@scalar/draggable'
 import { computed, ref } from 'vue'
 import { useRouter, type RouteLocationRaw } from 'vue-router'
-
-import SidebarListElementActions from '@/components/Sidebar/SidebarListElementActions.vue'
 
 const {
   isDraggable = false,

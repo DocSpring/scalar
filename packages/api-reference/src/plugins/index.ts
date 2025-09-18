@@ -2,6 +2,6 @@ export {
   createPluginManager,
   type ApiReferencePlugin,
   type PluginManager,
-} from '@/plugins/plugin-manager'
+} from '@scalar/api-reference/plugins/plugin-manager'
 
-export { PLUGIN_MANAGER_SYMBOL, usePluginManager } from '@/plugins/hooks/usePluginManager'
+export { PLUGIN_MANAGER_SYMBOL, usePluginManager } from '@scalar/api-reference/plugins/hooks/usePluginManager'

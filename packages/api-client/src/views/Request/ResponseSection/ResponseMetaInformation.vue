@@ -1,12 +1,11 @@
 <script lang="ts" setup>
+import HelpfulLink from '@scalar/api-client/components/HelpfulLink.vue'
+import { useWorkspace } from '@scalar/api-client/store'
 import type { ResponseInstance } from '@scalar/oas-utils/entities/spec'
 import { httpStatusCodes, type HttpStatusCode } from '@scalar/oas-utils/helpers'
 import prettyBytes from 'pretty-bytes'
 import prettyMilliseconds from 'pretty-ms'
 import { computed, ref } from 'vue'
-
-import HelpfulLink from '@/components/HelpfulLink.vue'
-import { useWorkspace } from '@/store'
 
 const props = defineProps<{ response: ResponseInstance }>()
 

@@ -1,13 +1,12 @@
 <script setup lang="ts">
+import Form from '@scalar/api-client/components/Form/Form.vue'
+import ServerVariablesForm from '@scalar/api-client/components/Server/ServerVariablesForm.vue'
+import type { ServerVariables } from '@scalar/api-client/components/Server/types'
+import { useWorkspace } from '@scalar/api-client/store'
+import { useActiveEntities } from '@scalar/api-client/store/active-entities'
 import type { Server } from '@scalar/oas-utils/entities/spec'
 import { REGEX } from '@scalar/oas-utils/helpers'
 import { computed, watch } from 'vue'
-
-import Form from '@/components/Form/Form.vue'
-import ServerVariablesForm from '@/components/Server/ServerVariablesForm.vue'
-import type { ServerVariables } from '@/components/Server/types'
-import { useWorkspace } from '@/store'
-import { useActiveEntities } from '@/store/active-entities'
 
 const props = withDefaults(
   defineProps<{

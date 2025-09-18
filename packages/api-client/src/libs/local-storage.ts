@@ -1,4 +1,4 @@
-import type { WorkspaceStore } from '@/store'
+import type { WorkspaceStore } from '@scalar/api-client/store'
 import { cookieSchema } from '@scalar/oas-utils/entities/cookie'
 import { environmentSchema } from '@scalar/oas-utils/entities/environment'
 import {

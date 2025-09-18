@@ -1,17 +1,19 @@
 <script setup lang="ts">
 import { useActiveEntities, useWorkspace } from '@scalar/api-client/store'
+import { getCurrentIndex } from '@scalar/api-reference/components/Content/Operations/get-current-index'
+import {
+  hasLazyLoaded,
+  lazyBus,
+} from '@scalar/api-reference/components/Lazy/lazyBus'
+import { useSidebar } from '@scalar/api-reference/features/sidebar'
+import { useNavState } from '@scalar/api-reference/hooks/useNavState'
+import type { ClientOptionGroup } from '@scalar/api-reference/v2/blocks/scalar-request-example-block/types'
 import { freezeAtTop } from '@scalar/helpers/dom/freeze-at-top'
 import { getSlugUid } from '@scalar/oas-utils/transforms'
 import type { OpenAPIV3_1 } from '@scalar/openapi-types'
 import type { ApiReferenceConfiguration } from '@scalar/types'
 import type { WorkspaceStore } from '@scalar/workspace-store/client'
-import { computed, ref } from 'vue'
-
-import { getCurrentIndex } from '@/components/Content/Operations/get-current-index'
-import { hasLazyLoaded, lazyBus } from '@/components/Lazy/lazyBus'
-import { useSidebar } from '@/features/sidebar'
-import { useNavState } from '@/hooks/useNavState'
-import type { ClientOptionGroup } from '@/v2/blocks/scalar-request-example-block/types'
+import { computed, ref, watch } from 'vue'
 
 import TraversedEntry from './TraversedEntry.vue'
 

@@ -1,4 +1,8 @@
 <script setup lang="ts">
+import SectionFilter from '@scalar/api-client/components/SectionFilter.vue'
+import ViewLayoutSection from '@scalar/api-client/components/ViewLayout/ViewLayoutSection.vue'
+import type { SendRequestResult } from '@scalar/api-client/libs/send-request/create-request-operation'
+import { usePluginManager } from '@scalar/api-client/plugins'
 import { ScalarErrorBoundary } from '@scalar/components'
 import type {
   Collection,
@@ -7,11 +11,6 @@ import type {
 } from '@scalar/oas-utils/entities/spec'
 import type { Workspace } from '@scalar/oas-utils/entities/workspace'
 import { computed, ref, useId } from 'vue'
-
-import SectionFilter from '@/components/SectionFilter.vue'
-import ViewLayoutSection from '@/components/ViewLayout/ViewLayoutSection.vue'
-import type { SendRequestResult } from '@/libs/send-request/create-request-operation'
-import { usePluginManager } from '@/plugins'
 
 import RequestHeaders from './RequestHeaders.vue'
 import ResponseBody from './ResponseBody.vue'

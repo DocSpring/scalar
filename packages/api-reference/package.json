@@ -44,14 +44,15 @@
     "types:check": "scalar-types-check-vue"
   },
   "type": "module",
-  "main": "./dist/index.js",
-  "types": "./dist/index.d.ts",
+  "main": "./src/direct-export.ts",
+  "types": "./src/direct-export.ts",
   "exports": {
-    ".": "./dist/index.js",
+    ".": "./src/direct-export.ts",
     "./style.css": "./dist/style.css",
     "./browser/standalone.js": "./dist/browser/standalone.js"
   },
   "files": [
+    "src",
     "dist",
     "!dist/webpack-stats.json",
     "CHANGELOG.md"
@@ -60,7 +61,7 @@
   "esm.sh": {
     "bundle": true
   },
-  "module": "./dist/index.js",
+  "module": "./src/direct-export.ts",
   "dependencies": {
     "@floating-ui/vue": "catalog:*",
     "@headlessui/vue": "catalog:*",

@@ -1,13 +1,12 @@
 <script setup lang="ts">
-import { sleep } from '@scalar/helpers/testing/sleep'
-import { onMounted, onUnmounted, ref, watch } from 'vue'
-
-import type { TraversedEntry } from '@/features/traverse-schema'
+import type { TraversedEntry } from '@scalar/api-reference/features/traverse-schema'
 import type {
   TraversedDescription,
   TraversedTag,
-} from '@/features/traverse-schema/types'
-import { useNavState } from '@/hooks/useNavState'
+} from '@scalar/api-reference/features/traverse-schema/types'
+import { useNavState } from '@scalar/api-reference/hooks/useNavState'
+import { sleep } from '@scalar/helpers/testing/sleep'
+import { onMounted, onUnmounted, ref, watch } from 'vue'
 
 import { useSidebar } from '../hooks/useSidebar'
 import SidebarElement from './SidebarElement.vue'

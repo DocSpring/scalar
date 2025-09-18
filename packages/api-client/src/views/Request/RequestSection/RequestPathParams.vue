@@ -1,14 +1,13 @@
 <script setup lang="ts">
+import ViewLayoutCollapse from '@scalar/api-client/components/ViewLayout/ViewLayoutCollapse.vue'
+import { useWorkspace } from '@scalar/api-client/store'
+import type { EnvVariable } from '@scalar/api-client/store/active-entities'
+import RequestTable from '@scalar/api-client/views/Request/RequestSection/RequestTable.vue'
 import type { Environment } from '@scalar/oas-utils/entities/environment'
 import type { Operation, RequestExample } from '@scalar/oas-utils/entities/spec'
 import type { Workspace } from '@scalar/oas-utils/entities/workspace'
 import { REGEX } from '@scalar/oas-utils/helpers'
 import { computed, watch } from 'vue'
-
-import ViewLayoutCollapse from '@/components/ViewLayout/ViewLayoutCollapse.vue'
-import { useWorkspace } from '@/store'
-import type { EnvVariable } from '@/store/active-entities'
-import RequestTable from '@/views/Request/RequestSection/RequestTable.vue'
 
 const {
   example,

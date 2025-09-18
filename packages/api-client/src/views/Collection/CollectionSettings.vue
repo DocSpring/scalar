@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import DeleteSidebarListElement from '@scalar/api-client/components/Sidebar/Actions/DeleteSidebarListElement.vue'
+import { PathId } from '@scalar/api-client/router'
+import { useActiveEntities, useWorkspace } from '@scalar/api-client/store'
 import {
   ScalarButton,
   ScalarIcon,
@@ -7,10 +10,6 @@ import {
   useModal,
 } from '@scalar/components'
 import { useRouter } from 'vue-router'
-
-import DeleteSidebarListElement from '@/components/Sidebar/Actions/DeleteSidebarListElement.vue'
-import { PathId } from '@/router'
-import { useActiveEntities, useWorkspace } from '@/store'
 
 const { activeCollection, activeWorkspace, activeWorkspaceCollections } =
   useActiveEntities()

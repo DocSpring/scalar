@@ -1,10 +1,9 @@
 <script setup lang="ts">
+import ViewLayoutCollapse from '@scalar/api-client/components/ViewLayout/ViewLayoutCollapse.vue'
+import { useResponseBody } from '@scalar/api-client/hooks/useResponseBody'
 import { ScalarVirtualText } from '@scalar/components'
 import { formatJsonOrYamlString } from '@scalar/oas-utils/helpers'
 import { computed, toRef } from 'vue'
-
-import ViewLayoutCollapse from '@/components/ViewLayout/ViewLayoutCollapse.vue'
-import { useResponseBody } from '@/hooks/useResponseBody'
 
 import ResponseBodyDownload from './ResponseBodyDownload.vue'
 

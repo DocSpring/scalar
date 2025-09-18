@@ -6,6 +6,31 @@ import {
   ACTIVE_ENTITIES_SYMBOL,
   WORKSPACE_SYMBOL,
 } from '@scalar/api-client/store'
+import ClassicHeader from '@scalar/api-reference/components/ClassicHeader.vue'
+import { Content } from '@scalar/api-reference/components/Content'
+import GettingStarted from '@scalar/api-reference/components/GettingStarted.vue'
+import { hasLazyLoaded } from '@scalar/api-reference/components/Lazy/lazyBus'
+import MobileHeader from '@scalar/api-reference/components/MobileHeader.vue'
+import { ApiClientModal } from '@scalar/api-reference/features/api-client-modal'
+import { useDocumentSource } from '@scalar/api-reference/features/document-source'
+import { OPENAPI_VERSION_SYMBOL } from '@scalar/api-reference/features/download-link'
+import { SearchButton } from '@scalar/api-reference/features/Search'
+import { Sidebar, useSidebar } from '@scalar/api-reference/features/sidebar'
+import { CONFIGURATION_SYMBOL } from '@scalar/api-reference/hooks/useConfig'
+import { useNavState } from '@scalar/api-reference/hooks/useNavState'
+import {
+  downloadDocument,
+  downloadEventBus,
+} from '@scalar/api-reference/libs/download'
+import {
+  createPluginManager,
+  PLUGIN_MANAGER_SYMBOL,
+} from '@scalar/api-reference/plugins'
+import type {
+  ReferenceLayoutProps,
+  ReferenceLayoutSlot,
+  ReferenceSlotProps,
+} from '@scalar/api-reference/types'
 import {
   addScalarClassesToHeadless,
   ScalarColorModeToggleButton,
@@ -34,26 +59,6 @@ import {
   useId,
   watch,
 } from 'vue'
-
-import ClassicHeader from '@/components/ClassicHeader.vue'
-import { Content } from '@/components/Content'
-import GettingStarted from '@/components/GettingStarted.vue'
-import { hasLazyLoaded } from '@/components/Lazy/lazyBus'
-import MobileHeader from '@/components/MobileHeader.vue'
-import { ApiClientModal } from '@/features/api-client-modal'
-import { useDocumentSource } from '@/features/document-source'
-import { OPENAPI_VERSION_SYMBOL } from '@/features/download-link'
-import { SearchButton } from '@/features/Search'
-import { Sidebar, useSidebar } from '@/features/sidebar'
-import { CONFIGURATION_SYMBOL } from '@/hooks/useConfig'
-import { useNavState } from '@/hooks/useNavState'
-import { downloadDocument, downloadEventBus } from '@/libs/download'
-import { createPluginManager, PLUGIN_MANAGER_SYMBOL } from '@/plugins'
-import type {
-  ReferenceLayoutProps,
-  ReferenceLayoutSlot,
-  ReferenceSlotProps,
-} from '@/types'
 
 const {
   rawSpec,

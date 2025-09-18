@@ -1,9 +1,8 @@
 <script lang="ts" setup>
 import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/vue'
+import SchemaProperty from '@scalar/api-reference/components/Content/Schema/SchemaProperty.vue'
 import { ScalarIcon } from '@scalar/components'
 import type { OpenAPIV3_1 } from '@scalar/openapi-types'
-
-import SchemaProperty from '@/components/Content/Schema/SchemaProperty.vue'
 
 defineProps<{
   headers: { [key: string]: OpenAPIV3_1.HeaderObject }

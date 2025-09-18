@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { HttpMethod } from '@/components/HttpMethod'
+import { HttpMethod } from '@scalar/api-reference/components/HttpMethod'
 
 defineProps<{
   method: string

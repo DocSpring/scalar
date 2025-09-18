@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { TheCommandPalette } from '@/components/CommandPalette'
-import SideNav from '@/components/SideNav/SideNav.vue'
-import { useLayout } from '@/hooks'
+import { TheCommandPalette } from '@scalar/api-client/components/CommandPalette'
+import SideNav from '@scalar/api-client/components/SideNav/SideNav.vue'
+import { useLayout } from '@scalar/api-client/hooks'
 
 const { layout } = useLayout()
 </script>

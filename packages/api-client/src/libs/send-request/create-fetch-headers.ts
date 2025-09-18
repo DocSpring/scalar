@@ -1,4 +1,4 @@
-import { replaceTemplateVariables } from '@/libs/string-template'
+import { replaceTemplateVariables } from '@scalar/api-client/libs/string-template'
 import type { RequestExample } from '@scalar/oas-utils/entities/spec'
 
 /** Populate the headers from enabled parameters */

@@ -1,11 +1,10 @@
 <script setup lang="ts">
+import DataTableInput from '@scalar/api-client/components/DataTable/DataTableInput.vue'
+import type { EnvVariable } from '@scalar/api-client/store/active-entities'
+import type { VueClassProp } from '@scalar/api-client/types/vue'
 import type { Environment } from '@scalar/oas-utils/entities/environment'
 import type { Workspace } from '@scalar/oas-utils/entities/workspace'
 import { useId } from 'vue'
-
-import DataTableInput from '@/components/DataTable/DataTableInput.vue'
-import type { EnvVariable } from '@/store/active-entities'
-import type { VueClassProp } from '@/types/vue'
 
 const props = withDefaults(
   defineProps<{

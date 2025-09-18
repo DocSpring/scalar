@@ -1,4 +1,15 @@
 <script setup lang="ts">
+import ViewLayoutCollapse from '@scalar/api-client/components/ViewLayout/ViewLayoutCollapse.vue'
+import { useLayout } from '@scalar/api-client/hooks/useLayout'
+import type { EnvVariable } from '@scalar/api-client/store/active-entities'
+import { useWorkspace } from '@scalar/api-client/store/store'
+import type { SecuritySchemeOption } from '@scalar/api-client/views/Request/consts'
+import {
+  formatComplexScheme,
+  formatScheme,
+  getSchemeOptions,
+  getSecurityRequirements,
+} from '@scalar/api-client/views/Request/libs'
 import {
   ScalarButton,
   ScalarComboboxMultiselect,
@@ -24,18 +35,6 @@ import type {
 import type { Workspace } from '@scalar/oas-utils/entities/workspace'
 import { isDefined } from '@scalar/oas-utils/helpers'
 import { computed, ref, useId } from 'vue'
-
-import ViewLayoutCollapse from '@/components/ViewLayout/ViewLayoutCollapse.vue'
-import { useLayout } from '@/hooks/useLayout'
-import type { EnvVariable } from '@/store/active-entities'
-import { useWorkspace } from '@/store/store'
-import type { SecuritySchemeOption } from '@/views/Request/consts'
-import {
-  formatComplexScheme,
-  formatScheme,
-  getSchemeOptions,
-  getSecurityRequirements,
-} from '@/views/Request/libs'
 
 import DeleteRequestAuthModal from './DeleteRequestAuthModal.vue'
 import RequestAuthDataTable from './RequestAuthDataTable.vue'

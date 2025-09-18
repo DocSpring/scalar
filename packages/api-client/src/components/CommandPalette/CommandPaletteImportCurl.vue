@@ -1,4 +1,9 @@
 <script setup lang="ts">
+import CommandActionForm from '@scalar/api-client/components/CommandPalette/CommandActionForm.vue'
+import HttpMethod from '@scalar/api-client/components/HttpMethod/HttpMethod.vue'
+import { PathId } from '@scalar/api-client/router'
+import { useWorkspace } from '@scalar/api-client/store'
+import { useActiveEntities } from '@scalar/api-client/store/active-entities'
 import {
   ScalarButton,
   ScalarIcon,
@@ -12,12 +17,6 @@ import type {
 import { REGEX } from '@scalar/oas-utils/helpers'
 import { computed, ref } from 'vue'
 import { useRouter } from 'vue-router'
-
-import CommandActionForm from '@/components/CommandPalette/CommandActionForm.vue'
-import HttpMethod from '@/components/HttpMethod/HttpMethod.vue'
-import { PathId } from '@/router'
-import { useWorkspace } from '@/store'
-import { useActiveEntities } from '@/store/active-entities'
 
 type ExtendedRequestPayload = RequestPayload & {
   url?: string

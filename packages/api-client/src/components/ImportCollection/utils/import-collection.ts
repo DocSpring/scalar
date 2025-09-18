@@ -1,7 +1,6 @@
+import { isUrl } from '@scalar/api-client/components/ImportCollection/utils/is-url'
+import type { WorkspaceStore } from '@scalar/api-client/store'
 import type { Collection } from '@scalar/oas-utils/entities/spec'
-
-import { isUrl } from '@/components/ImportCollection/utils/is-url'
-import type { WorkspaceStore } from '@/store'
 import type { Workspace } from '@scalar/oas-utils/entities/workspace'
 
 export async function importCollection({

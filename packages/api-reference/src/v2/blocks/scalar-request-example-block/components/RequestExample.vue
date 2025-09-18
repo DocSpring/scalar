@@ -64,6 +64,16 @@ export default {}
 </script>
 
 <script setup lang="ts">
+import { HttpMethod } from '@scalar/api-reference/components/HttpMethod'
+import { findClient } from '@scalar/api-reference/v2/blocks/scalar-request-example-block/helpers/find-client'
+import { generateCustomId } from '@scalar/api-reference/v2/blocks/scalar-request-example-block/helpers/generate-client-options'
+import { generateCodeSnippet } from '@scalar/api-reference/v2/blocks/scalar-request-example-block/helpers/generate-code-snippet'
+import { getSecrets } from '@scalar/api-reference/v2/blocks/scalar-request-example-block/helpers/get-secrets'
+import type {
+  ClientOption,
+  ClientOptionGroup,
+} from '@scalar/api-reference/v2/blocks/scalar-request-example-block/types'
+import { emitCustomEvent } from '@scalar/api-reference/v2/events'
 import {
   ScalarButton,
   ScalarCard,
@@ -72,6 +82,7 @@ import {
   ScalarCardSection,
   ScalarCodeBlock,
   ScalarCombobox,
+  ScalarMarkdown,
 } from '@scalar/components'
 import { freezeElement } from '@scalar/helpers/dom/freeze-element'
 import type { HttpMethod as HttpMethodType } from '@scalar/helpers/http/http-methods'
@@ -88,17 +99,7 @@ import {
 } from '@scalar/workspace-store/schemas/v3.1/type-guard'
 import { computed, ref, useId, watch, type ComponentPublicInstance } from 'vue'
 
-import { HttpMethod } from '@/components/HttpMethod'
-import { findClient } from '@/v2/blocks/scalar-request-example-block/helpers/find-client'
-import { generateCustomId } from '@/v2/blocks/scalar-request-example-block/helpers/generate-client-options'
-import { generateCodeSnippet } from '@/v2/blocks/scalar-request-example-block/helpers/generate-code-snippet'
-import { getSecrets } from '@/v2/blocks/scalar-request-example-block/helpers/get-secrets'
-import type {
-  ClientOption,
-  ClientOptionGroup,
-} from '@/v2/blocks/scalar-request-example-block/types'
-import { emitCustomEvent } from '@/v2/events'
-
+import StarlightCard from '../../../../components/StarlightCard.vue'
 import ExamplePicker from './ExamplePicker.vue'
 
 const {

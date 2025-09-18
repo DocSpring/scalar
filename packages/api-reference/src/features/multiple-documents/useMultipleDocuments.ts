@@ -1,4 +1,4 @@
-import type { NavState } from '@/hooks/useNavState'
+import type { NavState } from '@scalar/api-reference/hooks/useNavState'
 import { isDefined } from '@scalar/oas-utils/helpers'
 import {
   type AnyApiReferenceConfiguration,

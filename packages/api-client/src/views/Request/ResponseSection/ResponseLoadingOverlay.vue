@@ -1,12 +1,11 @@
 <script setup lang="ts">
+import { useWorkspace } from '@scalar/api-client/store'
 import {
   ScalarButton,
   ScalarLoading,
   useLoadingState,
 } from '@scalar/components'
 import { ref } from 'vue'
-
-import { useWorkspace } from '@/store'
 
 const { events } = useWorkspace()
 const loading = useLoadingState()

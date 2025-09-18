@@ -1,4 +1,4 @@
-import type { FuseData } from '@/features/Search/types'
+import type { FuseData } from '@scalar/api-reference/features/Search/types'
 import Fuse from 'fuse.js'
 
 /**

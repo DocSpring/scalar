@@ -1,12 +1,12 @@
 import { describe, expect, it, vi } from 'vitest'
 
 import { createApiClientApp } from './create-api-client-app'
-import { enableConsoleWarn } from '@/vitest.setup'
+import { enableConsoleWarn } from '@scalar/api-client/vitest.setup'
 
 describe('createApiClientApp', () => {
   it('renders something', async () => {
-    vi.unmock('@/hooks/useSidebar')
-    vi.unmock('@/hooks/useLayout')
+    vi.unmock('@scalar/api-client/hooks/useSidebar')
+    vi.unmock('@scalar/api-client/hooks/useLayout')
     enableConsoleWarn()
 
     const element = document.createElement('div')

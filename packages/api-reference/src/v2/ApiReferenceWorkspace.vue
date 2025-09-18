@@ -14,6 +14,16 @@
  * No state updates should be handled in children of this components. When updates are required
  * a custom event should be emitted to the workspace store and handled here.
  */
+import ApiReferenceLayout from '@scalar/api-reference/components/ApiReferenceLayout.vue'
+import {
+  DocumentSelector,
+  useMultipleDocuments,
+} from '@scalar/api-reference/features/multiple-documents'
+import { NAV_STATE_SYMBOL } from '@scalar/api-reference/hooks/useNavState'
+import { isClient } from '@scalar/api-reference/v2/blocks/scalar-request-example-block/helpers/find-client'
+import { onCustomEvent } from '@scalar/api-reference/v2/events'
+import { getDocumentName } from '@scalar/api-reference/v2/helpers/get-document-name'
+import { normalizeContent } from '@scalar/api-reference/v2/helpers/normalize-content'
 import {
   REFERENCE_LS_KEYS,
   safeLocalStorage,
@@ -38,17 +48,6 @@ import {
   useTemplateRef,
   watch,
 } from 'vue'
-
-import ApiReferenceLayout from '@/components/ApiReferenceLayout.vue'
-import {
-  DocumentSelector,
-  useMultipleDocuments,
-} from '@/features/multiple-documents'
-import { NAV_STATE_SYMBOL } from '@/hooks/useNavState'
-import { isClient } from '@/v2/blocks/scalar-request-example-block/helpers/find-client'
-import { onCustomEvent } from '@/v2/events'
-import { getDocumentName } from '@/v2/helpers/get-document-name'
-import { normalizeContent } from '@/v2/helpers/normalize-content'
 
 const props = defineProps<{
   configuration?: AnyApiReferenceConfiguration

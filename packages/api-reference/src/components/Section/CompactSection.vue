@@ -1,11 +1,10 @@
 <script setup lang="ts">
+import { Anchor } from '@scalar/api-reference/components/Anchor'
+import { Section } from '@scalar/api-reference/components/Section'
+import { useNavState } from '@scalar/api-reference/hooks/useNavState'
 import { scrollToId } from '@scalar/helpers/dom/scroll-to-id'
 import { ScalarIconCaretRight } from '@scalar/icons'
 import { nextTick, ref, watch } from 'vue'
-
-import { Anchor } from '@/components/Anchor'
-import { Section } from '@/components/Section'
-import { useNavState } from '@/hooks/useNavState'
 
 const props = defineProps<{
   id: string

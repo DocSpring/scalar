@@ -1,12 +1,12 @@
 import { mount } from '@vue/test-utils'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 
-import type { TraversedOperation, TraversedWebhook } from '@/features/traverse-schema'
+import type { TraversedOperation, TraversedWebhook } from '@scalar/api-reference/features/traverse-schema'
 import OperationsListItem from './OperationsListItem.vue'
 
 // Mock the dependencies
 const mockScrollToOperation = vi.fn()
-vi.mock('@/features/sidebar', () => ({
+vi.mock('@scalar/api-reference/features/sidebar', () => ({
   useSidebar: () => ({
     scrollToOperation: mockScrollToOperation,
   }),

@@ -1,8 +1,7 @@
 <script setup lang="ts" generic="T extends string">
+import SectionFilterButton from '@scalar/api-client/components/SectionFilterButton.vue'
 import { ScalarIcon } from '@scalar/components'
 import { nextTick, ref } from 'vue'
-
-import SectionFilterButton from '@/components/SectionFilterButton.vue'
 
 const { filters = [], filterIds } = defineProps<{
   filters?: T[]

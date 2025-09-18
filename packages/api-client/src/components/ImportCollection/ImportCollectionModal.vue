@@ -1,4 +1,15 @@
 <script setup lang="ts">
+import WatchModeToggle from '@scalar/api-client/components/CommandPalette/WatchModeToggle.vue'
+import { useUrlPrefetcher } from '@scalar/api-client/components/ImportCollection/hooks/useUrlPrefetcher'
+import ImportNowButton from '@scalar/api-client/components/ImportCollection/ImportNowButton.vue'
+import IntegrationLogo from '@scalar/api-client/components/ImportCollection/IntegrationLogo.vue'
+import PrefetchError from '@scalar/api-client/components/ImportCollection/PrefetchError.vue'
+import { getOpenApiVersion } from '@scalar/api-client/components/ImportCollection/utils/get-openapi-version'
+import { isDocument } from '@scalar/api-client/components/ImportCollection/utils/is-document'
+import { isUrl } from '@scalar/api-client/components/ImportCollection/utils/is-url'
+import WorkspaceSelector from '@scalar/api-client/components/ImportCollection/WorkspaceSelector.vue'
+import { useWorkspace } from '@scalar/api-client/store'
+import { useActiveEntities } from '@scalar/api-client/store/active-entities'
 import { ScalarIcon, ScalarModal, useModal } from '@scalar/components'
 import { isLocalUrl } from '@scalar/oas-utils/helpers'
 import { normalize } from '@scalar/openapi-parser'
@@ -11,18 +22,6 @@ import {
 import { useColorMode } from '@scalar/use-hooks/useColorMode'
 import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
 import { useRouter } from 'vue-router'
-
-import WatchModeToggle from '@/components/CommandPalette/WatchModeToggle.vue'
-import { useUrlPrefetcher } from '@/components/ImportCollection/hooks/useUrlPrefetcher'
-import ImportNowButton from '@/components/ImportCollection/ImportNowButton.vue'
-import IntegrationLogo from '@/components/ImportCollection/IntegrationLogo.vue'
-import PrefetchError from '@/components/ImportCollection/PrefetchError.vue'
-import { getOpenApiVersion } from '@/components/ImportCollection/utils/get-openapi-version'
-import { isDocument } from '@/components/ImportCollection/utils/is-document'
-import { isUrl } from '@/components/ImportCollection/utils/is-url'
-import WorkspaceSelector from '@/components/ImportCollection/WorkspaceSelector.vue'
-import { useWorkspace } from '@/store'
-import { useActiveEntities } from '@/store/active-entities'
 
 const props = defineProps<{
   source: string | null
@@ -344,7 +343,7 @@ function handleImportFinished() {
   </ScalarModal>
 </template>
 <style>
-@reference "@/style.css";
+@reference "@scalar/api-client/style.css";
 
 @variant md {
   .has-no-import-url,

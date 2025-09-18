@@ -1,4 +1,4 @@
-import type { createSidebar } from '@/features/sidebar'
+import type { createSidebar } from '@scalar/api-reference/features/sidebar'
 import type { FuseResult } from 'fuse.js'
 import { computed, ref, toValue, watch } from 'vue'
 import { createFuseInstance } from '../helpers/create-fuse-instance'

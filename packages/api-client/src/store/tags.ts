@@ -1,4 +1,4 @@
-import type { StoreContext } from '@/store/store-context'
+import type { StoreContext } from '@scalar/api-client/store/store-context'
 import { type Collection, type Tag, type TagPayload, tagSchema } from '@scalar/oas-utils/entities/spec'
 import { schemaModel } from '@scalar/oas-utils/helpers'
 import { LS_KEYS } from '@scalar/helpers/object/local-storage'

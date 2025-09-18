@@ -1,6 +1,6 @@
 // TODO: Can we use plain OpenAPI types here?
-import type { TraversedEntry } from '@/features/traverse-schema'
-import type { ParameterMap } from '@/libs/openapi'
+import type { TraversedEntry } from '@scalar/api-reference/features/traverse-schema'
+import type { ParameterMap } from '@scalar/api-reference/libs/openapi'
 
 export type EntryType = 'operation' | 'webhook' | 'model' | 'heading' | 'tag'
 

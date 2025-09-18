@@ -1,4 +1,4 @@
-import { ERRORS } from '@/blocks/constants'
+import { ERRORS } from '@scalar/api-reference/blocks/constants'
 import { escapeJsonPointer } from '@scalar/openapi-parser'
 import type { OpenAPI } from '@scalar/openapi-types'
 

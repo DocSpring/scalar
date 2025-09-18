@@ -1,8 +1,7 @@
 <script setup lang="ts">
+import type { Schemas } from '@scalar/api-reference/features/Operation/types/schemas'
 import type { OpenAPIV3_1 } from '@scalar/openapi-types'
 import { computed } from 'vue'
-
-import type { Schemas } from '@/features/Operation/types/schemas'
 
 import SchemaProperty from './SchemaProperty.vue'
 

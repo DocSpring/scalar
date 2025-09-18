@@ -1,10 +1,10 @@
-import type { TraversedTag } from '@/features/traverse-schema'
+import type { TraversedTag } from '@scalar/api-reference/features/traverse-schema'
 import { mount } from '@vue/test-utils'
 import { describe, expect, it, vi } from 'vitest'
 import Tag from './Tag.vue'
 
 // Mock the useSidebar hook
-vi.mock('@/features/sidebar', () => ({
+vi.mock('@scalar/api-reference/features/sidebar', () => ({
   useSidebar: () => ({
     collapsedSidebarItems: {
       'test-tag': false, // This makes isCollapsed return false, so slot content is rendered

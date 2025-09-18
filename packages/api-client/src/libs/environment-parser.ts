@@ -1,4 +1,4 @@
-import type { EnvVariables } from '@/libs/env-helpers'
+import type { EnvVariables } from '@scalar/api-client/libs/env-helpers'
 
 /** Parses the active environment variables and extracts key-value pairs. */
 export function parseEnvVariables(activeEnvVariables: EnvVariables) {

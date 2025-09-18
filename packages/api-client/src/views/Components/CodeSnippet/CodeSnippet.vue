@@ -1,4 +1,9 @@
 <script setup lang="ts">
+import type { EnvVariables } from '@scalar/api-client/libs/env-helpers'
+import {
+  getHarRequest,
+  getSnippet,
+} from '@scalar/api-client/views/Components/CodeSnippet'
 import { ScalarCodeBlock } from '@scalar/components'
 import type {
   Operation,
@@ -9,9 +14,6 @@ import type {
 import { isDefined } from '@scalar/oas-utils/helpers'
 import type { ClientId, TargetId } from '@scalar/snippetz'
 import { computed } from 'vue'
-
-import type { EnvVariables } from '@/libs/env-helpers'
-import { getHarRequest, getSnippet } from '@/views/Components/CodeSnippet'
 
 const {
   target,

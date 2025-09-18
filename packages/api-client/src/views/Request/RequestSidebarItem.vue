@@ -1,4 +1,15 @@
 <script setup lang="ts">
+import { HttpMethod } from '@scalar/api-client/components/HttpMethod'
+import { useLayout } from '@scalar/api-client/hooks/useLayout'
+import { useSidebar } from '@scalar/api-client/hooks/useSidebar'
+import { getModifiers } from '@scalar/api-client/libs'
+import { PathId } from '@scalar/api-client/router'
+import { useWorkspace } from '@scalar/api-client/store'
+import { useActiveEntities } from '@scalar/api-client/store/active-entities'
+import type {
+  SidebarItem,
+  SidebarMenuItem,
+} from '@scalar/api-client/views/Request/types'
 import {
   ScalarButton,
   ScalarIcon,
@@ -15,15 +26,6 @@ import type { Collection, Request } from '@scalar/oas-utils/entities/spec'
 import { shouldIgnoreEntity } from '@scalar/oas-utils/helpers'
 import { computed, nextTick, ref } from 'vue'
 import { RouterLink, useRouter } from 'vue-router'
-
-import { HttpMethod } from '@/components/HttpMethod'
-import { useLayout } from '@/hooks/useLayout'
-import { useSidebar } from '@/hooks/useSidebar'
-import { getModifiers } from '@/libs'
-import { PathId } from '@/router'
-import { useWorkspace } from '@/store'
-import { useActiveEntities } from '@/store/active-entities'
-import type { SidebarItem, SidebarMenuItem } from '@/views/Request/types'
 
 const {
   isDraggable = false,

@@ -1,16 +1,15 @@
 <script setup lang="ts">
+import Computer from '@scalar/api-client/assets/computer.ascii?raw'
+import EmptyState from '@scalar/api-client/components/EmptyState.vue'
+import ScalarAsciiArt from '@scalar/api-client/components/ScalarAsciiArt.vue'
+import ScalarHotkey from '@scalar/api-client/components/ScalarHotkey.vue'
+import { useLayout } from '@scalar/api-client/hooks'
+import type { HotKeyEvent } from '@scalar/api-client/libs'
+import { useWorkspace } from '@scalar/api-client/store'
 import type { Collection, Operation } from '@scalar/oas-utils/entities/spec'
 import type { Workspace } from '@scalar/oas-utils/entities/workspace'
 import { nextTick, onBeforeUnmount, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-
-import Computer from '@/assets/computer.ascii?raw'
-import EmptyState from '@/components/EmptyState.vue'
-import ScalarAsciiArt from '@/components/ScalarAsciiArt.vue'
-import ScalarHotkey from '@/components/ScalarHotkey.vue'
-import { useLayout } from '@/hooks'
-import type { HotKeyEvent } from '@/libs'
-import { useWorkspace } from '@/store'
 
 const { numWorkspaceRequests, collection, operation, workspace } = defineProps<{
   collection: Collection

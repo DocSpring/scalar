@@ -1,7 +1,6 @@
 <script setup lang="ts">
+import type { Schemas } from '@scalar/api-reference/features/Operation/types/schemas'
 import type { OpenAPIV3_1 } from '@scalar/openapi-types'
-
-import type { Schemas } from '@/features/Operation/types/schemas'
 
 import ParameterList from './ParameterList.vue'
 import RequestBody from './RequestBody.vue'

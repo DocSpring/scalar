@@ -1,4 +1,8 @@
 <script setup lang="ts">
+import { useLayout } from '@scalar/api-client/hooks'
+import { PathId } from '@scalar/api-client/routes'
+import { useWorkspace } from '@scalar/api-client/store'
+import { useActiveEntities } from '@scalar/api-client/store/active-entities'
 import {
   ScalarButton,
   ScalarDropdown,
@@ -10,11 +14,6 @@ import {
 import type { Collection } from '@scalar/oas-utils/entities/spec'
 import { computed, onMounted, watch } from 'vue'
 import { useRouter } from 'vue-router'
-
-import { useLayout } from '@/hooks'
-import { PathId } from '@/routes'
-import { useWorkspace } from '@/store'
-import { useActiveEntities } from '@/store/active-entities'
 
 const { activeCollection, activeWorkspace, activeEnvironment } =
   useActiveEntities()

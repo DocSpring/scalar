@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
+import { formatMs } from '@scalar/api-client/libs/formatters'
+import { useWorkspace } from '@scalar/api-client/store'
 import {
   ScalarFloating,
   ScalarFloatingBackdrop,
@@ -8,9 +10,6 @@ import {
 import type { Operation, RequestEvent } from '@scalar/oas-utils/entities/spec'
 import { httpStatusCodes } from '@scalar/oas-utils/helpers'
 import { computed } from 'vue'
-
-import { formatMs } from '@/libs/formatters'
-import { useWorkspace } from '@/store'
 
 import HttpMethod from '../HttpMethod/HttpMethod.vue'
 import { getStatusCodeColor } from './httpStatusCodeColors'

@@ -1,16 +1,16 @@
-import type { TraversedTag } from '@/features/traverse-schema'
+import type { TraversedTag } from '@scalar/api-reference/features/traverse-schema'
 import { mount } from '@vue/test-utils'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 import ModernLayout from './ModernLayout.vue'
-import { createMockSidebar } from '@/helpers/test-utils'
+import { createMockSidebar } from '@scalar/api-reference/helpers/test-utils'
 
 // Mock the sidebar module
-vi.mock('@/features/sidebar', () => ({
+vi.mock('@scalar/api-reference/features/sidebar', () => ({
   useSidebar: vi.fn(() => createMockSidebar()),
 }))
 
 // Mock the config hook
-vi.mock('@/hooks/useConfig', () => ({
+vi.mock('@scalar/api-reference/hooks/useConfig', () => ({
   useConfig: vi.fn(() => ({
     value: {
       onShowMore: vi.fn(),
@@ -96,7 +96,7 @@ describe('ModernLayout', () => {
 
   describe('ShowMoreButton rendering', () => {
     it('renders ShowMoreButton when tag is collapsed and moreThanOneTag is true', async () => {
-      const { useSidebar } = await import('@/features/sidebar')
+      const { useSidebar } = await import('@scalar/api-reference/features/sidebar')
       vi.mocked(useSidebar).mockReturnValue(createMockSidebar({ 'test-tag': false }))
 
       const wrapper = mountComponent({
@@ -108,7 +108,7 @@ describe('ModernLayout', () => {
     })
 
     it('does not render ShowMoreButton when tag is not collapsed', async () => {
-      const { useSidebar } = await import('@/features/sidebar')
+      const { useSidebar } = await import('@scalar/api-reference/features/sidebar')
       vi.mocked(useSidebar).mockReturnValue(createMockSidebar({ 'test-tag': true }))
 
       const wrapper = mountComponent({
@@ -120,7 +120,7 @@ describe('ModernLayout', () => {
     })
 
     it('does not render ShowMoreButton when moreThanOneTag is false', async () => {
-      const { useSidebar } = await import('@/features/sidebar')
+      const { useSidebar } = await import('@scalar/api-reference/features/sidebar')
       vi.mocked(useSidebar).mockReturnValue(createMockSidebar({ 'test-tag': false }))
 
       const wrapper = mountComponent({
@@ -134,7 +134,7 @@ describe('ModernLayout', () => {
 
   describe('slot content rendering', () => {
     it('renders slot content when ShowMoreButton is not shown', async () => {
-      const { useSidebar } = await import('@/features/sidebar')
+      const { useSidebar } = await import('@scalar/api-reference/features/sidebar')
       vi.mocked(useSidebar).mockReturnValue(createMockSidebar({ 'test-tag': true }))
 
       const wrapper = mountComponent(
@@ -169,7 +169,7 @@ describe('ModernLayout', () => {
     })
 
     it('calls setCollapsedSidebarItem when ShowMoreButton is clicked', async () => {
-      const { useSidebar } = await import('@/features/sidebar')
+      const { useSidebar } = await import('@scalar/api-reference/features/sidebar')
       const mockSidebar = createMockSidebar({ 'test-tag': false })
       vi.mocked(useSidebar).mockReturnValue(mockSidebar)
 

@@ -1,6 +1,6 @@
-import { useWorkspace } from '@/store'
-import { useActiveEntities } from '@/store/active-entities'
-import { specDictionary } from '@/store/import-spec'
+import { useWorkspace } from '@scalar/api-client/store'
+import { useActiveEntities } from '@scalar/api-client/store/active-entities'
+import { specDictionary } from '@scalar/api-client/store/import-spec'
 import {
   combineRenameDiffs,
   mutateCollectionDiff,
@@ -8,7 +8,7 @@ import {
   mutateSecuritySchemeDiff,
   mutateServerDiff,
   mutateTagDiff,
-} from '@/views/Request/libs/watch-mode'
+} from '@scalar/api-client/views/Request/libs/watch-mode'
 import { createHash, fetchDocument } from '@scalar/oas-utils/helpers'
 import { parseSchema } from '@scalar/oas-utils/transforms'
 import { useToasts } from '@scalar/use-toasts'

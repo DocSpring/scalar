@@ -1,4 +1,16 @@
 <script setup lang="ts">
+import { useFileDialog } from '@scalar/api-client/hooks'
+import {
+  convertPostmanToOpenApi,
+  getOpenApiDocumentDetails,
+  getPostmanDocumentDetails,
+  isPostmanCollection,
+  isUrl,
+} from '@scalar/api-client/libs'
+import { importCurlCommand } from '@scalar/api-client/libs/importers/curl'
+import { PathId } from '@scalar/api-client/router'
+import { useWorkspace } from '@scalar/api-client/store'
+import { useActiveEntities } from '@scalar/api-client/store/active-entities'
 import {
   ScalarButton,
   ScalarCodeBlock,
@@ -9,19 +21,6 @@ import {
 import { useToasts } from '@scalar/use-toasts'
 import { computed, ref, watch } from 'vue'
 import { useRouter } from 'vue-router'
-
-import { useFileDialog } from '@/hooks'
-import {
-  convertPostmanToOpenApi,
-  getOpenApiDocumentDetails,
-  getPostmanDocumentDetails,
-  isPostmanCollection,
-  isUrl,
-} from '@/libs'
-import { importCurlCommand } from '@/libs/importers/curl'
-import { PathId } from '@/router'
-import { useWorkspace } from '@/store'
-import { useActiveEntities } from '@/store/active-entities'
 
 import CommandActionForm from './CommandActionForm.vue'
 import CommandActionInput from './CommandActionInput.vue'

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { isUrl } from '@/libs'
+import { isUrl } from '@scalar/api-client/libs'
 
 defineProps<{
   url?: string | null

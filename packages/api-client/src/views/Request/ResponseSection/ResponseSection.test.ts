@@ -1,4 +1,4 @@
-import { WORKSPACE_SYMBOL } from '@/store/store'
+import { WORKSPACE_SYMBOL } from '@scalar/api-client/store/store'
 import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
 import ResponseSection from './ResponseSection.vue'

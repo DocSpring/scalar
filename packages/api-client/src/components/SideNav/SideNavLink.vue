@@ -1,8 +1,7 @@
 <script setup lang="ts">
+import { useLayout } from '@scalar/api-client/hooks'
 import { ScalarIcon, type Icon } from '@scalar/components'
 import type { Component } from 'vue'
-
-import { useLayout } from '@/hooks'
 
 defineProps<{
   is?: Component | string

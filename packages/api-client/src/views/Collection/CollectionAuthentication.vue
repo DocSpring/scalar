@@ -1,9 +1,8 @@
 <script setup lang="ts">
+import { useActiveEntities } from '@scalar/api-client/store/active-entities'
+import { useWorkspace } from '@scalar/api-client/store/store'
+import { RequestAuth } from '@scalar/api-client/views/Request/RequestSection/RequestAuth'
 import { ScalarToggle } from '@scalar/components'
-
-import { useActiveEntities } from '@/store/active-entities'
-import { useWorkspace } from '@/store/store'
-import { RequestAuth } from '@/views/Request/RequestSection/RequestAuth'
 
 const {
   activeCollection,

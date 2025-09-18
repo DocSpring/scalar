@@ -1,4 +1,12 @@
 <script setup lang="ts">
+import DeleteSidebarListElement from '@scalar/api-client/components/Sidebar/Actions/DeleteSidebarListElement.vue'
+import EditSidebarListCollection from '@scalar/api-client/components/Sidebar/Actions/EditSidebarListCollection.vue'
+import EditSidebarListElement from '@scalar/api-client/components/Sidebar/Actions/EditSidebarListElement.vue'
+import { PathId } from '@scalar/api-client/router'
+import { useWorkspace } from '@scalar/api-client/store'
+import { useActiveEntities } from '@scalar/api-client/store/active-entities'
+import { createInitialRequest } from '@scalar/api-client/store/requests'
+import type { SidebarMenuItem } from '@scalar/api-client/views/Request/types'
 import {
   ScalarDropdownButton,
   ScalarDropdownMenu,
@@ -11,15 +19,6 @@ import {
 import type { Collection } from '@scalar/oas-utils/entities/spec'
 import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { useRouter } from 'vue-router'
-
-import DeleteSidebarListElement from '@/components/Sidebar/Actions/DeleteSidebarListElement.vue'
-import EditSidebarListCollection from '@/components/Sidebar/Actions/EditSidebarListCollection.vue'
-import EditSidebarListElement from '@/components/Sidebar/Actions/EditSidebarListElement.vue'
-import { PathId } from '@/router'
-import { useWorkspace } from '@/store'
-import { useActiveEntities } from '@/store/active-entities'
-import { createInitialRequest } from '@/store/requests'
-import type { SidebarMenuItem } from '@/views/Request/types'
 
 const props = defineProps<{ menuItem: SidebarMenuItem }>()
 

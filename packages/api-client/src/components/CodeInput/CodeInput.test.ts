@@ -1,13 +1,14 @@
-import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
-import { mount, type VueWrapper } from '@vue/test-utils'
-import CodeInput from './CodeInput.vue'
-import { useCodeMirror } from '@scalar/use-codemirror'
-import { useClipboard } from '@scalar/use-hooks/useClipboard'
-import { enableConsoleError, enableConsoleWarn } from '@/vitest.setup'
-import { ref, toValue } from 'vue'
+import { enableConsoleError, enableConsoleWarn } from '@scalar/api-client/vitest.setup'
 import { environmentSchema } from '@scalar/oas-utils/entities/environment'
 import { workspaceSchema } from '@scalar/oas-utils/entities/workspace'
+import { useCodeMirror } from '@scalar/use-codemirror'
+import { useClipboard } from '@scalar/use-hooks/useClipboard'
+import { mount, type VueWrapper } from '@vue/test-utils'
 import { nanoid } from 'nanoid'
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
+import { ref, toValue } from 'vue'
+
+import CodeInput from './CodeInput.vue'
 
 // Mock dependencies
 vi.mock('@scalar/use-codemirror', async (importOriginal) => {
@@ -35,7 +36,7 @@ vi.mock('@scalar/use-hooks/useClipboard', () => ({
   })),
 }))
 
-vi.mock('@/hooks', () => ({
+vi.mock('@scalar/api-client/hooks', () => ({
   useLayout: vi.fn(() => ({
     layout: { value: { isMobile: false } },
   })),

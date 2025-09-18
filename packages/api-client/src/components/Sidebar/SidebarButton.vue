@@ -1,8 +1,7 @@
 <script setup lang="ts">
+import ScalarHotkey from '@scalar/api-client/components/ScalarHotkey.vue'
+import { useLayout } from '@scalar/api-client/hooks'
 import { ScalarButton } from '@scalar/components'
-
-import ScalarHotkey from '@/components/ScalarHotkey.vue'
-import { useLayout } from '@/hooks'
 
 const props = defineProps<{
   click: () => void

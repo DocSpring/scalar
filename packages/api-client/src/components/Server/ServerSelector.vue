@@ -1,10 +1,9 @@
 <script setup lang="ts">
+import { useWorkspace } from '@scalar/api-client/store/store'
 import { ScalarButton, ScalarListbox } from '@scalar/components'
 import { ScalarIconCaretDown } from '@scalar/icons'
 import type { Collection, Server } from '@scalar/oas-utils/entities/spec'
 import { computed, watch } from 'vue'
-
-import { useWorkspace } from '@/store/store'
 
 type ServerOption = {
   id: Server['uid']

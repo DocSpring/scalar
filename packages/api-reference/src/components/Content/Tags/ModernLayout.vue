@@ -1,12 +1,11 @@
 <script setup lang="ts">
+import { Lazy } from '@scalar/api-reference/components/Lazy'
+import { SectionContainer } from '@scalar/api-reference/components/Section'
+import ShowMoreButton from '@scalar/api-reference/components/ShowMoreButton.vue'
+import { useSidebar } from '@scalar/api-reference/features/sidebar'
+import type { TraversedTag } from '@scalar/api-reference/features/traverse-schema'
+import { useNavState } from '@scalar/api-reference/hooks/useNavState'
 import { computed, nextTick, ref, useId } from 'vue'
-
-import { Lazy } from '@/components/Lazy'
-import { SectionContainer } from '@/components/Section'
-import ShowMoreButton from '@/components/ShowMoreButton.vue'
-import { useSidebar } from '@/features/sidebar'
-import type { TraversedTag } from '@/features/traverse-schema'
-import { useNavState } from '@/hooks/useNavState'
 
 import TagSection from './TagSection.vue'
 

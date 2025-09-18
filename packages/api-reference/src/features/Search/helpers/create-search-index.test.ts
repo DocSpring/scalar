@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 
-import { type TraversedEntry, traverseDocument } from '@/features/traverse-schema'
+import { type TraversedEntry, traverseDocument } from '@scalar/api-reference/features/traverse-schema'
 import type { OpenAPIV3_1 } from '@scalar/openapi-types'
 import { apiReferenceConfigurationSchema } from '@scalar/types'
 import { ref } from 'vue'

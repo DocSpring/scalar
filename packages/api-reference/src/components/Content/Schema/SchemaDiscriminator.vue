@@ -1,9 +1,8 @@
 <script lang="ts" setup>
+import type { DiscriminatorMapping } from '@scalar/api-reference/hooks/useDiscriminator'
 import { ScalarListbox, type ScalarListboxOption } from '@scalar/components'
 import { ScalarIconCaretDown } from '@scalar/icons'
 import { computed, ref } from 'vue'
-
-import type { DiscriminatorMapping } from '@/hooks/useDiscriminator'
 
 const { discriminatorMapping, discriminator } = defineProps<{
   discriminatorMapping: DiscriminatorMapping

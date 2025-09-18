@@ -1,12 +1,11 @@
 <script lang="ts" setup>
 import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/vue'
+import ScreenReader from '@scalar/api-reference/components/ScreenReader.vue'
+import type { Schemas } from '@scalar/api-reference/features/Operation/types/schemas'
+import { DISCRIMINATOR_CONTEXT } from '@scalar/api-reference/hooks/useDiscriminator'
 import { ScalarIcon, ScalarMarkdown } from '@scalar/components'
 import type { OpenAPIV3_1 } from '@scalar/openapi-types'
 import { computed, inject } from 'vue'
-
-import ScreenReader from '@/components/ScreenReader.vue'
-import type { Schemas } from '@/features/Operation/types/schemas'
-import { DISCRIMINATOR_CONTEXT } from '@/hooks/useDiscriminator'
 
 import { isTypeObject } from './helpers/is-type-object'
 import SchemaHeading from './SchemaHeading.vue'

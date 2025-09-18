@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import { useActiveEntities, useWorkspace } from '@scalar/api-client/store'
 import { RequestAuth } from '@scalar/api-client/views/Request/RequestSection/RequestAuth'
+import { Lazy } from '@scalar/api-reference/components/Lazy'
+import { BaseUrl } from '@scalar/api-reference/features/base-url'
+import { useNavState } from '@scalar/api-reference/hooks/useNavState'
+import type { ClientOptionGroup } from '@scalar/api-reference/v2/blocks/scalar-request-example-block/types'
 import { ScalarErrorBoundary } from '@scalar/components'
 import { getSlugUid } from '@scalar/oas-utils/transforms'
 import type { OpenAPIV3_1 } from '@scalar/openapi-types'
@@ -8,20 +12,17 @@ import type { ApiReferenceConfiguration } from '@scalar/types'
 import type { WorkspaceStore } from '@scalar/workspace-store/client'
 import { computed } from 'vue'
 
-import { Lazy } from '@/components/Lazy'
-import { BaseUrl } from '@/features/base-url'
-import { useNavState } from '@/hooks/useNavState'
-import type { ClientOptionGroup } from '@/v2/blocks/scalar-request-example-block/types'
-
 import { ClientLibraries } from '../ClientLibraries'
 import IntroductionSection from './IntroductionSection.vue'
 
-const { config } = defineProps<{
+const props = defineProps<{
   document: OpenAPIV3_1.Document
   config?: ApiReferenceConfiguration
   clientOptions: ClientOptionGroup[]
   store: WorkspaceStore
 }>()
+
+const { config, store } = props
 
 const { collections, securitySchemes, servers } = useWorkspace()
 const {

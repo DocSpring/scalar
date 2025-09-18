@@ -1,14 +1,13 @@
 <script setup lang="ts">
+import IntegrationLogo from '@scalar/api-client/components/ImportCollection/IntegrationLogo.vue'
+import { useWorkspace } from '@scalar/api-client/store'
+import { useActiveEntities } from '@scalar/api-client/store/active-entities'
 import { cva, cx, ScalarButton, ScalarIcon } from '@scalar/components'
 import {
   themeLabels,
   type IntegrationThemeId,
   type ThemeId,
 } from '@scalar/themes'
-
-import IntegrationLogo from '@/components/ImportCollection/IntegrationLogo.vue'
-import { useWorkspace } from '@/store'
-import { useActiveEntities } from '@/store/active-entities'
 
 import SettingsGeneralAppearance from './components/SettingsAppearance.vue'
 import SettingsSection from './components/SettingsSection.vue'

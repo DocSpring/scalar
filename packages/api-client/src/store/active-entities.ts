@@ -1,5 +1,5 @@
-import { flattenEnvVars } from '@/libs/string-template'
-import { PathId } from '@/router'
+import { flattenEnvVars } from '@scalar/api-client/libs/string-template'
+import { PathId } from '@scalar/api-client/router'
 import { environmentSchema, type Environment } from '@scalar/oas-utils/entities/environment'
 import type { Collection, Request, RequestExample, Server } from '@scalar/oas-utils/entities/spec'
 import type { Workspace } from '@scalar/oas-utils/entities/workspace'

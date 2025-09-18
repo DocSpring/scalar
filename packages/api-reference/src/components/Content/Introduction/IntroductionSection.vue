@@ -1,10 +1,6 @@
 <script setup lang="ts">
-import type { OpenAPIV3_1 } from '@scalar/openapi-types'
-import type { ApiReferenceConfiguration } from '@scalar/types/api-reference'
-import { computed, inject, onMounted, type Ref } from 'vue'
-
-import { Badge } from '@/components/Badge'
-import { LinkList } from '@/components/LinkList'
+import { Badge } from '@scalar/api-reference/components/Badge'
+import { LinkList } from '@scalar/api-reference/components/LinkList'
 import {
   Section,
   SectionColumn,
@@ -13,13 +9,23 @@ import {
   SectionContent,
   SectionHeader,
   SectionHeaderTag,
-} from '@/components/Section'
-import { DownloadLink, OPENAPI_VERSION_SYMBOL } from '@/features/download-link'
-import { ExternalDocs } from '@/features/external-docs'
-import { Contact, License, TermsOfService } from '@/features/info-object'
-import { SpecificationExtension } from '@/features/specification-extension'
-import { DEFAULT_INTRODUCTION_SLUG } from '@/features/traverse-schema'
-import { useNavState } from '@/hooks/useNavState'
+} from '@scalar/api-reference/components/Section'
+import {
+  DownloadLink,
+  OPENAPI_VERSION_SYMBOL,
+} from '@scalar/api-reference/features/download-link'
+import { ExternalDocs } from '@scalar/api-reference/features/external-docs'
+import {
+  Contact,
+  License,
+  TermsOfService,
+} from '@scalar/api-reference/features/info-object'
+import { SpecificationExtension } from '@scalar/api-reference/features/specification-extension'
+import { DEFAULT_INTRODUCTION_SLUG } from '@scalar/api-reference/features/traverse-schema'
+import { useNavState } from '@scalar/api-reference/hooks/useNavState'
+import type { OpenAPIV3_1 } from '@scalar/openapi-types'
+import type { ApiReferenceConfiguration } from '@scalar/types/api-reference'
+import { computed, inject, onMounted, type Ref } from 'vue'
 
 import Description from './Description.vue'
 

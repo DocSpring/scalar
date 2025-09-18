@@ -1,4 +1,4 @@
-import { CONFIGURATION_SYMBOL } from '@/hooks/useConfig'
+import { CONFIGURATION_SYMBOL } from '@scalar/api-reference/hooks/useConfig'
 import { mount } from '@vue/test-utils'
 import { describe, expect, it, vi } from 'vitest'
 import { computed, ref } from 'vue'
@@ -8,7 +8,7 @@ const mockClient = ref({
   open: vi.fn(),
 })
 
-vi.mock('@/features/api-client-modal', () => ({
+vi.mock('@scalar/api-reference/features/api-client-modal', () => ({
   useApiClient: () => ({
     client: mockClient,
   }),

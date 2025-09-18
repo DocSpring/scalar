@@ -1,5 +1,5 @@
-import type { OpenClientPayload } from '@/libs/create-client'
-import { findRequestByPathMethod } from '@/libs/find-request'
+import type { OpenClientPayload } from '@scalar/api-client/libs/create-client'
+import { findRequestByPathMethod } from '@scalar/api-client/libs/find-request'
 import type { Operation } from '@scalar/oas-utils/entities/spec'
 
 /**

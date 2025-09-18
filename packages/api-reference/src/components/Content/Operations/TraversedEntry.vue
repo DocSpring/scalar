@@ -1,23 +1,22 @@
 <script setup lang="ts">
+import { getCurrentIndex } from '@scalar/api-reference/components/Content/Operations/get-current-index'
+import { Tag } from '@scalar/api-reference/components/Content/Tags'
+import { Lazy } from '@scalar/api-reference/components/Lazy'
+import { SectionContainer } from '@scalar/api-reference/components/Section'
+import { Operation } from '@scalar/api-reference/features/Operation'
+import {
+  type TraversedEntry,
+  type TraversedOperation,
+  type TraversedTag,
+} from '@scalar/api-reference/features/traverse-schema'
+import type { TraversedWebhook } from '@scalar/api-reference/features/traverse-schema/types'
+import { useNavState } from '@scalar/api-reference/hooks/useNavState'
+import type { ClientOptionGroup } from '@scalar/api-reference/v2/blocks/scalar-request-example-block/types'
 import type { Collection, Server } from '@scalar/oas-utils/entities/spec'
 import type { OpenAPIV3_1 } from '@scalar/openapi-types'
 import type { ApiReferenceConfiguration } from '@scalar/types'
 import type { WorkspaceStore } from '@scalar/workspace-store/client'
 import { computed } from 'vue'
-
-import { getCurrentIndex } from '@/components/Content/Operations/get-current-index'
-import { Tag } from '@/components/Content/Tags'
-import { Lazy } from '@/components/Lazy'
-import { SectionContainer } from '@/components/Section'
-import { Operation } from '@/features/Operation'
-import {
-  type TraversedEntry,
-  type TraversedOperation,
-  type TraversedTag,
-} from '@/features/traverse-schema'
-import type { TraversedWebhook } from '@/features/traverse-schema/types'
-import { useNavState } from '@/hooks/useNavState'
-import type { ClientOptionGroup } from '@/v2/blocks/scalar-request-example-block/types'
 
 const {
   level = 0,

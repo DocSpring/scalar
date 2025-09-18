@@ -21,7 +21,7 @@ vi.mock('vue', async () => {
 describe('createSidebarState', () => {
   beforeEach(() => {
     // Disable global mock for useSidebar
-    vi.unmock('@/hooks/useSidebar')
+    vi.unmock('@scalar/api-client/hooks/useSidebar')
   })
 
   it('should create sidebar state with isSidebarOpen=true for non-modal layout', () => {

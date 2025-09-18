@@ -1,15 +1,14 @@
 <script setup lang="ts">
 import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/vue'
-import { ScalarButton, ScalarIcon } from '@scalar/components'
-import type { Oauth2Flow } from '@scalar/oas-utils/entities/spec'
-import { computed } from 'vue'
-
 import {
   DataTableCell,
   DataTableCheckbox,
   DataTableRow,
-} from '@/components/DataTable'
-import type { UpdateScheme } from '@/store'
+} from '@scalar/api-client/components/DataTable'
+import type { UpdateScheme } from '@scalar/api-client/store'
+import { ScalarButton, ScalarIcon } from '@scalar/components'
+import type { Oauth2Flow } from '@scalar/oas-utils/entities/spec'
+import { computed } from 'vue'
 
 const { flow, updateScheme } = defineProps<{
   flow: Oauth2Flow

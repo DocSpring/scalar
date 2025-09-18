@@ -1,8 +1,7 @@
 <script setup lang="ts">
+import ApiReferenceWorkspace from '@scalar/api-reference/v2/ApiReferenceWorkspace.vue'
 import type { AnyApiReferenceConfiguration } from '@scalar/types/api-reference'
 import { createWorkspaceStore } from '@scalar/workspace-store/client'
-
-import ApiReferenceWorkspace from '@/v2/ApiReferenceWorkspace.vue'
 
 defineProps<{
   /**

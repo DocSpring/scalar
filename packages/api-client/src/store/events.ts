@@ -1,7 +1,7 @@
-import type { CommandPaletteEvent } from '@/components/CommandPalette/TheCommandPalette.vue'
-import { createEventBus } from '@/libs/event-bus'
-import type { HotKeyEvent } from '@/libs/hot-keys'
-import type { RequestStatus } from '@/libs/send-request'
+import type { CommandPaletteEvent } from '@scalar/api-client/components/CommandPalette/TheCommandPalette.vue'
+import { createEventBus } from '@scalar/api-client/libs/event-bus'
+import type { HotKeyEvent } from '@scalar/api-client/libs/hot-keys'
+import type { RequestStatus } from '@scalar/api-client/libs/send-request'
 
 /** Create the store for the api client events */
 export function createStoreEvents() {

@@ -1,4 +1,4 @@
-import type { TagsMap } from '@/features/traverse-schema/types'
+import type { TagsMap } from '@scalar/api-reference/features/traverse-schema/types'
 
 type TagMapValue = NonNullable<TagsMap extends Map<string, infer V> ? V : never>
 

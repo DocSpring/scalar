@@ -4,8 +4,8 @@
   "compilerOptions": {
     "jsx": "react-jsx",
     "paths": {
-      "@/*": ["./src/*"],
-      "@test/*": ["./test/*"]
+      "@scalar/api-reference/*": ["./src/*"],
+      "@scalar/api-reference-test/*": ["./test/*"]
     },
     "types": ["vite/client", "node"]
   }

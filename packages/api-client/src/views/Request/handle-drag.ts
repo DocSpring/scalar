@@ -1,6 +1,6 @@
-import { useLayout } from '@/hooks'
-import type { WorkspaceStore } from '@/store'
-import type { ActiveEntitiesStore } from '@/store/active-entities'
+import { useLayout } from '@scalar/api-client/hooks'
+import type { WorkspaceStore } from '@scalar/api-client/store'
+import type { ActiveEntitiesStore } from '@scalar/api-client/store/active-entities'
 import type { DraggingItem, HoveredItem } from '@scalar/draggable'
 import type { Collection, Tag } from '@scalar/oas-utils/entities/spec'
 

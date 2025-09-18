@@ -1,16 +1,28 @@
 <script setup lang="ts">
 import { TabGroup, TabList, TabPanel, TabPanels } from '@headlessui/vue'
+import { useActiveEntities, useWorkspace } from '@scalar/api-client/store'
+import { DEFAULT_CLIENT } from '@scalar/api-reference/v2/blocks/scalar-request-example-block/helpers/find-client'
+// Import DocSpring clients helper
+import { getDocSpringClients } from '@scalar/api-reference/v2/blocks/scalar-request-example-block/helpers/generate-client-options'
+import type {
+  ClientOption,
+  ClientOptionGroup,
+} from '@scalar/api-reference/v2/blocks/scalar-request-example-block/types'
+import { emitCustomEvent } from '@scalar/api-reference/v2/events/definitions'
 import { ScalarCodeBlock, ScalarMarkdown } from '@scalar/components'
 import type { AvailableClients } from '@scalar/snippetz'
+import { useClipboard } from '@scalar/use-hooks/useClipboard'
 import type { WorkspaceDocument } from '@scalar/workspace-store/schemas/schemas/workspace'
-import { computed, useId, useTemplateRef } from 'vue'
+import {
+  computed,
+  onBeforeUnmount,
+  onMounted,
+  useId,
+  useTemplateRef,
+} from 'vue'
 
-import { DEFAULT_CLIENT } from '@/v2/blocks/scalar-request-example-block/helpers/find-client'
-import type { ClientOptionGroup } from '@/v2/blocks/scalar-request-example-block/types'
-import { emitCustomEvent } from '@/v2/events/definitions'
-
+import StarlightCard from '../../StarlightCard.vue'
 import ClientSelector from './ClientSelector.vue'
-import { getFeaturedClients, isFeaturedClient } from './featured-clients'
 
 const {
   clientOptions,

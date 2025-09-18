@@ -1,4 +1,25 @@
 <script setup lang="ts">
+import Rabbit from '@scalar/api-client/assets/rabbit.ascii?raw'
+import RabbitJump from '@scalar/api-client/assets/rabbitjump.ascii?raw'
+import { Sidebar } from '@scalar/api-client/components'
+import EnvironmentSelector from '@scalar/api-client/components/EnvironmentSelector/EnvironmentSelector.vue'
+import HttpMethod from '@scalar/api-client/components/HttpMethod/HttpMethod.vue'
+import ScalarAsciiArt from '@scalar/api-client/components/ScalarAsciiArt.vue'
+import { useSearch } from '@scalar/api-client/components/Search/useSearch'
+import SidebarButton from '@scalar/api-client/components/Sidebar/SidebarButton.vue'
+import { useLayout } from '@scalar/api-client/hooks/useLayout'
+import { useSidebar } from '@scalar/api-client/hooks/useSidebar'
+import type { HotKeyEvent } from '@scalar/api-client/libs'
+import { PathId } from '@scalar/api-client/routes'
+import { useWorkspace } from '@scalar/api-client/store'
+import { useActiveEntities } from '@scalar/api-client/store/active-entities'
+import { createInitialRequest } from '@scalar/api-client/store/requests'
+import { dragHandlerFactory } from '@scalar/api-client/views/Request/handle-drag'
+import RequestSidebarItemMenu from '@scalar/api-client/views/Request/RequestSidebarItemMenu.vue'
+import type {
+  SidebarItem,
+  SidebarMenuItem,
+} from '@scalar/api-client/views/Request/types'
 import {
   ScalarButton,
   ScalarIcon,
@@ -19,25 +40,6 @@ import {
   watch,
 } from 'vue'
 import { useRouter } from 'vue-router'
-
-import Rabbit from '@/assets/rabbit.ascii?raw'
-import RabbitJump from '@/assets/rabbitjump.ascii?raw'
-import { Sidebar } from '@/components'
-import EnvironmentSelector from '@/components/EnvironmentSelector/EnvironmentSelector.vue'
-import HttpMethod from '@/components/HttpMethod/HttpMethod.vue'
-import ScalarAsciiArt from '@/components/ScalarAsciiArt.vue'
-import { useSearch } from '@/components/Search/useSearch'
-import SidebarButton from '@/components/Sidebar/SidebarButton.vue'
-import { useLayout } from '@/hooks/useLayout'
-import { useSidebar } from '@/hooks/useSidebar'
-import type { HotKeyEvent } from '@/libs'
-import { PathId } from '@/routes'
-import { useWorkspace } from '@/store'
-import { useActiveEntities } from '@/store/active-entities'
-import { createInitialRequest } from '@/store/requests'
-import { dragHandlerFactory } from '@/views/Request/handle-drag'
-import RequestSidebarItemMenu from '@/views/Request/RequestSidebarItemMenu.vue'
-import type { SidebarItem, SidebarMenuItem } from '@/views/Request/types'
 
 import { WorkspaceDropdown } from './components'
 import { isGettingStarted } from './RequestSection/helpers/getting-started'

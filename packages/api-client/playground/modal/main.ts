@@ -1,4 +1,4 @@
-import { createApiClientModal } from '@/index'
+import { createApiClientModal } from '@scalar/api-client/index'
 
 const { open } = await createApiClientModal({
   el: document.getElementById('app'),

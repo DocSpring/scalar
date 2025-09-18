@@ -3,7 +3,7 @@ import {
   createContainer,
   findDataAttributes,
   getConfigurationFromDataAttributes,
-} from '@/standalone/lib/html-api'
+} from '@scalar/api-reference/standalone/lib/html-api'
 import { apiReferenceConfigurationSchema } from '@scalar/types/api-reference'
 import { flushPromises } from '@vue/test-utils'
 import { beforeEach, describe, expect, it, vi } from 'vitest'

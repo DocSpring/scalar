@@ -1,4 +1,4 @@
-import type { TraversedTag } from '@/features/traverse-schema'
+import type { TraversedTag } from '@scalar/api-reference/features/traverse-schema'
 import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
 import ClassicLayout from './ClassicLayout.vue'

@@ -1,7 +1,7 @@
 import type { OpenAPIV3_1 } from '@scalar/openapi-types'
 
-import type { TagsMap, TraversedWebhook } from '@/features/traverse-schema/types'
-import type { UseNavState } from '@/hooks/useNavState'
+import type { TagsMap, TraversedWebhook } from '@scalar/api-reference/features/traverse-schema/types'
+import type { UseNavState } from '@scalar/api-reference/hooks/useNavState'
 import type { OperationObject } from '@scalar/workspace-store/schemas/v3.1/strict/path-operations'
 import type { TagObject } from '@scalar/workspace-store/schemas/v3.1/strict/tag'
 import type { Dereference } from '@scalar/workspace-store/schemas/v3.1/type-guard'

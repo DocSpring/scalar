@@ -1,4 +1,4 @@
-import { NAV_STATE_SYMBOL } from '@/hooks/useNavState'
+import { NAV_STATE_SYMBOL } from '@scalar/api-reference/hooks/useNavState'
 import type { OpenAPIV3_1 } from '@scalar/openapi-types'
 import { apiReferenceConfigurationSchema } from '@scalar/types/api-reference'
 import { beforeEach, describe, expect, it, vi } from 'vitest'

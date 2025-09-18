@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import type { TraversedEntry } from '@scalar/api-reference/features/traverse-schema'
+import { useConfig } from '@scalar/api-reference/hooks/useConfig'
+import { useNavState } from '@scalar/api-reference/hooks/useNavState'
 import { ScalarSidebarGroupToggle } from '@scalar/components'
 import { scrollToId } from '@scalar/helpers/dom/scroll-to-id'
 import { getHttpMethodInfo } from '@scalar/helpers/http/http-info'
@@ -9,10 +12,6 @@ import {
   isOperationDeprecated,
 } from '@scalar/oas-utils/helpers'
 import type { OpenAPIV3_1, XScalarStability } from '@scalar/types'
-
-import type { TraversedEntry } from '@/features/traverse-schema'
-import { useConfig } from '@/hooks/useConfig'
-import { useNavState } from '@/hooks/useNavState'
 
 import SidebarHttpBadge from './SidebarHttpBadge.vue'
 

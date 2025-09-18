@@ -1,4 +1,7 @@
-import type { ClientOption, ClientOptionGroup } from '@/v2/blocks/scalar-request-example-block/types'
+import type {
+  ClientOption,
+  ClientOptionGroup,
+} from '@scalar/api-reference/v2/blocks/scalar-request-example-block/types'
 import { AVAILABLE_CLIENTS, type AvailableClients } from '@scalar/snippetz'
 
 export const DEFAULT_CLIENT = 'shell/curl'
@@ -42,10 +45,8 @@ export const isClient = (id: any): id is AvailableClients[number] => AVAILABLE_C
  */
 export const findClient = (
   clientGroups: ClientOptionGroup[],
-  clientId?: AvailableClients[number] | undefined,
-): ClientOption => {
-  const firstOption = clientGroups[0]?.options[0]
-
+  clientId?: AvailableClients[number] | string | undefined,
+): ClientOption | undefined => {
   // Client ID is passed in
   if (clientId) {
     for (const group of clientGroups) {

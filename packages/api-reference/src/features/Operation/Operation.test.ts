@@ -1,7 +1,7 @@
 import { mount } from '@vue/test-utils'
 import { describe, expect, it, vi } from 'vitest'
 import type { WorkspaceStore } from '@scalar/workspace-store/client'
-import { createMockSidebar, createMockStore } from '@/helpers/test-utils'
+import { createMockSidebar, createMockStore } from '@scalar/api-reference/helpers/test-utils'
 
 import Operation from './Operation.vue'
 import { collectionSchema } from '@scalar/oas-utils/entities/spec'
@@ -16,14 +16,14 @@ vi.mock('@scalar/api-client/store', () => ({
 }))
 
 // Mock the discriminator hook
-vi.mock('@/hooks/useOperationDiscriminator', () => ({
+vi.mock('@scalar/api-reference/hooks/useOperationDiscriminator', () => ({
   useOperationDiscriminator: () => ({
     handleDiscriminatorChange: vi.fn(),
   }),
 }))
 
 // Mock the sidebar provider
-vi.mock('@/features/sidebar/hooks/useSidebar', () => ({
+vi.mock('@scalar/api-reference/features/sidebar/hooks/useSidebar', () => ({
   useSidebar: () => createMockSidebar({}),
 }))
 

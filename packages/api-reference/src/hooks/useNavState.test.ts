@@ -1,4 +1,4 @@
-import { useConfig } from '@/hooks/useConfig'
+import { useConfig } from '@scalar/api-reference/hooks/useConfig'
 import type { Heading, Tag } from '@scalar/types/legacy'
 import { apiReferenceConfigurationSchema } from '@scalar/types/api-reference'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
@@ -13,7 +13,7 @@ declare global {
 }
 
 // Mock the useConfig hook
-vi.mock('@/hooks/useConfig', () => ({
+vi.mock('@scalar/api-reference/hooks/useConfig', () => ({
   useConfig: vi.fn().mockReturnValue({ value: {} }),
 }))
 

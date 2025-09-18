@@ -1,4 +1,4 @@
-import type { TraversedEntry } from '@/features/traverse-schema'
+import type { TraversedEntry } from '@scalar/api-reference/features/traverse-schema'
 import { describe, expect, it } from 'vitest'
 import { computed } from 'vue'
 import { useSearchIndex } from './useSearchIndex'

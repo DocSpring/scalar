@@ -1,8 +1,7 @@
 <script setup lang="ts">
+import ViewLayout from '@scalar/api-client/components/ViewLayout/ViewLayout.vue'
+import ViewLayoutContent from '@scalar/api-client/components/ViewLayout/ViewLayoutContent.vue'
 import { ref, type DefineComponent } from 'vue'
-
-import ViewLayout from '@/components/ViewLayout/ViewLayout.vue'
-import ViewLayoutContent from '@/components/ViewLayout/ViewLayoutContent.vue'
 
 import SettingsGeneral from './SettingsGeneral.vue'
 

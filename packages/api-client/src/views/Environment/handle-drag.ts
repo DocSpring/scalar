@@ -1,4 +1,4 @@
-import type { ActiveEntitiesStore } from '@/store/active-entities'
+import type { ActiveEntitiesStore } from '@scalar/api-client/store/active-entities'
 import type { DraggingItem, HoveredItem } from '@scalar/draggable'
 import type { Collection } from '@scalar/oas-utils/entities/spec'
 

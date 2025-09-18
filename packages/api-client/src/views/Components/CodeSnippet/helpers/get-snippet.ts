@@ -1,4 +1,4 @@
-import type { ErrorResponse } from '@/libs/errors'
+import type { ErrorResponse } from '@scalar/api-client/libs/errors'
 import { type ClientId, type TargetId, snippetz } from '@scalar/snippetz'
 import type { Request as HarRequest } from 'har-format'
 

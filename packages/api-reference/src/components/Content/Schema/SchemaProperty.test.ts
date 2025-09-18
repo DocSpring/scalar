@@ -1,4 +1,4 @@
-import { DISCRIMINATOR_CONTEXT } from '@/hooks/useDiscriminator'
+import { DISCRIMINATOR_CONTEXT } from '@scalar/api-reference/hooks/useDiscriminator'
 import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
 

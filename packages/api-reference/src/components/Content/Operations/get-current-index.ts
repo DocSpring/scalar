@@ -1,4 +1,4 @@
-import type { TraversedEntry } from '@/features/traverse-schema/types'
+import type { TraversedEntry } from '@scalar/api-reference/features/traverse-schema/types'
 
 /** Weak regex to match parameter links */
 const IS_PARAMETER_LINK = /^.*?(?=\.query|\.path|\.headers|\.cookies|\.body)/

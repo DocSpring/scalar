@@ -1,9 +1,8 @@
 <script setup lang="ts">
+import { Lazy } from '@scalar/api-reference/components/Lazy'
+import { useNavState } from '@scalar/api-reference/hooks/useNavState'
 import type { OpenAPIV3_1 } from '@scalar/openapi-types'
 import type { ApiReferenceConfiguration } from '@scalar/types'
-
-import { Lazy } from '@/components/Lazy'
-import { useNavState } from '@/hooks/useNavState'
 
 import ClassicLayout from './ClassicLayout.vue'
 import ModernLayout from './ModernLayout.vue'

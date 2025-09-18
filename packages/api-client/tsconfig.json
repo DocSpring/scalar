@@ -3,7 +3,7 @@
   "compilerOptions": {
     "types": ["vite/client"],
     "paths": {
-      "@/*": ["./src/*"]
+      "@scalar/api-client/*": ["./src/*"]
     }
   },
   "include": ["src", "playground"]

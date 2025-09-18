@@ -1,4 +1,8 @@
 <script setup lang="ts">
+import HttpMethod from '@scalar/api-client/components/HttpMethod/HttpMethod.vue'
+import { PathId } from '@scalar/api-client/routes'
+import { useWorkspace } from '@scalar/api-client/store'
+import { useActiveEntities } from '@scalar/api-client/store/active-entities'
 import {
   ScalarButton,
   ScalarDropdown,
@@ -10,11 +14,6 @@ import { isDefined } from '@scalar/oas-utils/helpers'
 import { useToasts } from '@scalar/use-toasts'
 import { computed, ref } from 'vue'
 import { useRouter } from 'vue-router'
-
-import HttpMethod from '@/components/HttpMethod/HttpMethod.vue'
-import { PathId } from '@/routes'
-import { useWorkspace } from '@/store'
-import { useActiveEntities } from '@/store/active-entities'
 
 import CommandActionForm from './CommandActionForm.vue'
 import CommandActionInput from './CommandActionInput.vue'

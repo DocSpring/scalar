@@ -1,4 +1,4 @@
-import type { WorkspaceStore } from '@/store'
+import type { WorkspaceStore } from '@scalar/api-client/store'
 
 /**
  * Checks whether the store is empty.

@@ -1,4 +1,4 @@
-import { PathId } from '@/router'
+import { PathId } from '@scalar/api-client/router'
 import type { Cookie } from '@scalar/oas-utils/entities/cookie'
 import type { Environment } from '@scalar/oas-utils/entities/environment'
 import type { Collection, Request, RequestExample, Server } from '@scalar/oas-utils/entities/spec'

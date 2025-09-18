@@ -1,8 +1,7 @@
 <script lang="ts" setup>
+import ViewLayoutCollapse from '@scalar/api-client/components/ViewLayout/ViewLayoutCollapse.vue'
 import { ScalarLoading, useLoadingState } from '@scalar/components'
 import { nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
-
-import ViewLayoutCollapse from '@/components/ViewLayout/ViewLayoutCollapse.vue'
 
 const { reader } = defineProps<{
   reader: ReadableStreamDefaultReader<Uint8Array>

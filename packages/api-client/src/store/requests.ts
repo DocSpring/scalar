@@ -1,4 +1,4 @@
-import type { extendedTagDataFactory } from '@/store/tags'
+import type { extendedTagDataFactory } from '@scalar/api-client/store/tags'
 import {
   type Collection,
   type Request,

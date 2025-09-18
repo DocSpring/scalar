@@ -1,4 +1,4 @@
-import { extractFilename } from '@/libs/extractAttachmentFilename'
+import { extractFilename } from '@scalar/api-client/libs/extractAttachmentFilename'
 import { computed, isRef } from 'vue'
 import MimeType from 'whatwg-mimetype'
 import type { Ref } from 'vue'

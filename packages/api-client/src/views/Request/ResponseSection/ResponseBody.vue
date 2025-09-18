@@ -1,9 +1,8 @@
 <script lang="ts" setup>
+import ViewLayoutCollapse from '@scalar/api-client/components/ViewLayout/ViewLayoutCollapse.vue'
+import { useResponseBody } from '@scalar/api-client/hooks/useResponseBody'
+import { getMediaTypeConfig } from '@scalar/api-client/views/Request/consts'
 import { computed, ref, toRef } from 'vue'
-
-import ViewLayoutCollapse from '@/components/ViewLayout/ViewLayoutCollapse.vue'
-import { useResponseBody } from '@/hooks/useResponseBody'
-import { getMediaTypeConfig } from '@/views/Request/consts'
 
 import ResponseBodyDownload from './ResponseBodyDownload.vue'
 import ResponseBodyInfo from './ResponseBodyInfo.vue'

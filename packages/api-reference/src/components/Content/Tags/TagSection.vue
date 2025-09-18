@@ -1,9 +1,7 @@
 <script setup lang="ts">
-import { ScalarMarkdown } from '@scalar/components'
-
-import { Anchor } from '@/components/Anchor'
-import { OperationsList } from '@/components/OperationsList'
-import ScreenReader from '@/components/ScreenReader.vue'
+import { Anchor } from '@scalar/api-reference/components/Anchor'
+import { OperationsList } from '@scalar/api-reference/components/OperationsList'
+import ScreenReader from '@scalar/api-reference/components/ScreenReader.vue'
 import {
   Section,
   SectionColumn,
@@ -11,10 +9,11 @@ import {
   SectionContent,
   SectionHeader,
   SectionHeaderTag,
-} from '@/components/Section'
-import { SpecificationExtension } from '@/features/specification-extension'
-import type { TraversedTag } from '@/features/traverse-schema'
-import { useConfig } from '@/hooks/useConfig'
+} from '@scalar/api-reference/components/Section'
+import { SpecificationExtension } from '@scalar/api-reference/features/specification-extension'
+import type { TraversedTag } from '@scalar/api-reference/features/traverse-schema'
+import { useConfig } from '@scalar/api-reference/hooks/useConfig'
+import { ScalarMarkdown } from '@scalar/components'
 
 const { tag, headerId, isCollapsed } = defineProps<{
   tag: TraversedTag

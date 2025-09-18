@@ -1,4 +1,4 @@
-import { parseCurlCommand } from '@/libs/parse-curl'
+import { parseCurlCommand } from '@scalar/api-client/libs/parse-curl'
 import { operationSchema } from '@scalar/oas-utils/entities/spec'
 import { describe, expect, it } from 'vitest'
 

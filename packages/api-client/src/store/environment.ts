@@ -1,4 +1,4 @@
-import type { StoreContext } from '@/store/store-context'
+import type { StoreContext } from '@scalar/api-client/store/store-context'
 import { type Environment, environmentSchema } from '@scalar/oas-utils/entities/environment'
 import { LS_KEYS } from '@scalar/helpers/object/local-storage'
 import { mutationFactory } from '@scalar/object-utils/mutator-record'

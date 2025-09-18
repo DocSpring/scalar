@@ -1,4 +1,9 @@
 <script setup lang="ts">
+import CodeInput from '@scalar/api-client/components/CodeInput/CodeInput.vue'
+import { ServerDropdown } from '@scalar/api-client/components/Server'
+import { useLayout } from '@scalar/api-client/hooks'
+import { useWorkspace } from '@scalar/api-client/store'
+import type { EnvVariable } from '@scalar/api-client/store/active-entities'
 import { ScalarButton, ScalarIcon } from '@scalar/components'
 import type { Environment } from '@scalar/oas-utils/entities/environment'
 import type {
@@ -10,12 +15,6 @@ import type {
 import type { Workspace } from '@scalar/oas-utils/entities/workspace'
 import { REQUEST_METHODS } from '@scalar/oas-utils/helpers'
 import { ref, useId, watch } from 'vue'
-
-import CodeInput from '@/components/CodeInput/CodeInput.vue'
-import { ServerDropdown } from '@/components/Server'
-import { useLayout } from '@/hooks'
-import { useWorkspace } from '@/store'
-import type { EnvVariable } from '@/store/active-entities'
 
 import HttpMethod from '../HttpMethod/HttpMethod.vue'
 import AddressBarHistory from './AddressBarHistory.vue'

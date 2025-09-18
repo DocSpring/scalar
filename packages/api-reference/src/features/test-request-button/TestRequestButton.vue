@@ -1,11 +1,10 @@
 <script setup lang="ts">
+import ScreenReader from '@scalar/api-reference/components/ScreenReader.vue'
+import { useApiClient } from '@scalar/api-reference/features/api-client-modal'
+import { useConfig } from '@scalar/api-reference/hooks/useConfig'
 import type { HttpMethod } from '@scalar/helpers/http/http-methods'
 import { ScalarIconPlay } from '@scalar/icons'
 import { computed } from 'vue'
-
-import ScreenReader from '@/components/ScreenReader.vue'
-import { useApiClient } from '@/features/api-client-modal'
-import { useConfig } from '@/hooks/useConfig'
 
 const { method, path } = defineProps<{
   method: HttpMethod

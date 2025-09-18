@@ -1,10 +1,9 @@
 <script setup lang="ts">
+import type { Schemas } from '@scalar/api-reference/features/Operation/types/schemas'
 import type { HttpMethod } from '@scalar/helpers/http/http-methods'
 import { isHttpMethod } from '@scalar/helpers/http/is-http-method'
 import type { CallbackObject } from '@scalar/workspace-store/schemas/v3.1/strict/path-operations'
 import { isReference } from '@scalar/workspace-store/schemas/v3.1/type-guard'
-
-import type { Schemas } from '@/features/Operation/types/schemas'
 
 import Callback from './Callback.vue'
 

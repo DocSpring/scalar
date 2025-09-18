@@ -1,10 +1,9 @@
 <script setup lang="ts">
+import { useLayout } from '@scalar/api-client/hooks/useLayout'
+import { useSidebar } from '@scalar/api-client/hooks/useSidebar'
+import { useWorkspace } from '@scalar/api-client/store'
 import { useBreakpoints } from '@scalar/use-hooks/useBreakpoints'
 import { ref } from 'vue'
-
-import { useLayout } from '@/hooks/useLayout'
-import { useSidebar } from '@/hooks/useSidebar'
-import { useWorkspace } from '@/store'
 
 defineProps<{
   title?: string
@@ -96,7 +95,7 @@ const startDrag = (event: MouseEvent) => {
   </aside>
 </template>
 <style scoped>
-@reference "@/style.css";
+@reference "@scalar/api-client/style.css";
 
 .sidebar-height {
   min-height: 100%;

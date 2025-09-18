@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import { DataTableHeader } from '@/components/DataTable'
-import DataTable from '@/components/DataTable/DataTable.vue'
-import DataTableRow from '@/components/DataTable/DataTableRow.vue'
-import DataTableText from '@/components/DataTable/DataTableText.vue'
-import HelpfulLink from '@/components/HelpfulLink.vue'
-import ViewLayoutCollapse from '@/components/ViewLayout/ViewLayoutCollapse.vue'
-import { httpHeaders } from '@/data/httpHeaders'
+import { DataTableHeader } from '@scalar/api-client/components/DataTable'
+import DataTable from '@scalar/api-client/components/DataTable/DataTable.vue'
+import DataTableRow from '@scalar/api-client/components/DataTable/DataTableRow.vue'
+import DataTableText from '@scalar/api-client/components/DataTable/DataTableText.vue'
+import HelpfulLink from '@scalar/api-client/components/HelpfulLink.vue'
+import ViewLayoutCollapse from '@scalar/api-client/components/ViewLayout/ViewLayoutCollapse.vue'
+import { httpHeaders } from '@scalar/api-client/data/httpHeaders'
 
 type Header = { name: string; value: string; required: boolean }
 

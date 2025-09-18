@@ -1,10 +1,9 @@
 <script setup lang="ts">
+import { useWorkspace } from '@scalar/api-client/store'
+import { useActiveEntities } from '@scalar/api-client/store/active-entities'
 import { ScalarButton, ScalarIcon, ScalarListbox } from '@scalar/components'
 import { useToasts } from '@scalar/use-toasts'
 import { computed, ref } from 'vue'
-
-import { useWorkspace } from '@/store'
-import { useActiveEntities } from '@/store/active-entities'
 
 import CommandActionForm from './CommandActionForm.vue'
 import CommandActionInput from './CommandActionInput.vue'

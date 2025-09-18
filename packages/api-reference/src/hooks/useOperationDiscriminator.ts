@@ -1,8 +1,8 @@
 import type { OpenAPIV3_1 } from '@scalar/openapi-types'
 import { computed, provide, ref } from 'vue'
 
-import type { Schemas } from '@/features/Operation/types/schemas'
-import { DISCRIMINATOR_CONTEXT, EXAMPLE_CONTEXT, useDiscriminator } from '@/hooks/useDiscriminator'
+import type { Schemas } from '@scalar/api-reference/features/Operation/types/schemas'
+import { DISCRIMINATOR_CONTEXT, EXAMPLE_CONTEXT, useDiscriminator } from '@scalar/api-reference/hooks/useDiscriminator'
 
 /** Check if a schema has discriminator usage */
 function hasDiscriminatorInSchema(schema: OpenAPIV3_1.SchemaObject | undefined): boolean {

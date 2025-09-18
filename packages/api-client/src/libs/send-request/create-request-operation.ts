@@ -1,13 +1,13 @@
-import { ERRORS, type ErrorResponse, normalizeError } from '@/libs/errors'
-import type { EventBus } from '@/libs/event-bus'
-import { normalizeHeaders } from '@/libs/normalize-headers'
-import { createFetchBody } from '@/libs/send-request/create-fetch-body'
-import { createFetchHeaders } from '@/libs/send-request/create-fetch-headers'
-import { createFetchQueryParams } from '@/libs/send-request/create-fetch-query-params'
-import { decodeBuffer } from '@/libs/send-request/decode-buffer'
-import { getCookieHeader, setRequestCookies } from '@/libs/send-request/set-request-cookies'
-import { replaceTemplateVariables } from '@/libs/string-template'
-import type { PluginManager } from '@/plugins'
+import { ERRORS, type ErrorResponse, normalizeError } from '@scalar/api-client/libs/errors'
+import type { EventBus } from '@scalar/api-client/libs/event-bus'
+import { normalizeHeaders } from '@scalar/api-client/libs/normalize-headers'
+import { createFetchBody } from '@scalar/api-client/libs/send-request/create-fetch-body'
+import { createFetchHeaders } from '@scalar/api-client/libs/send-request/create-fetch-headers'
+import { createFetchQueryParams } from '@scalar/api-client/libs/send-request/create-fetch-query-params'
+import { decodeBuffer } from '@scalar/api-client/libs/send-request/decode-buffer'
+import { getCookieHeader, setRequestCookies } from '@scalar/api-client/libs/send-request/set-request-cookies'
+import { replaceTemplateVariables } from '@scalar/api-client/libs/string-template'
+import type { PluginManager } from '@scalar/api-client/plugins'
 import type { Cookie } from '@scalar/oas-utils/entities/cookie'
 import type {
   Operation,
@@ -17,7 +17,7 @@ import type {
   Server,
 } from '@scalar/oas-utils/entities/spec'
 
-import { isElectron } from '@/libs/electron'
+import { isElectron } from '@scalar/api-client/libs/electron'
 import { httpStatusCodes, isDefined, mergeUrls, redirectToProxy, shouldUseProxy } from '@scalar/oas-utils/helpers'
 import { buildRequestSecurity } from './build-request-security'
 

@@ -141,9 +141,14 @@ export async function addPackageFileExports({
 }
 
 /** Standard path aliases for Vite */
-export function alias(url: string) {
+export function alias(url: string, pkgAlias?: string) {
+  const base = (pkgAlias || '@').replace(/\s+/g, '')
+  const hasAt = base.startsWith('@')
+  const prefix = hasAt ? base : `@${base}`
+  const testKey = prefix === '@' ? '@test' : `${prefix}-test`
+
   return {
-    '@test': fileURLToPath(new URL('./test', url)),
-    '@': fileURLToPath(new URL('./src', url)),
-  }
+    [testKey]: fileURLToPath(new URL('./test', url)),
+    [prefix]: fileURLToPath(new URL('./src', url)),
+  } as Record<string, string>
 }

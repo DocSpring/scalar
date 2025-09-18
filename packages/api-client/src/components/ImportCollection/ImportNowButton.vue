@@ -1,11 +1,10 @@
 <script lang="ts" setup>
+import { useWorkspace } from '@scalar/api-client/store'
+import { useActiveEntities } from '@scalar/api-client/store/active-entities'
 import { ScalarButton } from '@scalar/components'
 import type { Collection } from '@scalar/oas-utils/entities/spec'
 import { useToasts } from '@scalar/use-toasts'
 import { useRouter } from 'vue-router'
-
-import { useWorkspace } from '@/store'
-import { useActiveEntities } from '@/store/active-entities'
 
 import { importCollection } from './utils/import-collection'
 

@@ -1,13 +1,12 @@
 <script setup lang="ts">
+import { HttpMethod } from '@scalar/api-reference/components/HttpMethod'
+import OperationParameters from '@scalar/api-reference/features/Operation/components/OperationParameters.vue'
+import OperationResponses from '@scalar/api-reference/features/Operation/components/OperationResponses.vue'
+import type { Schemas } from '@scalar/api-reference/features/Operation/types/schemas'
 import type { HttpMethod as HttpMethodType } from '@scalar/helpers/http/http-methods'
 import { ScalarIconCaretRight } from '@scalar/icons'
 import { type OperationObject } from '@scalar/workspace-store/schemas/v3.1/strict/path-operations'
 import { type Dereference } from '@scalar/workspace-store/schemas/v3.1/type-guard'
-
-import { HttpMethod } from '@/components/HttpMethod'
-import OperationParameters from '@/features/Operation/components/OperationParameters.vue'
-import OperationResponses from '@/features/Operation/components/OperationResponses.vue'
-import type { Schemas } from '@/features/Operation/types/schemas'
 
 const { method, name, schemas, url } = defineProps<{
   callback: Dereference<OperationObject>

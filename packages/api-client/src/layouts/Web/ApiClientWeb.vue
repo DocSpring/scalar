@@ -1,4 +1,10 @@
 <script setup lang="ts">
+import { ImportCollectionListener } from '@scalar/api-client/components/ImportCollection'
+import { useSidebar } from '@scalar/api-client/hooks/useSidebar'
+import MainLayout from '@scalar/api-client/layouts/App/MainLayout.vue'
+import { handleHotKeyDown, type HotKeyEvent } from '@scalar/api-client/libs'
+import { useWorkspace } from '@scalar/api-client/store'
+import { useActiveEntities } from '@scalar/api-client/store/active-entities'
 import {
   addScalarClassesToHeadless,
   ScalarTeleportRoot,
@@ -9,13 +15,6 @@ import { useColorMode } from '@scalar/use-hooks/useColorMode'
 import { ScalarToasts } from '@scalar/use-toasts'
 import { computed, onBeforeMount, onBeforeUnmount, onMounted, watch } from 'vue'
 import { RouterView } from 'vue-router'
-
-import { ImportCollectionListener } from '@/components/ImportCollection'
-import { useSidebar } from '@/hooks/useSidebar'
-import MainLayout from '@/layouts/App/MainLayout.vue'
-import { handleHotKeyDown, type HotKeyEvent } from '@/libs'
-import { useWorkspace } from '@/store'
-import { useActiveEntities } from '@/store/active-entities'
 
 // Initialize color mode state globally
 useColorMode()

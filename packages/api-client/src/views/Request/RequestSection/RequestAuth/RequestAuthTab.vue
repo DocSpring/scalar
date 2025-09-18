@@ -1,4 +1,14 @@
 <script setup lang="ts">
+import {
+  DataTableCell,
+  DataTableRow,
+} from '@scalar/api-client/components/DataTable'
+import type { EnvVariable } from '@scalar/api-client/store/active-entities'
+import { useWorkspace } from '@scalar/api-client/store/store'
+import {
+  updateScheme as _updateScheme,
+  type Auth,
+} from '@scalar/api-client/views/Request/RequestSection/helpers/update-scheme'
 import { ScalarMarkdown } from '@scalar/components'
 import {
   CLIENT_LS_KEYS,
@@ -15,14 +25,6 @@ import { isDefined } from '@scalar/oas-utils/helpers'
 import type { Path, PathValue } from '@scalar/object-utils/nested'
 import type { Entries } from 'type-fest'
 import { capitalize, computed, onMounted, ref } from 'vue'
-
-import { DataTableCell, DataTableRow } from '@/components/DataTable'
-import type { EnvVariable } from '@/store/active-entities'
-import { useWorkspace } from '@/store/store'
-import {
-  updateScheme as _updateScheme,
-  type Auth,
-} from '@/views/Request/RequestSection/helpers/update-scheme'
 
 import OAuth2 from './OAuth2.vue'
 import RequestAuthDataTableInput from './RequestAuthDataTableInput.vue'

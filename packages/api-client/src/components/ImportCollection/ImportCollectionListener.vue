@@ -1,12 +1,11 @@
 <script lang="ts" setup>
+import { workspaceStoreIsEmpty } from '@scalar/api-client/components/ImportCollection/utils/workspace-store-is-empty'
+import { useWorkspace } from '@scalar/api-client/store'
+import { useActiveEntities } from '@scalar/api-client/store/active-entities'
 import type { Collection } from '@scalar/oas-utils/entities/spec'
 import { useToasts } from '@scalar/use-toasts'
 import { nextTick, ref } from 'vue'
 import { useRouter } from 'vue-router'
-
-import { workspaceStoreIsEmpty } from '@/components/ImportCollection/utils/workspace-store-is-empty'
-import { useWorkspace } from '@/store'
-import { useActiveEntities } from '@/store/active-entities'
 
 import DropEventListener from './DropEventListener.vue'
 import ImportCollectionModal from './ImportCollectionModal.vue'

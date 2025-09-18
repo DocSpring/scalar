@@ -1,8 +1,7 @@
 <script setup lang="ts">
+import { usePluginManager } from '@scalar/api-reference/plugins'
 import { ScalarErrorBoundary } from '@scalar/components'
 import { computed } from 'vue'
-
-import { usePluginManager } from '@/plugins'
 
 const { value } = defineProps<{
   /**

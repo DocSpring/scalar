@@ -1,4 +1,21 @@
 <script setup lang="ts">
+import { Anchor } from '@scalar/api-reference/components/Anchor'
+import { Badge } from '@scalar/api-reference/components/Badge'
+import { HttpMethod } from '@scalar/api-reference/components/HttpMethod'
+import { LinkList } from '@scalar/api-reference/components/LinkList'
+import OperationPath from '@scalar/api-reference/components/OperationPath.vue'
+import { SectionAccordion } from '@scalar/api-reference/components/Section'
+import VisibleOnIntersect from '@scalar/api-reference/components/VisibleOnIntersect.vue'
+import { ExampleResponses } from '@scalar/api-reference/features/example-responses'
+import { ExternalDocs } from '@scalar/api-reference/features/external-docs'
+import Callbacks from '@scalar/api-reference/features/Operation/components/callbacks/Callbacks.vue'
+import OperationParameters from '@scalar/api-reference/features/Operation/components/OperationParameters.vue'
+import OperationResponses from '@scalar/api-reference/features/Operation/components/OperationResponses.vue'
+import type { Schemas } from '@scalar/api-reference/features/Operation/types/schemas'
+import { TestRequestButton } from '@scalar/api-reference/features/test-request-button'
+import { useConfig } from '@scalar/api-reference/hooks/useConfig'
+import { RequestExample } from '@scalar/api-reference/v2/blocks/scalar-request-example-block'
+import type { ClientOptionGroup } from '@scalar/api-reference/v2/blocks/scalar-request-example-block/types'
 import {
   ScalarErrorBoundary,
   ScalarIconButton,
@@ -24,23 +41,6 @@ import type { SecuritySchemeObject } from '@scalar/workspace-store/schemas/v3.1/
 import type { ServerObject } from '@scalar/workspace-store/schemas/v3.1/strict/server'
 import type { Dereference } from '@scalar/workspace-store/schemas/v3.1/type-guard'
 import { computed } from 'vue'
-
-import { Anchor } from '@/components/Anchor'
-import { Badge } from '@/components/Badge'
-import { HttpMethod } from '@/components/HttpMethod'
-import { LinkList } from '@/components/LinkList'
-import OperationPath from '@/components/OperationPath.vue'
-import { SectionAccordion } from '@/components/Section'
-import { ExampleResponses } from '@/features/example-responses'
-import { ExternalDocs } from '@/features/external-docs'
-import Callbacks from '@/features/Operation/components/callbacks/Callbacks.vue'
-import OperationParameters from '@/features/Operation/components/OperationParameters.vue'
-import OperationResponses from '@/features/Operation/components/OperationResponses.vue'
-import type { Schemas } from '@/features/Operation/types/schemas'
-import { TestRequestButton } from '@/features/test-request-button'
-import { useConfig } from '@/hooks/useConfig'
-import { RequestExample } from '@/v2/blocks/scalar-request-example-block'
-import type { ClientOptionGroup } from '@/v2/blocks/scalar-request-example-block/types'
 
 const { operation, path, isWebhook } = defineProps<{
   id: string
@@ -204,7 +204,7 @@ const handleDiscriminatorChange = (type: string) => {
 </template>
 
 <style scoped>
-@reference "@/style.css";
+@reference "@scalar/api-reference/style.css";
 
 .operation-title {
   display: flex;

@@ -1,17 +1,16 @@
 <script setup lang="ts">
+import ScreenReader from '@scalar/api-reference/components/ScreenReader.vue'
+import type { TraversedTag } from '@scalar/api-reference/features/traverse-schema'
+import type {
+  TraversedOperation,
+  TraversedWebhook,
+} from '@scalar/api-reference/features/traverse-schema/types'
 import {
   ScalarCard,
   ScalarCardHeader,
   ScalarCardSection,
 } from '@scalar/components'
 import { computed } from 'vue'
-
-import ScreenReader from '@/components/ScreenReader.vue'
-import type { TraversedTag } from '@/features/traverse-schema'
-import type {
-  TraversedOperation,
-  TraversedWebhook,
-} from '@/features/traverse-schema/types'
 
 import OperationsListItem from './OperationsListItem.vue'
 

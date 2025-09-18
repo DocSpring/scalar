@@ -1,4 +1,8 @@
 <script setup lang="ts">
+import DeleteSidebarListElement from '@scalar/api-client/components/Sidebar/Actions/DeleteSidebarListElement.vue'
+import EditSidebarListElement from '@scalar/api-client/components/Sidebar/Actions/EditSidebarListElement.vue'
+import { useWorkspace } from '@scalar/api-client/store'
+import { useActiveEntities } from '@scalar/api-client/store/active-entities'
 import {
   ScalarButton,
   ScalarDropdown,
@@ -12,11 +16,6 @@ import {
 import type { Workspace } from '@scalar/oas-utils/entities/workspace'
 import { computed, ref } from 'vue'
 import { useRouter } from 'vue-router'
-
-import DeleteSidebarListElement from '@/components/Sidebar/Actions/DeleteSidebarListElement.vue'
-import EditSidebarListElement from '@/components/Sidebar/Actions/EditSidebarListElement.vue'
-import { useWorkspace } from '@/store'
-import { useActiveEntities } from '@/store/active-entities'
 
 const { activeWorkspace } = useActiveEntities()
 const { workspaces, workspaceMutators, events } = useWorkspace()

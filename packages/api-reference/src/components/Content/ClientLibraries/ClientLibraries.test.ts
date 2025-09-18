@@ -1,8 +1,11 @@
 import { describe, expect, it } from 'vitest'
 import { mount } from '@vue/test-utils'
-import { DEFAULT_CLIENT } from '@/v2/blocks/scalar-request-example-block/helpers/find-client'
-import type { ClientOptionGroup } from '@/v2/blocks/scalar-request-example-block/types'
+import { DEFAULT_CLIENT } from '@scalar/api-reference/v2/blocks/scalar-request-example-block/helpers/find-client'
+import type { ClientOptionGroup } from '@scalar/api-reference/v2/blocks/scalar-request-example-block/types'
+import { ACTIVE_ENTITIES_SYMBOL } from '@scalar/api-client/store/active-entities'
+import { WORKSPACE_SYMBOL } from '@scalar/api-client/store/store'
 import type { WorkspaceDocument } from '@scalar/workspace-store/schemas/schemas/workspace'
+import { reactive, ref } from 'vue'
 
 import ClientLibraries from './ClientLibraries.vue'
 

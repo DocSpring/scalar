@@ -1,9 +1,8 @@
 <script setup lang="ts">
+import { useApiClient } from '@scalar/api-reference/features/api-client-modal'
 import { ScalarSidebarSearchButton, useModal } from '@scalar/components'
 import { isMacOS } from '@scalar/helpers/general/is-mac-os'
 import { nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
-
-import { useApiClient } from '@/features/api-client-modal'
 
 import SearchModal from './SearchModal.vue'
 

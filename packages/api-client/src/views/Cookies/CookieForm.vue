@@ -1,11 +1,10 @@
 <script setup lang="ts">
+import Form from '@scalar/api-client/components/Form/Form.vue'
+import { useWorkspace } from '@scalar/api-client/store'
+import { useActiveEntities } from '@scalar/api-client/store/active-entities'
 import { cookieSchema, type Cookie } from '@scalar/oas-utils/entities/cookie'
 import type { Path, PathValue } from '@scalar/object-utils/nested'
 import { computed } from 'vue'
-
-import Form from '@/components/Form/Form.vue'
-import { useWorkspace } from '@/store'
-import { useActiveEntities } from '@/store/active-entities'
 
 const { activeCookieId } = useActiveEntities()
 const { cookies, cookieMutators } = useWorkspace()

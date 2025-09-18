@@ -1,11 +1,10 @@
 <script setup lang="ts">
+import CodeInput from '@scalar/api-client/components/CodeInput/CodeInput.vue'
+import type { EnvVariable } from '@scalar/api-client/store/active-entities'
 import { ScalarButton, ScalarIcon, ScalarMarkdown } from '@scalar/components'
 import type { Environment } from '@scalar/oas-utils/entities/environment'
 import type { Workspace } from '@scalar/oas-utils/entities/workspace'
 import { nextTick, ref, watch } from 'vue'
-
-import CodeInput from '@/components/CodeInput/CodeInput.vue'
-import type { EnvVariable } from '@/store/active-entities'
 
 const { modelValue, environment, envVariables, workspace } = defineProps<{
   modelValue: string

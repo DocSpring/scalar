@@ -1,13 +1,13 @@
 import { mount } from '@vue/test-utils'
 import { describe, expect, it, vi } from 'vitest'
 
-import type { TraversedOperation, TraversedTag, TraversedWebhook } from '@/features/traverse-schema'
+import type { TraversedOperation, TraversedTag, TraversedWebhook } from '@scalar/api-reference/features/traverse-schema'
 import OperationsList from './OperationsList.vue'
-import { createMockSidebar } from '@/helpers/test-utils'
-import { useSidebar } from '@/features/sidebar'
+import { createMockSidebar } from '@scalar/api-reference/helpers/test-utils'
+import { useSidebar } from '@scalar/api-reference/features/sidebar'
 
 // Mock the sidebar module
-vi.mock('@/features/sidebar', () => ({
+vi.mock('@scalar/api-reference/features/sidebar', () => ({
   useSidebar: vi.fn(() => createMockSidebar()),
 }))
 

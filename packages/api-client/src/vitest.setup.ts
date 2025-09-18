@@ -1,16 +1,16 @@
-import { useLayout } from '@/hooks/useLayout'
-import { useSidebar } from '@/hooks/useSidebar'
+import { useLayout } from '@scalar/api-client/hooks/useLayout'
+import { useSidebar } from '@scalar/api-client/hooks/useSidebar'
 import { afterEach, beforeEach, expect, vi } from 'vitest'
 import { reactive, ref } from 'vue'
 
 // Mock the useLayout hook
-vi.mock('@/hooks/useLayout', () => ({
+vi.mock('@scalar/api-client/hooks/useLayout', () => ({
   useLayout: vi.fn(),
 }))
 export const mockUseLayout = useLayout
 
 // Mock the useSidebar hook
-vi.mock('@/hooks/useSidebar', () => ({
+vi.mock('@scalar/api-client/hooks/useSidebar', () => ({
   useSidebar: vi.fn(),
 }))
 export const mockUseSidebar = useSidebar

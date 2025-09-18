@@ -1,4 +1,4 @@
-import { useWorkspace } from '@/store'
+import { useWorkspace } from '@scalar/api-client/store'
 import {
   collectionSchema,
   operationSchema,
@@ -11,12 +11,12 @@ import type { ClientId, TargetId } from '@scalar/snippetz'
 import { mount } from '@vue/test-utils'
 import { type Mock, afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { workspaceSchema } from '@scalar/oas-utils/entities/workspace'
-import { useActiveEntities } from '@/store/active-entities'
+import { useActiveEntities } from '@scalar/api-client/store/active-entities'
 
 import RequestCodeExample from './RequestCodeExample.vue'
 
 // Mock the useWorkspace hook
-vi.mock('@/store', () => ({
+vi.mock('@scalar/api-client/store', () => ({
   useWorkspace: vi.fn(),
 }))
 
@@ -79,7 +79,7 @@ const mockWorkspaceMutators = {
   edit: vi.fn(),
 }
 
-vi.mock('@/store/active-entities', () => ({
+vi.mock('@scalar/api-client/store/active-entities', () => ({
   useActiveEntities: vi.fn(),
 }))
 const mockUseActiveEntities = useActiveEntities as Mock

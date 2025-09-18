@@ -1,7 +1,7 @@
-import { modalRoutes, routes } from '@/routes'
+import { modalRoutes, routes } from '@scalar/api-client/routes'
 import { createMemoryHistory, createRouter, createWebHashHistory, createWebHistory } from 'vue-router'
 
-export { PathId, saveActiveWorkspace } from '@/routes'
+export { PathId, saveActiveWorkspace } from '@scalar/api-client/routes'
 
 /** Router for the API client app */
 export const createWebHistoryRouter = () =>

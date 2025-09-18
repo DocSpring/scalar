@@ -1,9 +1,9 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
 import { createApiClient, type CreateApiClientParams, type OpenClientPayload } from './create-client'
-import { createWorkspaceStore, type CreateWorkspaceStoreOptions } from '@/store/store'
-import { createActiveEntitiesStore } from '@/store/active-entities'
-import { createSidebarState } from '@/hooks/useSidebar'
-import { loadAllResources } from '@/libs/local-storage'
+import { createWorkspaceStore, type CreateWorkspaceStoreOptions } from '@scalar/api-client/store/store'
+import { createActiveEntitiesStore } from '@scalar/api-client/store/active-entities'
+import { createSidebarState } from '@scalar/api-client/hooks/useSidebar'
+import { loadAllResources } from '@scalar/api-client/libs/local-storage'
 import {
   requestExampleSchema,
   requestSchema,
@@ -12,7 +12,7 @@ import {
 } from '@scalar/oas-utils/entities/spec'
 
 // Mock dependencies
-vi.mock('@/store/store', () => ({
+vi.mock('@scalar/api-client/store/store', () => ({
   createWorkspaceStore: vi.fn(() => ({
     workspaceMutators: {
       add: vi.fn(),
@@ -44,7 +44,7 @@ vi.mock('@/store/store', () => ({
   WORKSPACE_SYMBOL: Symbol('workspace'),
 }))
 
-vi.mock('@/store/active-entities', () => ({
+vi.mock('@scalar/api-client/store/active-entities', () => ({
   createActiveEntitiesStore: vi.fn(() => ({
     activeCollection: { value: { uid: 'collection-1' } },
     activeWorkspace: { value: { uid: 'workspace-1' } },
@@ -52,16 +52,16 @@ vi.mock('@/store/active-entities', () => ({
   ACTIVE_ENTITIES_SYMBOL: Symbol('active-entities'),
 }))
 
-vi.mock('@/hooks/useSidebar', () => ({
+vi.mock('@scalar/api-client/hooks/useSidebar', () => ({
   createSidebarState: vi.fn(() => ({})),
   SIDEBAR_SYMBOL: Symbol('sidebar'),
 }))
 
-vi.mock('@/hooks/useLayout', () => ({
+vi.mock('@scalar/api-client/hooks/useLayout', () => ({
   LAYOUT_SYMBOL: Symbol('layout'),
 }))
 
-vi.mock('@/libs/local-storage', () => ({
+vi.mock('@scalar/api-client/libs/local-storage', () => ({
   loadAllResources: vi.fn(),
 }))
 

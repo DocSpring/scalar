@@ -1,4 +1,4 @@
-import type { TraversedEntry, TraversedOperation } from '@/features/traverse-schema'
+import type { TraversedEntry, TraversedOperation } from '@scalar/api-reference/features/traverse-schema'
 import { XScalarStability } from '@scalar/types/legacy'
 import { mount } from '@vue/test-utils'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
@@ -12,7 +12,7 @@ vi.mock('@scalar/oas-utils/helpers', () => ({
   isOperationDeprecated: vi.fn(),
 }))
 
-vi.mock('@/hooks/useConfig', () => ({
+vi.mock('@scalar/api-reference/hooks/useConfig', () => ({
   useConfig: () => ({
     value: {
       pathRouting: false,
@@ -22,7 +22,7 @@ vi.mock('@/hooks/useConfig', () => ({
   }),
 }))
 
-vi.mock('@/hooks/useNavState', () => ({
+vi.mock('@scalar/api-reference/hooks/useNavState', () => ({
   useNavState: () => ({
     getFullHash: vi.fn((id: string) => `#${id}`),
     isIntersectionEnabled: ref(true),

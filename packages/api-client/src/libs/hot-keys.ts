@@ -1,4 +1,4 @@
-import type { EventBus } from '@/libs'
+import type { EventBus } from '@scalar/api-client/libs'
 import type { HotkeyEventName, KeydownKey } from '@scalar/oas-utils/entities/hotkeys'
 import type { HotKeyConfig, HotKeyModifiers } from '@scalar/oas-utils/entities/workspace'
 import { isMacOS } from '@scalar/helpers/general/is-mac-os'

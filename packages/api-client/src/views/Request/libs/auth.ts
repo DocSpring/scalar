@@ -1,4 +1,8 @@
-import { ADD_AUTH_OPTIONS, type SecuritySchemeGroup, type SecuritySchemeOption } from '@/views/Request/consts'
+import {
+  ADD_AUTH_OPTIONS,
+  type SecuritySchemeGroup,
+  type SecuritySchemeOption,
+} from '@scalar/api-client/views/Request/consts'
 import type { Collection, Operation, SecurityScheme } from '@scalar/oas-utils/entities/spec'
 import { isDefined } from '@scalar/oas-utils/helpers'
 

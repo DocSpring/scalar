@@ -1,4 +1,4 @@
-import type { ReferenceProps } from '@/types'
+import type { ReferenceProps } from '@scalar/api-reference/types'
 import {
   type AnyApiReferenceConfiguration,
   type ApiReferenceConfiguration,
@@ -8,7 +8,7 @@ import {
 import { createHead } from '@unhead/vue'
 import { createApp, h, reactive } from 'vue'
 
-import { default as ApiReference } from '@/components/ApiReference.vue'
+import { default as ApiReference } from '@scalar/api-reference/components/ApiReference.vue'
 
 const getSpecScriptTag = (doc: Document) => doc.getElementById('api-reference')
 

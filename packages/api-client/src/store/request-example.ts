@@ -1,4 +1,4 @@
-import type { StoreContext } from '@/store/store-context'
+import type { StoreContext } from '@scalar/api-client/store/store-context'
 import { type Request, type RequestExample, createExampleFromRequest } from '@scalar/oas-utils/entities/spec'
 import { LS_KEYS } from '@scalar/helpers/object/local-storage'
 import { iterateTitle } from '@scalar/helpers/string/iterate-title'

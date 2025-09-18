@@ -1,7 +1,6 @@
 <script setup lang="ts">
+import { useSidebar } from '@scalar/api-reference/features/sidebar'
 import { ScalarIconButton } from '@scalar/components'
-
-import { useSidebar } from '@/features/sidebar'
 
 const { isSidebarOpen } = useSidebar()
 

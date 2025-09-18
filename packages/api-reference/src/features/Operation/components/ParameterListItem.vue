@@ -1,13 +1,12 @@
 <script setup lang="ts">
 import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/vue'
+import { SchemaProperty } from '@scalar/api-reference/components/Content/Schema'
 import { ScalarMarkdown } from '@scalar/components'
 import { ScalarIconCaretRight } from '@scalar/icons'
 import type { Request as RequestEntity } from '@scalar/oas-utils/entities/spec'
 import { isDefined } from '@scalar/oas-utils/helpers'
 import type { OpenAPIV3_1 } from '@scalar/openapi-types'
 import { computed, ref } from 'vue'
-
-import { SchemaProperty } from '@/components/Content/Schema'
 
 import ContentTypeSelect from './ContentTypeSelect.vue'
 import ParameterHeaders from './ParameterHeaders.vue'

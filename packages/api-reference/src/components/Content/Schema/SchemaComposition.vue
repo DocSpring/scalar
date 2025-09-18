@@ -1,10 +1,9 @@
 <script lang="ts" setup>
+import type { Schemas } from '@scalar/api-reference/features/Operation/types/schemas'
 import { ScalarListbox, type ScalarListboxOption } from '@scalar/components'
 import { ScalarIconCaretDown } from '@scalar/icons'
 import type { OpenAPIV3_1 } from '@scalar/openapi-types'
 import { computed, ref } from 'vue'
-
-import type { Schemas } from '@/features/Operation/types/schemas'
 
 import { getSchemaType } from './helpers/get-schema-type'
 import { mergeAllOfSchemas } from './helpers/merge-all-of-schemas'

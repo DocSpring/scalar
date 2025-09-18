@@ -1,5 +1,5 @@
-import { DownloadLink } from '@/features/download-link'
-import { useSidebar } from '@/features/sidebar/hooks/useSidebar'
+import { DownloadLink } from '@scalar/api-reference/features/download-link'
+import { useSidebar } from '@scalar/api-reference/features/sidebar/hooks/useSidebar'
 import type { OpenAPIV3_1 } from '@scalar/openapi-types'
 import { mount } from '@vue/test-utils'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
@@ -7,7 +7,7 @@ import { computed, reactive, ref } from 'vue'
 import IntroductionSection from './IntroductionSection.vue'
 
 // Mock the useSidebar hook and SIDEBAR_SYMBOL
-vi.mock('@/features/sidebar/hooks/useSidebar', () => ({
+vi.mock('@scalar/api-reference/features/sidebar/hooks/useSidebar', () => ({
   useSidebar: vi.fn(),
   SIDEBAR_SYMBOL: Symbol(),
 }))

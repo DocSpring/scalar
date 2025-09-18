@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { useLayout } from '@scalar/api-client/hooks/useLayout'
+import { useWorkspace } from '@scalar/api-client/store/store'
 import {
   ScalarButton,
   ScalarDropdownDivider,
@@ -12,9 +14,6 @@ import type {
   Server,
 } from '@scalar/oas-utils/entities/spec'
 import { computed, watch } from 'vue'
-
-import { useLayout } from '@/hooks/useLayout'
-import { useWorkspace } from '@/store/store'
 
 import ServerDropdownItem from './ServerDropdownItem.vue'
 

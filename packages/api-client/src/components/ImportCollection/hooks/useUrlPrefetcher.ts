@@ -1,4 +1,4 @@
-import { isUrl } from '@/libs'
+import { isUrl } from '@scalar/api-client/libs'
 import { resolve } from '@scalar/import'
 import { fetchWithProxyFallback, redirectToProxy } from '@scalar/oas-utils/helpers'
 import { reactive } from 'vue'

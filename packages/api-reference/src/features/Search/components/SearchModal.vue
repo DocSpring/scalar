@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import { lazyBus } from '@scalar/api-reference/components/Lazy'
+import { useSidebar } from '@scalar/api-reference/features/sidebar'
+import SidebarHttpBadge from '@scalar/api-reference/features/sidebar/components/SidebarHttpBadge.vue'
 import {
   ScalarModal,
   ScalarSearchInput,
@@ -19,10 +22,6 @@ import { isOperationDeprecated } from '@scalar/oas-utils/helpers'
 import type { FuseResult } from 'fuse.js'
 import { nanoid } from 'nanoid'
 import { ref, watch } from 'vue'
-
-import { lazyBus } from '@/components/Lazy'
-import { useSidebar } from '@/features/sidebar'
-import SidebarHttpBadge from '@/features/sidebar/components/SidebarHttpBadge.vue'
 
 import { useSearchIndex } from '../hooks/useSearchIndex'
 import type { EntryType, FuseData } from '../types'

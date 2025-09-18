@@ -1,5 +1,5 @@
-import { type CreateApiClientParams, createApiClient } from '@/libs'
-import { createModalRouter } from '@/router'
+import { type CreateApiClientParams, createApiClient } from '@scalar/api-client/libs'
+import { createModalRouter } from '@scalar/api-client/router'
 
 import ApiClientModal from './ApiClientModal.vue'
 

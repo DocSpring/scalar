@@ -1,10 +1,9 @@
 <script setup lang="ts">
+import { useNavState } from '@scalar/api-reference/hooks/useNavState'
 import { ScalarButton, useBindCx } from '@scalar/components'
 import { ScalarIconHash } from '@scalar/icons'
 import { useClipboard } from '@scalar/use-hooks/useClipboard'
 import { useId } from 'vue'
-
-import { useNavState } from '@/hooks/useNavState'
 
 import ScreenReader from '../ScreenReader.vue'
 

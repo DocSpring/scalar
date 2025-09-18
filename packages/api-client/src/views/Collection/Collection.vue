@@ -1,13 +1,12 @@
 <script setup lang="ts">
+import ViewLayout from '@scalar/api-client/components/ViewLayout/ViewLayout.vue'
+import ViewLayoutSection from '@scalar/api-client/components/ViewLayout/ViewLayoutSection.vue'
+import { PathId } from '@scalar/api-client/router'
+import { useActiveEntities } from '@scalar/api-client/store'
+import CollectionNavigation from '@scalar/api-client/views/Collection/CollectionNavigation.vue'
 import { useScroll } from '@vueuse/core'
 import { computed, ref, watch } from 'vue'
 import { RouterView, useRouter } from 'vue-router'
-
-import ViewLayout from '@/components/ViewLayout/ViewLayout.vue'
-import ViewLayoutSection from '@/components/ViewLayout/ViewLayoutSection.vue'
-import { PathId } from '@/router'
-import { useActiveEntities } from '@/store'
-import CollectionNavigation from '@/views/Collection/CollectionNavigation.vue'
 
 const { activeCollection } = useActiveEntities()
 const router = useRouter()

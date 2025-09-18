@@ -1,4 +1,10 @@
 <script setup lang="ts">
+import { OpenApiClientButton } from '@scalar/api-client/components'
+import AddressBar from '@scalar/api-client/components/AddressBar/AddressBar.vue'
+import { useLayout } from '@scalar/api-client/hooks/useLayout'
+import { useSidebar } from '@scalar/api-client/hooks/useSidebar'
+import { useWorkspace } from '@scalar/api-client/store'
+import type { EnvVariable } from '@scalar/api-client/store/active-entities'
 import { ScalarIcon } from '@scalar/components'
 import type { Environment } from '@scalar/oas-utils/entities/environment'
 import type {
@@ -8,13 +14,6 @@ import type {
 } from '@scalar/oas-utils/entities/spec'
 import type { Workspace } from '@scalar/oas-utils/entities/workspace'
 import { useRouter } from 'vue-router'
-
-import { OpenApiClientButton } from '@/components'
-import AddressBar from '@/components/AddressBar/AddressBar.vue'
-import { useLayout } from '@/hooks/useLayout'
-import { useSidebar } from '@/hooks/useSidebar'
-import { useWorkspace } from '@/store'
-import type { EnvVariable } from '@/store/active-entities'
 
 const { collection, operation, server, environment, envVariables, workspace } =
   defineProps<{

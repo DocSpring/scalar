@@ -1,7 +1,6 @@
 <script setup lang="ts">
+import SidebarListElementForm from '@scalar/api-client/components/Sidebar/Actions/SidebarListElementForm.vue'
 import { computed } from 'vue'
-
-import SidebarListElementForm from '@/components/Sidebar/Actions/SidebarListElementForm.vue'
 
 const props = defineProps<{
   variableName: string

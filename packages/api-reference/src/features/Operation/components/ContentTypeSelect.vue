@@ -1,10 +1,9 @@
 <script setup lang="ts">
+import ScreenReader from '@scalar/api-reference/components/ScreenReader.vue'
 import { cva, ScalarButton, ScalarListbox } from '@scalar/components'
 import { ScalarIconCaretDown } from '@scalar/icons'
 import type { RequestBody } from '@scalar/types/legacy'
 import { computed, ref } from 'vue'
-
-import ScreenReader from '@/components/ScreenReader.vue'
 
 const prop = defineProps<{
   requestBody?: RequestBody

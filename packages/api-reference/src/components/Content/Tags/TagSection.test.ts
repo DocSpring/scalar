@@ -1,18 +1,18 @@
-import type { TraversedTag } from '@/features/traverse-schema'
-import { createMockSidebar } from '@/helpers/test-utils'
+import type { TraversedTag } from '@scalar/api-reference/features/traverse-schema'
+import { createMockSidebar } from '@scalar/api-reference/helpers/test-utils'
 import { mount } from '@vue/test-utils'
 import { describe, expect, it, vi } from 'vitest'
 import TagSection from './TagSection.vue'
 
 // Mock the useConfig hook
-vi.mock('@/hooks/useConfig', () => ({
+vi.mock('@scalar/api-reference/hooks/useConfig', () => ({
   useConfig: () => ({
     isLoading: false,
   }),
 }))
 
 // Mock the sidebar like in ModernLayout.test.ts
-vi.mock('@/features/sidebar', () => ({
+vi.mock('@scalar/api-reference/features/sidebar', () => ({
   useSidebar: vi.fn(() => createMockSidebar()),
 }))
 

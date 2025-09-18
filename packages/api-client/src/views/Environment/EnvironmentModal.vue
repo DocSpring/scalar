@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import CommandActionForm from '@scalar/api-client/components/CommandPalette/CommandActionForm.vue'
+import CommandActionInput from '@scalar/api-client/components/CommandPalette/CommandActionInput.vue'
+import { useWorkspace } from '@scalar/api-client/store'
 import {
   ScalarButton,
   ScalarIcon,
@@ -9,10 +12,6 @@ import {
 import type { Collection } from '@scalar/oas-utils/entities/spec'
 import { useToasts } from '@scalar/use-toasts'
 import { computed, ref, watch } from 'vue'
-
-import CommandActionForm from '@/components/CommandPalette/CommandActionForm.vue'
-import CommandActionInput from '@/components/CommandPalette/CommandActionInput.vue'
-import { useWorkspace } from '@/store'
 
 import EnvironmentColors from './EnvironmentColors.vue'
 

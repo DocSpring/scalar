@@ -1,4 +1,10 @@
 <script setup lang="ts">
+import DataTable from '@scalar/api-client/components/DataTable/DataTable.vue'
+import DataTableRow from '@scalar/api-client/components/DataTable/DataTableRow.vue'
+import ViewLayoutCollapse from '@scalar/api-client/components/ViewLayout/ViewLayoutCollapse.vue'
+import type { EnvVariables } from '@scalar/api-client/libs/env-helpers'
+import { useWorkspace } from '@scalar/api-client/store'
+import { CodeSnippet } from '@scalar/api-client/views/Components/CodeSnippet'
 import {
   ScalarButton,
   ScalarCodeBlock,
@@ -16,13 +22,6 @@ import type {
 import type { Workspace } from '@scalar/oas-utils/entities/workspace'
 import { snippetz, type ClientId, type TargetId } from '@scalar/snippetz'
 import { computed, ref } from 'vue'
-
-import DataTable from '@/components/DataTable/DataTable.vue'
-import DataTableRow from '@/components/DataTable/DataTableRow.vue'
-import ViewLayoutCollapse from '@/components/ViewLayout/ViewLayoutCollapse.vue'
-import type { EnvVariables } from '@/libs/env-helpers'
-import { useWorkspace } from '@/store'
-import { CodeSnippet } from '@/views/Components/CodeSnippet'
 
 const { collection, example, operation, server, workspace } = defineProps<{
   collection: Collection

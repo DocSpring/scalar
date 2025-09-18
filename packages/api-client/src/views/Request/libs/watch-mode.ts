@@ -1,5 +1,5 @@
-import type { WorkspaceStore } from '@/store'
-import type { ActiveEntitiesStore } from '@/store/active-entities'
+import type { WorkspaceStore } from '@scalar/api-client/store'
+import type { ActiveEntitiesStore } from '@scalar/api-client/store/active-entities'
 import {
   type Request,
   type RequestParameterPayload,

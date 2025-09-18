@@ -1,18 +1,17 @@
 <script setup lang="ts">
+import CodeInput from '@scalar/api-client/components/CodeInput/CodeInput.vue'
+import DataTable from '@scalar/api-client/components/DataTable/DataTable.vue'
+import DataTableCell from '@scalar/api-client/components/DataTable/DataTableCell.vue'
+import DataTableHeader from '@scalar/api-client/components/DataTable/DataTableHeader.vue'
+import DataTableRow from '@scalar/api-client/components/DataTable/DataTableRow.vue'
+import { useWorkspace } from '@scalar/api-client/store'
+import type { EnvVariable } from '@scalar/api-client/store/active-entities'
 import { ScalarButton } from '@scalar/components'
 import { ScalarIconTrash, ScalarIconWarning } from '@scalar/icons'
 import type { Environment } from '@scalar/oas-utils/entities/environment'
 import type { Collection } from '@scalar/oas-utils/entities/spec'
 import type { Workspace } from '@scalar/oas-utils/entities/workspace'
 import { computed, nextTick, onMounted, ref, watch } from 'vue'
-
-import CodeInput from '@/components/CodeInput/CodeInput.vue'
-import DataTable from '@/components/DataTable/DataTable.vue'
-import DataTableCell from '@/components/DataTable/DataTableCell.vue'
-import DataTableHeader from '@/components/DataTable/DataTableHeader.vue'
-import DataTableRow from '@/components/DataTable/DataTableRow.vue'
-import { useWorkspace } from '@/store'
-import type { EnvVariable } from '@/store/active-entities'
 
 const { collection, environment, workspace, envVariables } = defineProps<{
   collection: Collection

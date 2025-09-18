@@ -1,7 +1,6 @@
 <script lang="ts" setup>
+import type { MediaPreview } from '@scalar/api-client/views/Request/consts'
 import { ref, watch } from 'vue'
-
-import type { MediaPreview } from '@/views/Request/consts'
 
 import ResponseBodyInfo from './ResponseBodyInfo.vue'
 

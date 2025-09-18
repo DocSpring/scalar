@@ -1,13 +1,12 @@
 <script setup lang="ts">
-import { ScalarMarkdown } from '@scalar/components'
-
-import { Anchor } from '@/components/Anchor'
+import { Anchor } from '@scalar/api-reference/components/Anchor'
 import {
   SectionContainerAccordion,
   SectionHeader,
   SectionHeaderTag,
-} from '@/components/Section'
-import type { TraversedTag } from '@/features/traverse-schema'
+} from '@scalar/api-reference/components/Section'
+import type { TraversedTag } from '@scalar/api-reference/features/traverse-schema'
+import { ScalarMarkdown } from '@scalar/components'
 
 defineProps<{
   tag: TraversedTag

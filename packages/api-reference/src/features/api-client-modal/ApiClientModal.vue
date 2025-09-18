@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { useActiveEntities, useWorkspace } from '@scalar/api-client/store'
 import { mutateSecuritySchemeDiff } from '@scalar/api-client/views/Request/libs'
+import { useNavState } from '@scalar/api-reference/hooks/useNavState'
+import { useExampleStore } from '@scalar/api-reference/legacy/stores'
 import { getServersFromOpenApiDocument } from '@scalar/oas-utils/transforms'
 import type { OpenAPIV3_1 } from '@scalar/openapi-types'
 import type { ApiClientPlugin } from '@scalar/types/api-client'
@@ -11,9 +13,6 @@ import type {
 import { watchDebounced } from '@vueuse/core'
 import microdiff from 'microdiff'
 import { onBeforeUnmount, onMounted, ref, watch } from 'vue'
-
-import { useNavState } from '@/hooks/useNavState'
-import { useExampleStore } from '@/legacy/stores'
 
 import { useApiClient } from './useApiClient'
 

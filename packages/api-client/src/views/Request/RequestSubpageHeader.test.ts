@@ -1,12 +1,12 @@
-import { useWorkspace } from '@/store'
-import { createStoreEvents } from '@/store/events'
+import { useWorkspace } from '@scalar/api-client/store'
+import { createStoreEvents } from '@scalar/api-client/store/events'
 import { environmentSchema } from '@scalar/oas-utils/entities/environment'
 import { collectionSchema, operationSchema } from '@scalar/oas-utils/entities/spec'
 import { workspaceSchema } from '@scalar/oas-utils/entities/workspace'
 import { mount } from '@vue/test-utils'
 import { type Mock, beforeEach, describe, expect, it, vi } from 'vitest'
 
-import { mockUseLayout } from '@/vitest.setup'
+import { mockUseLayout } from '@scalar/api-client/vitest.setup'
 import RequestSubpageHeader from './RequestSubpageHeader.vue'
 
 // Mock vue-router
@@ -19,7 +19,7 @@ vi.mock('vue-router', () => ({
 }))
 
 // Mock the useWorkspace hook
-vi.mock('@/store', () => ({
+vi.mock('@scalar/api-client/store', () => ({
   useWorkspace: vi.fn(),
 }))
 const mockUseWorkspace = useWorkspace as Mock

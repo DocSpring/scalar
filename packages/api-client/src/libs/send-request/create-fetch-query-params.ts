@@ -1,4 +1,4 @@
-import { replaceTemplateVariables } from '@/libs/string-template'
+import { replaceTemplateVariables } from '@scalar/api-client/libs/string-template'
 import type { RequestExample, RequestPayload } from '@scalar/oas-utils/entities/spec'
 
 /**

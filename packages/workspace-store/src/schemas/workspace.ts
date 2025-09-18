@@ -24,7 +24,10 @@ export type WorkspaceDocument = Static<typeof WorkspaceDocumentSchema>
 export const WorkspaceMetaSchema = Type.Partial(
   Type.Object({
     [extensions.workspace.darkMode]: Type.Boolean(),
-    [extensions.workspace.defaultClient]: Type.Union(AVAILABLE_CLIENTS.map((client) => Type.Literal(client))),
+    [extensions.workspace.defaultClient]: Type.Union([
+      ...AVAILABLE_CLIENTS.map((client) => Type.Literal(client)),
+      Type.String(),
+    ]),
     [extensions.workspace.activeDocument]: Type.String(),
     [extensions.workspace.theme]: Type.String(),
   }),

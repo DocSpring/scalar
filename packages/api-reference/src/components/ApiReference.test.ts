@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 
-import ApiReference from '@/components/ApiReference.vue'
+import ApiReference from '@scalar/api-reference/components/ApiReference.vue'
 import { flushPromises, mount } from '@vue/test-utils'
 
 describe('ApiReference', () => {

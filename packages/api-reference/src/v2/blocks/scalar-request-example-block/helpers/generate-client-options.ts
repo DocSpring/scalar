@@ -1,4 +1,4 @@
-import type { ClientOptionGroup } from '@/v2/blocks/scalar-request-example-block/types'
+import type { ClientOptionGroup } from '@scalar/api-reference/v2/blocks/scalar-request-example-block/types'
 import type { XCodeSample } from '@scalar/openapi-types/schemas/extensions'
 import { snippetz, type AvailableClients } from '@scalar/snippetz'
 import type { ApiReferenceConfiguration } from '@scalar/types/api-reference'

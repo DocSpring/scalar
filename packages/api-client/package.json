@@ -36,169 +36,244 @@
     "types:check": "scalar-types-check-vue"
   },
   "type": "module",
-  "main": "dist/index.js",
+  "main": "src/index.ts",
   "exports": {
     ".": {
-      "import": "./dist/index.js",
-      "types": "./dist/index.d.ts",
-      "default": "./dist/index.js"
+      "import": "./src/index.ts",
+      "types": "./src/index.ts",
+      "default": "./src/index.ts"
     },
     "./*.css": {
-      "import": "./dist/*.css",
-      "require": "./dist/*.css",
-      "default": "./dist/*.css"
+      "import": "./src/*.css",
+      "require": "./src/*.css",
+      "default": "./src/*.css"
     },
     "./components": {
-      "import": "./dist/components/index.js",
-      "types": "./dist/components/index.d.ts",
-      "default": "./dist/components/index.js"
+      "import": "./src/components/index.ts",
+      "types": "./src/components/index.ts",
+      "default": "./src/components/index.ts"
+    },
+    "./components/*": {
+      "import": "./src/components/*/index.ts",
+      "types": "./src/components/*/index.ts",
+      "default": "./src/components/*/index.ts"
     },
     "./components/AddressBar": {
-      "import": "./dist/components/AddressBar/index.js",
-      "types": "./dist/components/AddressBar/index.d.ts",
-      "default": "./dist/components/AddressBar/index.js"
+      "import": "./src/components/AddressBar/index.ts",
+      "types": "./src/components/AddressBar/index.ts",
+      "default": "./src/components/AddressBar/index.ts"
     },
     "./components/CodeInput": {
-      "import": "./dist/components/CodeInput/index.js",
-      "types": "./dist/components/CodeInput/index.d.ts",
-      "default": "./dist/components/CodeInput/index.js"
+      "import": "./src/components/CodeInput/index.ts",
+      "types": "./src/components/CodeInput/index.ts",
+      "default": "./src/components/CodeInput/index.ts"
     },
     "./components/CommandPalette": {
-      "import": "./dist/components/CommandPalette/index.js",
-      "types": "./dist/components/CommandPalette/index.d.ts",
-      "default": "./dist/components/CommandPalette/index.js"
+      "import": "./src/components/CommandPalette/index.ts",
+      "types": "./src/components/CommandPalette/index.ts",
+      "default": "./src/components/CommandPalette/index.ts"
     },
     "./components/DataTable": {
-      "import": "./dist/components/DataTable/index.js",
-      "types": "./dist/components/DataTable/index.d.ts",
-      "default": "./dist/components/DataTable/index.js"
+      "import": "./src/components/DataTable/index.ts",
+      "types": "./src/components/DataTable/index.ts",
+      "default": "./src/components/DataTable/index.ts"
     },
     "./components/HttpMethod": {
-      "import": "./dist/components/HttpMethod/index.js",
-      "types": "./dist/components/HttpMethod/index.d.ts",
-      "default": "./dist/components/HttpMethod/index.js"
+      "import": "./src/components/HttpMethod/index.ts",
+      "types": "./src/components/HttpMethod/index.ts",
+      "default": "./src/components/HttpMethod/index.ts"
     },
     "./components/ImportCollection": {
-      "import": "./dist/components/ImportCollection/index.js",
-      "types": "./dist/components/ImportCollection/index.d.ts",
-      "default": "./dist/components/ImportCollection/index.js"
+      "import": "./src/components/ImportCollection/index.ts",
+      "types": "./src/components/ImportCollection/index.ts",
+      "default": "./src/components/ImportCollection/index.ts"
     },
     "./components/Server": {
-      "import": "./dist/components/Server/index.js",
-      "types": "./dist/components/Server/index.d.ts",
-      "default": "./dist/components/Server/index.js"
+      "import": "./src/components/Server/index.ts",
+      "types": "./src/components/Server/index.ts",
+      "default": "./src/components/Server/index.ts"
     },
     "./components/Sidebar": {
-      "import": "./dist/components/Sidebar/index.js",
-      "types": "./dist/components/Sidebar/index.d.ts",
-      "default": "./dist/components/Sidebar/index.js"
+      "import": "./src/components/Sidebar/index.ts",
+      "types": "./src/components/Sidebar/index.ts",
+      "default": "./src/components/Sidebar/index.ts"
     },
     "./components/ViewLayout": {
-      "import": "./dist/components/ViewLayout/index.js",
-      "types": "./dist/components/ViewLayout/index.d.ts",
-      "default": "./dist/components/ViewLayout/index.js"
+      "import": "./src/components/ViewLayout/index.ts",
+      "types": "./src/components/ViewLayout/index.ts",
+      "default": "./src/components/ViewLayout/index.ts"
     },
     "./css/*.css": {
-      "import": "./dist/css/*.css",
-      "require": "./dist/css/*.css",
-      "default": "./dist/css/*.css"
+      "import": "./src/css/*.css",
+      "require": "./src/css/*.css",
+      "default": "./src/css/*.css"
     },
     "./hooks": {
-      "import": "./dist/hooks/index.js",
-      "types": "./dist/hooks/index.d.ts",
-      "default": "./dist/hooks/index.js"
+      "import": "./src/hooks/index.ts",
+      "types": "./src/hooks/index.ts",
+      "default": "./src/hooks/index.ts"
+    },
+    "./hooks/*": {
+      "import": "./src/hooks/*.ts",
+      "types": "./src/hooks/*.ts",
+      "default": "./src/hooks/*.ts"
     },
     "./layouts/App": {
-      "import": "./dist/layouts/App/index.js",
-      "types": "./dist/layouts/App/index.d.ts",
-      "default": "./dist/layouts/App/index.js"
+      "import": "./src/layouts/App/index.ts",
+      "types": "./src/layouts/App/index.ts",
+      "default": "./src/layouts/App/index.ts"
+    },
+    "./layouts/*": {
+      "import": "./src/layouts/*/index.ts",
+      "types": "./src/layouts/*/index.ts",
+      "default": "./src/layouts/*/index.ts"
     },
     "./layouts/Modal": {
-      "import": "./dist/layouts/Modal/index.js",
-      "types": "./dist/layouts/Modal/index.d.ts",
-      "default": "./dist/layouts/Modal/index.js"
+      "import": "./src/layouts/Modal/index.ts",
+      "types": "./src/layouts/Modal/index.ts",
+      "default": "./src/layouts/Modal/index.ts"
     },
     "./layouts/Web": {
-      "import": "./dist/layouts/Web/index.js",
-      "types": "./dist/layouts/Web/index.d.ts",
-      "default": "./dist/layouts/Web/index.js"
+      "import": "./src/layouts/Web/index.ts",
+      "types": "./src/layouts/Web/index.ts",
+      "default": "./src/layouts/Web/index.ts"
     },
     "./libs": {
-      "import": "./dist/libs/index.js",
-      "types": "./dist/libs/index.d.ts",
-      "default": "./dist/libs/index.js"
+      "import": "./src/libs/index.ts",
+      "types": "./src/libs/index.ts",
+      "default": "./src/libs/index.ts"
+    },
+    "./libs/*": {
+      "import": "./src/libs/*.ts",
+      "types": "./src/libs/*.ts",
+      "default": "./src/libs/*.ts"
     },
     "./libs/importers": {
-      "import": "./dist/libs/importers/index.js",
-      "types": "./dist/libs/importers/index.d.ts",
-      "default": "./dist/libs/importers/index.js"
+      "import": "./src/libs/importers/index.ts",
+      "types": "./src/libs/importers/index.ts",
+      "default": "./src/libs/importers/index.ts"
     },
     "./libs/send-request": {
-      "import": "./dist/libs/send-request/index.js",
-      "types": "./dist/libs/send-request/index.d.ts",
-      "default": "./dist/libs/send-request/index.js"
+      "import": "./src/libs/send-request/index.ts",
+      "types": "./src/libs/send-request/index.ts",
+      "default": "./src/libs/send-request/index.ts"
     },
     "./plugins": {
-      "import": "./dist/plugins/index.js",
-      "types": "./dist/plugins/index.d.ts",
-      "default": "./dist/plugins/index.js"
+      "import": "./src/plugins/index.ts",
+      "types": "./src/plugins/index.ts",
+      "default": "./src/plugins/index.ts"
+    },
+    "./plugins/*": {
+      "import": "./src/plugins/**/*.ts",
+      "types": "./src/plugins/**/*.ts",
+      "default": "./src/plugins/**/*.ts"
     },
     "./store": {
-      "import": "./dist/store/index.js",
-      "types": "./dist/store/index.d.ts",
-      "default": "./dist/store/index.js"
+      "import": "./src/store/index.ts",
+      "types": "./src/store/index.ts",
+      "default": "./src/store/index.ts"
+    },
+    "./store/collections": {
+      "import": "./src/store/collections.ts",
+      "types": "./src/store/collections.ts",
+      "default": "./src/store/collections.ts"
+    },
+    "./store/cookies": {
+      "import": "./src/store/cookies.ts",
+      "types": "./src/store/cookies.ts",
+      "default": "./src/store/cookies.ts"
+    },
+    "./store/environment": {
+      "import": "./src/store/environment.ts",
+      "types": "./src/store/environment.ts",
+      "default": "./src/store/environment.ts"
+    },
+    "./store/request": {
+      "import": "./src/store/requests.ts",
+      "types": "./src/store/requests.ts",
+      "default": "./src/store/requests.ts"
+    },
+    "./store/security-schemes": {
+      "import": "./src/store/security-schemes.ts",
+      "types": "./src/store/security-schemes.ts",
+      "default": "./src/store/security-schemes.ts"
+    },
+    "./store/servers": {
+      "import": "./src/store/servers.ts",
+      "types": "./src/store/servers.ts",
+      "default": "./src/store/servers.ts"
+    },
+    "./store/tags": {
+      "import": "./src/store/tags.ts",
+      "types": "./src/store/tags.ts",
+      "default": "./src/store/tags.ts"
+    },
+    "./store/workspace": {
+      "import": "./src/store/workspace.ts",
+      "types": "./src/store/workspace.ts",
+      "default": "./src/store/workspace.ts"
+    },
+    "./store/*": {
+      "import": "./src/store/*.ts",
+      "types": "./src/store/*.ts",
+      "default": "./src/store/*.ts"
     },
     "./types": {
-      "import": "./dist/types/index.js",
-      "types": "./dist/types/index.d.ts",
-      "default": "./dist/types/index.js"
+      "import": "./src/types/index.ts",
+      "types": "./src/types/index.ts",
+      "default": "./src/types/index.ts"
     },
     "./views/Components/CodeSnippet": {
-      "import": "./dist/views/Components/CodeSnippet/index.js",
-      "types": "./dist/views/Components/CodeSnippet/index.d.ts",
-      "default": "./dist/views/Components/CodeSnippet/index.js"
+      "import": "./src/views/Components/CodeSnippet/index.ts",
+      "types": "./src/views/Components/CodeSnippet/index.ts",
+      "default": "./src/views/Components/CodeSnippet/index.ts"
     },
     "./views/Request/components": {
-      "import": "./dist/views/Request/components/index.js",
-      "types": "./dist/views/Request/components/index.d.ts",
-      "default": "./dist/views/Request/components/index.js"
+      "import": "./src/views/Request/components/index.ts",
+      "types": "./src/views/Request/components/index.ts",
+      "default": "./src/views/Request/components/index.ts"
     },
     "./views/Request/consts": {
-      "import": "./dist/views/Request/consts/index.js",
-      "types": "./dist/views/Request/consts/index.d.ts",
-      "default": "./dist/views/Request/consts/index.js"
+      "import": "./src/views/Request/consts/index.ts",
+      "types": "./src/views/Request/consts/index.ts",
+      "default": "./src/views/Request/consts/index.ts"
     },
     "./views/Request/libs": {
-      "import": "./dist/views/Request/libs/index.js",
-      "types": "./dist/views/Request/libs/index.d.ts",
-      "default": "./dist/views/Request/libs/index.js"
+      "import": "./src/views/Request/libs/index.ts",
+      "types": "./src/views/Request/libs/index.ts",
+      "default": "./src/views/Request/libs/index.ts"
     },
     "./views/Request/RequestSection": {
-      "import": "./dist/views/Request/RequestSection/index.js",
-      "types": "./dist/views/Request/RequestSection/index.d.ts",
-      "default": "./dist/views/Request/RequestSection/index.js"
+      "import": "./src/views/Request/RequestSection/index.ts",
+      "types": "./src/views/Request/RequestSection/index.ts",
+      "default": "./src/views/Request/RequestSection/index.ts"
     },
     "./views/Request/RequestSection/RequestAuth": {
-      "import": "./dist/views/Request/RequestSection/RequestAuth/index.js",
-      "types": "./dist/views/Request/RequestSection/RequestAuth/index.d.ts",
-      "default": "./dist/views/Request/RequestSection/RequestAuth/index.js"
+      "import": "./src/views/Request/RequestSection/RequestAuth/index.ts",
+      "types": "./src/views/Request/RequestSection/RequestAuth/index.ts",
+      "default": "./src/views/Request/RequestSection/RequestAuth/index.ts"
     },
     "./views/Request/ResponseSection": {
-      "import": "./dist/views/Request/ResponseSection/index.js",
-      "types": "./dist/views/Request/ResponseSection/index.d.ts",
-      "default": "./dist/views/Request/ResponseSection/index.js"
+      "import": "./src/views/Request/ResponseSection/index.ts",
+      "types": "./src/views/Request/ResponseSection/index.ts",
+      "default": "./src/views/Request/ResponseSection/index.ts"
     },
     "./views/Request/types": {
-      "import": "./dist/views/Request/types/index.js",
-      "types": "./dist/views/Request/types/index.d.ts",
-      "default": "./dist/views/Request/types/index.js"
+      "import": "./src/views/Request/types/index.ts",
+      "types": "./src/views/Request/types/index.ts",
+      "default": "./src/views/Request/types/index.ts"
+    },
+    "./views/*": {
+      "import": "./src/views/*/index.ts",
+      "types": "./src/views/*/index.ts",
+      "default": "./src/views/*/index.ts"
     }
   },
   "files": [
     "dist",
     "CHANGELOG.md"
   ],
-  "module": "dist/index.js",
+  "module": "src/index.ts",
   "dependencies": {
     "@headlessui/tailwindcss": "catalog:*",
     "@headlessui/vue": "catalog:*",

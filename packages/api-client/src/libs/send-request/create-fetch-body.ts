@@ -1,4 +1,4 @@
-import { replaceTemplateVariables } from '@/libs/string-template'
+import { replaceTemplateVariables } from '@scalar/api-client/libs/string-template'
 import type { RequestExample, RequestMethod } from '@scalar/oas-utils/entities/spec'
 import { canMethodHaveBody } from '@scalar/oas-utils/helpers'
 

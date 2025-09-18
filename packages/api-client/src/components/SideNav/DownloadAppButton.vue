@@ -1,8 +1,7 @@
 <script setup lang="ts">
+import SideNavLink from '@scalar/api-client/components/SideNav/SideNavLink.vue'
+import { useLayout } from '@scalar/api-client/hooks'
 import { ScalarIcon } from '@scalar/components'
-
-import SideNavLink from '@/components/SideNav/SideNavLink.vue'
-import { useLayout } from '@/hooks'
 
 const { layout } = useLayout()
 </script>

@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import { handleHotKeyDown, type HotKeyEvent } from '@scalar/api-client/libs'
+import { useWorkspace } from '@scalar/api-client/store'
+import { useActiveEntities } from '@scalar/api-client/store/active-entities'
 import {
   addScalarClassesToHeadless,
   ScalarTeleportRoot,
@@ -14,10 +17,6 @@ import {
   watch,
 } from 'vue'
 import { RouterView } from 'vue-router'
-
-import { handleHotKeyDown, type HotKeyEvent } from '@/libs'
-import { useWorkspace } from '@/store'
-import { useActiveEntities } from '@/store/active-entities'
 
 const { activeWorkspace } = useActiveEntities()
 const { modalState, events } = useWorkspace()
@@ -95,7 +94,7 @@ onBeforeUnmount(() => {
   </div>
 </template>
 <style scoped>
-@reference "@/style.css";
+@reference "@scalar/api-client/style.css";
 
 .scalar .scalar-app-layout {
   background: var(--scalar-background-1);

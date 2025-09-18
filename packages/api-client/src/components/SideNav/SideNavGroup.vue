@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useLayout } from '@/hooks'
+import { useLayout } from '@scalar/api-client/hooks'
 
 const { layout } = useLayout()
 </script>

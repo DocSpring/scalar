@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import ViewLayoutSection from '@/components/ViewLayout/ViewLayoutSection.vue'
-import { useWorkspace } from '@/store'
-import { useActiveEntities } from '@/store/active-entities'
-import MarkdownInput from '@/views/Collection/components/MarkdownInput.vue'
+import ViewLayoutSection from '@scalar/api-client/components/ViewLayout/ViewLayoutSection.vue'
+import { useWorkspace } from '@scalar/api-client/store'
+import { useActiveEntities } from '@scalar/api-client/store/active-entities'
+import MarkdownInput from '@scalar/api-client/views/Collection/components/MarkdownInput.vue'
 
 const {
   activeCollection,

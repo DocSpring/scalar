@@ -8,7 +8,7 @@ import { createStoreCollections, extendedCollectionDataFactory } from './collect
 import { createStoreServers } from './servers'
 
 // Mock data
-vi.mock('@/store', () => ({
+vi.mock('@scalar/api-client/store', () => ({
   useWorkspace: vi.fn(),
 }))
 

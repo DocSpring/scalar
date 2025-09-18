@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import CodeInput from '@/components/CodeInput/CodeInput.vue'
-import ViewLayoutSection from '@/components/ViewLayout/ViewLayoutSection.vue'
-import { useWorkspace } from '@/store'
-import { useActiveEntities } from '@/store/active-entities'
+import CodeInput from '@scalar/api-client/components/CodeInput/CodeInput.vue'
+import ViewLayoutSection from '@scalar/api-client/components/ViewLayout/ViewLayoutSection.vue'
+import { useWorkspace } from '@scalar/api-client/store'
+import { useActiveEntities } from '@scalar/api-client/store/active-entities'
 
 const {
   activeCookieId,

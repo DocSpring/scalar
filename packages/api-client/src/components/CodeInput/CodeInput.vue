@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import { useLayout } from '@scalar/api-client/hooks'
+import type { EnvVariable } from '@scalar/api-client/store/active-entities'
+import EnvironmentVariableDropdown from '@scalar/api-client/views/Environment/EnvironmentVariableDropdown.vue'
 import { ScalarIcon } from '@scalar/components'
 import type { Environment } from '@scalar/oas-utils/entities/environment'
 import type { Workspace } from '@scalar/oas-utils/entities/workspace'
@@ -13,10 +16,6 @@ import {
 import { useClipboard } from '@scalar/use-hooks/useClipboard'
 import { nanoid } from 'nanoid'
 import { computed, ref, toRef, useAttrs, watch, type Ref } from 'vue'
-
-import { useLayout } from '@/hooks'
-import type { EnvVariable } from '@/store/active-entities'
-import EnvironmentVariableDropdown from '@/views/Environment/EnvironmentVariableDropdown.vue'
 
 import DataTableInputSelect from '../DataTable/DataTableInputSelect.vue'
 import { backspaceCommand, pillPlugin } from './codeVariableWidget'

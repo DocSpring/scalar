@@ -1,14 +1,13 @@
 <script setup lang="ts">
+import DataTable from '@scalar/api-client/components/DataTable/DataTable.vue'
+import DataTableInput from '@scalar/api-client/components/DataTable/DataTableInput.vue'
+import DataTableRow from '@scalar/api-client/components/DataTable/DataTableRow.vue'
+import ViewLayoutSection from '@scalar/api-client/components/ViewLayout/ViewLayoutSection.vue'
+import { useActiveEntities } from '@scalar/api-client/store/active-entities'
 import { ScalarIcon } from '@scalar/components'
 import type { Cookie } from '@scalar/oas-utils/entities/cookie'
 import type { Path, PathValue } from '@scalar/object-utils/nested'
 import { useId } from 'vue'
-
-import DataTable from '@/components/DataTable/DataTable.vue'
-import DataTableInput from '@/components/DataTable/DataTableInput.vue'
-import DataTableRow from '@/components/DataTable/DataTableRow.vue'
-import ViewLayoutSection from '@/components/ViewLayout/ViewLayoutSection.vue'
-import { useActiveEntities } from '@/store/active-entities'
 
 defineProps<{
   title?: string

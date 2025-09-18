@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import ServerVariablesForm from '@scalar/api-client/components/Server/ServerVariablesForm.vue'
+import type { ServerVariables } from '@scalar/api-client/components/Server/types'
+import { useWorkspace } from '@scalar/api-client/store/store'
 import { ScalarListboxCheckbox, ScalarMarkdown } from '@scalar/components'
 import type {
   Collection,
@@ -6,10 +9,6 @@ import type {
   Server,
 } from '@scalar/oas-utils/entities/spec'
 import { computed, useId } from 'vue'
-
-import ServerVariablesForm from '@/components/Server/ServerVariablesForm.vue'
-import type { ServerVariables } from '@/components/Server/types'
-import { useWorkspace } from '@/store/store'
 
 const props = defineProps<{
   collection: Collection

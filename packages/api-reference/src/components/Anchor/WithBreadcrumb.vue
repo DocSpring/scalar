@@ -1,11 +1,10 @@
 <script setup lang="ts">
+import { useNavState } from '@scalar/api-reference/hooks/useNavState'
 import { scrollToId } from '@scalar/helpers/dom/scroll-to-id'
 import { sleep } from '@scalar/helpers/testing/sleep'
 import { ScalarIconLink } from '@scalar/icons'
 import { useClipboard } from '@scalar/use-hooks/useClipboard'
 import { computed } from 'vue'
-
-import { useNavState } from '@/hooks/useNavState'
 
 const { breadcrumb } = defineProps<{
   breadcrumb?: string[]

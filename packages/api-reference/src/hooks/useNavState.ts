@@ -1,4 +1,4 @@
-import { useConfig } from '@/hooks/useConfig'
+import { useConfig } from '@scalar/api-reference/hooks/useConfig'
 import { combineUrlAndPath } from '@scalar/helpers/url/merge-urls'
 import type { ApiReferenceConfiguration } from '@scalar/types/api-reference'
 import type { Heading, OpenAPIV3_1 } from '@scalar/types/legacy'
@@ -71,7 +71,9 @@ export const useNavState = (_config?: Ref<ApiReferenceConfiguration>) => {
         decodeURIComponent(window.location.hash.replace(/^#/, '')).slice(hashPrefix.value.length)
 
   // Update the reactive hash state
-  const updateHash = () => (hash.value = getReferenceId())
+  const updateHash = () => {
+    hash.value = getReferenceId()
+  }
 
   const replaceUrlState = (replacementHash: string, url = window.location.href) => {
     const newUrl = new URL(url)

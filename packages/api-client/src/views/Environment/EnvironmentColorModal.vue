@@ -1,8 +1,7 @@
 <script setup lang="ts">
+import SidebarListElementForm from '@scalar/api-client/components/Sidebar/Actions/SidebarListElementForm.vue'
 import { ScalarModal, type ModalState } from '@scalar/components'
 import { ref } from 'vue'
-
-import SidebarListElementForm from '@/components/Sidebar/Actions/SidebarListElementForm.vue'
 
 import EnvironmentColors from './EnvironmentColors.vue'
 

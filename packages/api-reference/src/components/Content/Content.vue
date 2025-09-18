@@ -1,14 +1,13 @@
 <script setup lang="ts">
+import { Introduction } from '@scalar/api-reference/components/Content/Introduction'
+import { Models } from '@scalar/api-reference/components/Content/Models'
+import { SectionFlare } from '@scalar/api-reference/components/SectionFlare'
+import { useConfig } from '@scalar/api-reference/hooks/useConfig'
+import { generateClientOptionsWithDocSpring } from '@scalar/api-reference/v2/blocks/scalar-request-example-block/helpers/generate-client-options'
 import type { OpenAPIV3_1 } from '@scalar/openapi-types'
 import type { ApiReferenceConfiguration } from '@scalar/types'
 import type { WorkspaceStore } from '@scalar/workspace-store/client'
 import { computed } from 'vue'
-
-import { Introduction } from '@/components/Content/Introduction'
-import { Models } from '@/components/Content/Models'
-import { SectionFlare } from '@/components/SectionFlare'
-import { useConfig } from '@/hooks/useConfig'
-import { generateClientOptions } from '@/v2/blocks/scalar-request-example-block/helpers/generate-client-options'
 
 import { TraversedEntryContainer } from './Operations'
 

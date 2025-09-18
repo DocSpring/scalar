@@ -1,6 +1,6 @@
-import type { FuseData } from '@/features/Search/types'
-import type { TraversedEntry } from '@/features/traverse-schema'
-import { createParameterMap, extractRequestBody } from '@/libs/openapi'
+import type { FuseData } from '@scalar/api-reference/features/Search/types'
+import type { TraversedEntry } from '@scalar/api-reference/features/traverse-schema'
+import { createParameterMap, extractRequestBody } from '@scalar/api-reference/libs/openapi'
 
 /**
  * Create a search index from a list of entries.

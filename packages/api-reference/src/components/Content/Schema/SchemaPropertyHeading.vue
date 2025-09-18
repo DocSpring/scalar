@@ -1,11 +1,10 @@
 <script lang="ts" setup>
+import { Badge } from '@scalar/api-reference/components/Badge'
+import ScreenReader from '@scalar/api-reference/components/ScreenReader.vue'
+import type { Schemas } from '@scalar/api-reference/features/Operation/types/schemas'
+import { getDiscriminatorSchemaName } from '@scalar/api-reference/hooks/useDiscriminator'
 import { isDefined } from '@scalar/helpers/array/is-defined'
 import { computed } from 'vue'
-
-import { Badge } from '@/components/Badge'
-import ScreenReader from '@/components/ScreenReader.vue'
-import type { Schemas } from '@/features/Operation/types/schemas'
-import { getDiscriminatorSchemaName } from '@/hooks/useDiscriminator'
 
 import { getSchemaType } from './helpers/get-schema-type'
 import { getModelName } from './helpers/schema-name'

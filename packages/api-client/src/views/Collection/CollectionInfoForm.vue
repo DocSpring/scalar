@@ -1,12 +1,11 @@
 <script setup lang="ts">
+import LabelInput from '@scalar/api-client/components/Form/LabelInput.vue'
+import IconSelector from '@scalar/api-client/components/IconSelector.vue'
+import { useWorkspace } from '@scalar/api-client/store'
+import { useActiveEntities } from '@scalar/api-client/store/active-entities'
 import { ScalarButton } from '@scalar/components'
 import { LibraryIcon } from '@scalar/icons/library'
 import { computed } from 'vue'
-
-import LabelInput from '@/components/Form/LabelInput.vue'
-import IconSelector from '@/components/IconSelector.vue'
-import { useWorkspace } from '@/store'
-import { useActiveEntities } from '@/store/active-entities'
 
 const { activeCollection } = useActiveEntities()
 const { collectionMutators } = useWorkspace()
@@ -77,7 +76,7 @@ const data = computed(() => {
 </template>
 
 <style scoped>
-@reference "@/style.css";
+@reference "@scalar/api-client/style.css";
 
 :deep(.markdown) h2 {
   @apply text-lg;

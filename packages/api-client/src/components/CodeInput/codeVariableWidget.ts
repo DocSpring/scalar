@@ -1,20 +1,20 @@
-import { parseEnvVariables } from '@/libs'
-import { type EnvVariables, getEnvColor } from '@/libs/env-helpers'
+import { parseEnvVariables } from '@scalar/api-client/libs'
+import { getEnvColor, type EnvVariables } from '@scalar/api-client/libs/env-helpers'
 import { ScalarButton, ScalarIcon, ScalarTooltip } from '@scalar/components'
 import type { Environment } from '@scalar/oas-utils/entities/environment'
 import type { Workspace } from '@scalar/oas-utils/entities/workspace'
 import { REGEX } from '@scalar/oas-utils/helpers'
 import {
   Decoration,
-  type DecorationSet,
   EditorView,
   RangeSetBuilder,
   ViewPlugin,
-  type ViewUpdate,
   WidgetType,
+  type DecorationSet,
+  type ViewUpdate,
 } from '@scalar/use-codemirror'
-import { createApp, defineComponent, h } from 'vue'
 import { nanoid } from 'nanoid'
+import { createApp, defineComponent, h } from 'vue'
 
 /**
  * Displays the value of a variable of the active environment in a pill

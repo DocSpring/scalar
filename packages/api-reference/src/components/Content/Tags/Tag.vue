@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { TraversedTag } from '@/features/traverse-schema'
+import type { TraversedTag } from '@scalar/api-reference/features/traverse-schema'
 
 import ClassicLayout from './ClassicLayout.vue'
 import ModernLayout from './ModernLayout.vue'

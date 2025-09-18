@@ -1,8 +1,7 @@
 <script setup lang="ts">
+import { useSidebar } from '@scalar/api-reference/features/sidebar'
+import { useConfig } from '@scalar/api-reference/hooks/useConfig'
 import { ScalarIconCaretDown } from '@scalar/icons'
-
-import { useSidebar } from '@/features/sidebar'
-import { useConfig } from '@/hooks/useConfig'
 
 const { id } = defineProps<{
   id: string

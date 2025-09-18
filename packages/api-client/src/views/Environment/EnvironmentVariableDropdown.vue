@@ -1,13 +1,15 @@
 <script setup lang="ts">
+import { parseEnvVariables } from '@scalar/api-client/libs'
+import {
+  getEnvColor,
+  type EnvVariables,
+} from '@scalar/api-client/libs/env-helpers'
 import { ScalarButton, ScalarIcon, ScalarTeleport } from '@scalar/components'
 import type { Environment } from '@scalar/oas-utils/entities/environment'
 import { onClickOutside } from '@vueuse/core'
 import Fuse from 'fuse.js'
 import { computed, onMounted, ref, type CSSProperties } from 'vue'
 import { useRouter } from 'vue-router'
-
-import { parseEnvVariables } from '@/libs'
-import { getEnvColor, type EnvVariables } from '@/libs/env-helpers'
 
 const props = defineProps<{
   query: string

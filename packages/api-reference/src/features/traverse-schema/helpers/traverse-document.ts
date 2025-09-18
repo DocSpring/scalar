@@ -5,7 +5,7 @@ import { traversePaths } from './traverse-paths'
 import { traverseSchemas } from './traverse-schemas'
 import { traverseTags } from './traverse-tags'
 import { traverseWebhooks } from './traverse-webhooks'
-import type { TagsMap, TraverseSpecOptions, TraversedEntry } from '@/features/traverse-schema/types'
+import type { TagsMap, TraverseSpecOptions, TraversedEntry } from '@scalar/api-reference/features/traverse-schema/types'
 
 /**
  * Travers the OpenAPI Document and ensure we only do it once

@@ -1,6 +1,16 @@
 <script setup lang="ts">
 // TODO: Disabled until we polished the UI.
-// import { ImportCollectionListener } from '@/components/ImportCollection'
+// import { ImportCollectionListener } from '@scalar/api-client/components/ImportCollection'
+import TopNav from '@scalar/api-client/components/TopNav/TopNav.vue'
+import { useSidebar } from '@scalar/api-client/hooks/useSidebar'
+import MainLayout from '@scalar/api-client/layouts/App/MainLayout.vue'
+import {
+  DEFAULT_HOTKEYS,
+  handleHotKeyDown,
+  type HotKeyEvent,
+} from '@scalar/api-client/libs'
+import { useWorkspace } from '@scalar/api-client/store'
+import { useActiveEntities } from '@scalar/api-client/store/active-entities'
 import {
   addScalarClassesToHeadless,
   ScalarTeleportRoot,
@@ -18,13 +28,6 @@ import {
   watch,
 } from 'vue'
 import { RouterView } from 'vue-router'
-
-import TopNav from '@/components/TopNav/TopNav.vue'
-import { useSidebar } from '@/hooks/useSidebar'
-import MainLayout from '@/layouts/App/MainLayout.vue'
-import { DEFAULT_HOTKEYS, handleHotKeyDown, type HotKeyEvent } from '@/libs'
-import { useWorkspace } from '@/store'
-import { useActiveEntities } from '@/store/active-entities'
 
 import { APP_HOTKEYS } from './hotkeys'
 

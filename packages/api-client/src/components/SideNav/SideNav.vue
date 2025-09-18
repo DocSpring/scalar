@@ -1,11 +1,10 @@
 <script setup lang="ts">
+import { ROUTES } from '@scalar/api-client/constants'
+import { useLayout } from '@scalar/api-client/hooks'
+import { PathId } from '@scalar/api-client/routes'
+import { useActiveEntities } from '@scalar/api-client/store'
 import { ScalarIcon } from '@scalar/components'
 import { useRouter } from 'vue-router'
-
-import { ROUTES } from '@/constants'
-import { useLayout } from '@/hooks'
-import { PathId } from '@/routes'
-import { useActiveEntities } from '@/store'
 
 import DownloadAppButton from './DownloadAppButton.vue'
 import SideHelp from './SideHelp.vue'

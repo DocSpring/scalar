@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import ViewLayoutSection from '@/components/ViewLayout/ViewLayoutSection.vue'
+import ViewLayoutSection from '@scalar/api-client/components/ViewLayout/ViewLayoutSection.vue'
 </script>
 
 <template>

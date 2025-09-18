@@ -9,7 +9,7 @@ vi.mock('vue-router', () => ({
   useRouter: vi.fn(),
 }))
 
-vi.mock('@/store', () => ({
+vi.mock('@scalar/api-client/store', () => ({
   useWorkspace: vi.fn(() => ({
     requests: {
       request1: {
@@ -27,7 +27,7 @@ vi.mock('@/store', () => ({
   })),
 }))
 
-vi.mock('@/store/active-entities', () => ({
+vi.mock('@scalar/api-client/store/active-entities', () => ({
   useActiveEntities: vi.fn(() => ({
     activeWorkspace: ref({ uid: 'workspace1' }),
     activeWorkspaceRequests: ref([]),

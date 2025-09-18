@@ -1,9 +1,9 @@
-import { buildRequestSecurity } from '@/libs/send-request/build-request-security'
+import { buildRequestSecurity } from '@scalar/api-client/libs/send-request/build-request-security'
 import type { Operation, RequestExample, SecurityScheme, Server } from '@scalar/oas-utils/entities/spec'
 import type { HarRequest } from '@scalar/snippetz'
-import { replaceTemplateVariables } from '@/libs/string-template'
+import { replaceTemplateVariables } from '@scalar/api-client/libs/string-template'
 import { REGEX } from '@scalar/oas-utils/helpers'
-import type { EnvVariables } from '@/libs/env-helpers'
+import type { EnvVariables } from '@scalar/api-client/libs/env-helpers'
 
 import { convertToHarRequest } from './convert-to-har-request'
 

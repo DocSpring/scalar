@@ -1,4 +1,10 @@
 <script setup lang="ts">
+import DeleteSidebarListElement from '@scalar/api-client/components/Sidebar/Actions/DeleteSidebarListElement.vue'
+import EditSidebarListElement from '@scalar/api-client/components/Sidebar/Actions/EditSidebarListElement.vue'
+import ViewLayoutSection from '@scalar/api-client/components/ViewLayout/ViewLayoutSection.vue'
+import { useActiveEntities, useWorkspace } from '@scalar/api-client/store'
+import EnvironmentColorModal from '@scalar/api-client/views/Environment/EnvironmentColorModal.vue'
+import EnvironmentModal from '@scalar/api-client/views/Environment/EnvironmentModal.vue'
 import {
   ScalarButton,
   ScalarIcon,
@@ -9,13 +15,6 @@ import { Draggable } from '@scalar/draggable'
 import { ScalarIconTrash } from '@scalar/icons'
 import type { Environment } from '@scalar/oas-utils/entities/environment'
 import { computed, ref } from 'vue'
-
-import DeleteSidebarListElement from '@/components/Sidebar/Actions/DeleteSidebarListElement.vue'
-import EditSidebarListElement from '@/components/Sidebar/Actions/EditSidebarListElement.vue'
-import ViewLayoutSection from '@/components/ViewLayout/ViewLayoutSection.vue'
-import { useActiveEntities, useWorkspace } from '@/store'
-import EnvironmentColorModal from '@/views/Environment/EnvironmentColorModal.vue'
-import EnvironmentModal from '@/views/Environment/EnvironmentModal.vue'
 
 import EnvironmentForm from './components/EnvironmentForm.vue'
 

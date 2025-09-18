@@ -1,19 +1,18 @@
 <script setup lang="ts">
+import EmptyState from '@scalar/api-client/components/EmptyState.vue'
+import ViewLayout from '@scalar/api-client/components/ViewLayout/ViewLayout.vue'
+import ViewLayoutContent from '@scalar/api-client/components/ViewLayout/ViewLayoutContent.vue'
+import { useLayout } from '@scalar/api-client/hooks'
+import { useSidebar } from '@scalar/api-client/hooks/useSidebar'
+import { importCurlCommand } from '@scalar/api-client/libs/importers/curl'
+import type { SendRequestResult } from '@scalar/api-client/libs/send-request/create-request-operation'
+import { useWorkspace } from '@scalar/api-client/store'
+import { useActiveEntities } from '@scalar/api-client/store/active-entities'
+import RequestSection from '@scalar/api-client/views/Request/RequestSection/RequestSection.vue'
+import RequestSubpageHeader from '@scalar/api-client/views/Request/RequestSubpageHeader.vue'
+import ResponseSection from '@scalar/api-client/views/Request/ResponseSection/ResponseSection.vue'
 import type { SelectedSecuritySchemeUids } from '@scalar/oas-utils/entities/shared'
 import { computed } from 'vue'
-
-import EmptyState from '@/components/EmptyState.vue'
-import ViewLayout from '@/components/ViewLayout/ViewLayout.vue'
-import ViewLayoutContent from '@/components/ViewLayout/ViewLayoutContent.vue'
-import { useLayout } from '@/hooks'
-import { useSidebar } from '@/hooks/useSidebar'
-import { importCurlCommand } from '@/libs/importers/curl'
-import type { SendRequestResult } from '@/libs/send-request/create-request-operation'
-import { useWorkspace } from '@/store'
-import { useActiveEntities } from '@/store/active-entities'
-import RequestSection from '@/views/Request/RequestSection/RequestSection.vue'
-import RequestSubpageHeader from '@/views/Request/RequestSubpageHeader.vue'
-import ResponseSection from '@/views/Request/ResponseSection/ResponseSection.vue'
 
 const { invalidParams, selectedSecuritySchemeUids, requestResult } =
   defineProps<{

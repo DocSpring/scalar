@@ -1,15 +1,14 @@
 <script setup lang="ts">
-import type { OpenAPIV3_1 } from '@scalar/openapi-types'
-import { computed } from 'vue'
-
-import { Anchor } from '@/components/Anchor'
+import { Anchor } from '@scalar/api-reference/components/Anchor'
 import {
   SectionAccordion,
   SectionContainerAccordion,
   SectionHeader,
   SectionHeaderTag,
-} from '@/components/Section'
-import { useNavState } from '@/hooks/useNavState'
+} from '@scalar/api-reference/components/Section'
+import { useNavState } from '@scalar/api-reference/hooks/useNavState'
+import type { OpenAPIV3_1 } from '@scalar/openapi-types'
+import { computed } from 'vue'
 
 import { SchemaHeading, SchemaProperty } from '../Schema'
 

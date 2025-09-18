@@ -1,6 +1,6 @@
 import type { ApiReferenceConfiguration } from '@scalar/types/api-reference'
 
-import type { UseNavState } from '@/hooks/useNavState'
+import type { UseNavState } from '@scalar/api-reference/hooks/useNavState'
 import type { OpenAPIV3_1 } from '@scalar/openapi-types'
 import type { OperationObject } from '@scalar/workspace-store/schemas/v3.1/strict/path-operations'
 import type { SchemaObject } from '@scalar/workspace-store/schemas/v3.1/strict/schema'

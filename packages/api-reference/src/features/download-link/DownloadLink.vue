@@ -1,10 +1,9 @@
 <script lang="ts" setup>
+import Badge from '@scalar/api-reference/components/Badge/Badge.vue'
+import { useConfig } from '@scalar/api-reference/hooks/useConfig'
+import { downloadEventBus } from '@scalar/api-reference/libs/download'
 import GitHubSlugger from 'github-slugger'
 import { computed } from 'vue'
-
-import Badge from '@/components/Badge/Badge.vue'
-import { useConfig } from '@/hooks/useConfig'
-import { downloadEventBus } from '@/libs/download'
 
 const { title } = defineProps<{
   title?: string
@@ -38,7 +37,7 @@ const handleDownloadClick = (format: 'json' | 'yaml') => {
       "
       @click.prevent="handleDownloadClick('json')"
       variant="ghost">
-      <span> Download OpenAPI Document </span>
+      <span> Download OpenAPI Schema </span>
       <Badge class="extension hidden group-hover:flex">json</Badge>
     </button>
 
@@ -52,14 +51,14 @@ const handleDownloadClick = (format: 'json' | 'yaml') => {
       "
       @click.prevent="handleDownloadClick('yaml')"
       variant="ghost">
-      <span> Download OpenAPI Document </span>
+      <span> Download OpenAPI Schema </span>
       <Badge class="extension hidden group-hover:flex">yaml</Badge>
     </button>
   </div>
 </template>
 
 <style scoped>
-@reference '@/style.css';
+@reference '@scalar/api-reference/style.css';
 
 .download-container {
   display: flex;

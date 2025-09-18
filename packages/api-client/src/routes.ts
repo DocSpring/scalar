@@ -50,7 +50,7 @@ const requestRoutes = [
   {
     name: 'request.root',
     path: '',
-    component: () => import('@/views/Request/RequestRoot.vue'),
+    component: () => import('@scalar/api-client/views/Request/RequestRoot.vue'),
     redirect: (to) => ({
       name: 'request',
       params: { ...to.params, request: 'default' },
@@ -59,17 +59,17 @@ const requestRoutes = [
       {
         name: 'request',
         path: `request/:${PathId.Request}`,
-        component: () => import('@/views/Request/Request.vue'),
+        component: () => import('@scalar/api-client/views/Request/Request.vue'),
       },
       {
         name: 'request.examples',
         path: `request/:${PathId.Request}/examples/:${PathId.Examples}`,
-        component: () => import('@/views/Request/Request.vue'),
+        component: () => import('@scalar/api-client/views/Request/Request.vue'),
       },
       {
         name: 'collection',
         path: `collection/:${PathId.Collection}`,
-        component: () => import('@/views/Collection/Collection.vue'),
+        component: () => import('@scalar/api-client/views/Collection/Collection.vue'),
         redirect: () => {
           return {
             name: 'collection.overview',
@@ -79,49 +79,49 @@ const requestRoutes = [
           {
             name: 'collection.overview',
             path: 'overview',
-            component: () => import('@/views/Collection/CollectionOverview.vue'),
+            component: () => import('@scalar/api-client/views/Collection/CollectionOverview.vue'),
           },
           {
             name: 'collection.servers',
             path: 'servers',
-            component: () => import('@/views/Collection/CollectionServers.vue'),
+            component: () => import('@scalar/api-client/views/Collection/CollectionServers.vue'),
             children: [
               {
                 name: 'collection.servers.edit',
                 path: `:${PathId.Servers}`,
-                component: () => import('@/views/Collection/CollectionServers.vue'),
+                component: () => import('@scalar/api-client/views/Collection/CollectionServers.vue'),
               },
             ],
           },
           {
             name: 'collection.environment',
             path: 'environment',
-            component: () => import('@/views/Collection/CollectionEnvironment.vue'),
+            component: () => import('@scalar/api-client/views/Collection/CollectionEnvironment.vue'),
           },
           {
             name: 'collection.authentication',
             path: 'authentication',
-            component: () => import('@/views/Collection/CollectionAuthentication.vue'),
+            component: () => import('@scalar/api-client/views/Collection/CollectionAuthentication.vue'),
           },
           {
             name: 'collection.cookies',
             path: 'cookies',
-            component: () => import('@/views/Collection/CollectionCookies.vue'),
+            component: () => import('@scalar/api-client/views/Collection/CollectionCookies.vue'),
           },
           {
             name: 'collection.scripts',
             path: 'scripts',
-            component: () => import('@/views/Collection/CollectionScripts.vue'),
+            component: () => import('@scalar/api-client/views/Collection/CollectionScripts.vue'),
           },
           {
             name: 'collection.sync',
             path: 'sync',
-            component: () => import('@/views/Collection/CollectionSync.vue'),
+            component: () => import('@scalar/api-client/views/Collection/CollectionSync.vue'),
           },
           {
             name: 'collection.settings',
             path: 'settings',
-            component: () => import('@/views/Collection/CollectionSettings.vue'),
+            component: () => import('@scalar/api-client/views/Collection/CollectionSettings.vue'),
           },
         ],
       },
@@ -192,12 +192,12 @@ export const routes = [
       {
         name: 'environment',
         path: `environment/:${PathId.Environment}`,
-        component: () => import('@/views/Environment/Environment.vue'),
+        component: () => import('@scalar/api-client/views/Environment/Environment.vue'),
       },
       {
         name: 'environment.collection',
         path: `environment/:${PathId.Collection}/:${PathId.Environment}`,
-        component: () => import('@/views/Environment/Environment.vue'),
+        component: () => import('@scalar/api-client/views/Environment/Environment.vue'),
         props: true,
       },
       {
@@ -211,7 +211,7 @@ export const routes = [
       {
         name: 'cookies',
         path: `cookies/:${PathId.Cookies}`,
-        component: () => import('@/views/Cookies/Cookies.vue'),
+        component: () => import('@scalar/api-client/views/Cookies/Cookies.vue'),
       },
       {
         name: 'servers.default',
@@ -236,7 +236,7 @@ export const routes = [
       {
         name: 'settings',
         path: `settings/:${PathId.Settings}`,
-        component: () => import('@/views/Settings/Settings.vue'),
+        component: () => import('@scalar/api-client/views/Settings/Settings.vue'),
       },
     ],
   },

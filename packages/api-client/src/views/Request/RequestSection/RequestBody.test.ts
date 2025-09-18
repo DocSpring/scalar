@@ -1,6 +1,6 @@
-import { useWorkspace } from '@/store'
+import { useWorkspace } from '@scalar/api-client/store'
 import { operationSchema, requestExampleSchema } from '@scalar/oas-utils/entities/spec'
-import { createStoreEvents } from '@/store/events'
+import { createStoreEvents } from '@scalar/api-client/store/events'
 import { mount } from '@vue/test-utils'
 import { type Mock, afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 
@@ -9,11 +9,11 @@ import { environmentSchema } from '@scalar/oas-utils/entities/environment'
 import { workspaceSchema } from '@scalar/oas-utils/entities/workspace'
 
 // Mock the useWorkspace hook
-vi.mock('@/store', () => ({
+vi.mock('@scalar/api-client/store', () => ({
   useWorkspace: vi.fn(),
 }))
 
-vi.mock('@/store/active-entities', () => ({
+vi.mock('@scalar/api-client/store/active-entities', () => ({
   useActiveEntities: vi.fn(),
 }))
 

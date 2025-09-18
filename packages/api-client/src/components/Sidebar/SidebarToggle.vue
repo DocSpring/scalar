@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useSidebar } from '@/hooks/useSidebar'
+import { useSidebar } from '@scalar/api-client/hooks/useSidebar'
 
 const { isSidebarOpen, toggleSidebarOpen } = useSidebar()
 </script>

@@ -1,6 +1,9 @@
 <script lang="ts" setup>
 import { useWorkspace } from '@scalar/api-client/store'
 import { filterSecurityRequirements } from '@scalar/api-client/views/Request/RequestSection'
+import { convertSecurityScheme } from '@scalar/api-reference/helpers/convert-security-scheme'
+import { useOperationDiscriminator } from '@scalar/api-reference/hooks/useOperationDiscriminator'
+import type { ClientOptionGroup } from '@scalar/api-reference/v2/blocks/scalar-request-example-block/types'
 import type { HttpMethod } from '@scalar/helpers/http/http-methods'
 import type { Collection, Server } from '@scalar/oas-utils/entities/spec'
 import type { OpenAPIV3_1 } from '@scalar/openapi-types'
@@ -11,10 +14,6 @@ import {
   isResolvedRef,
 } from '@scalar/workspace-store/schemas/v3.1/type-guard'
 import { computed } from 'vue'
-
-import { convertSecurityScheme } from '@/helpers/convert-security-scheme'
-import { useOperationDiscriminator } from '@/hooks/useOperationDiscriminator'
-import type { ClientOptionGroup } from '@/v2/blocks/scalar-request-example-block/types'
 
 import ClassicLayout from './layouts/ClassicLayout.vue'
 import ModernLayout from './layouts/ModernLayout.vue'

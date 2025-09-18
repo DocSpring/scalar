@@ -1,12 +1,11 @@
 <script lang="ts" setup>
+import { WithBreadcrumb } from '@scalar/api-reference/components/Anchor'
+import { isTypeObject } from '@scalar/api-reference/components/Content/Schema/helpers/is-type-object'
+import type { Schemas } from '@scalar/api-reference/features/Operation/types/schemas'
+import { SpecificationExtension } from '@scalar/api-reference/features/specification-extension'
+import { DISCRIMINATOR_CONTEXT } from '@scalar/api-reference/hooks/useDiscriminator'
 import { ScalarMarkdown } from '@scalar/components'
 import { computed, inject, type Component } from 'vue'
-
-import { WithBreadcrumb } from '@/components/Anchor'
-import { isTypeObject } from '@/components/Content/Schema/helpers/is-type-object'
-import type { Schemas } from '@/features/Operation/types/schemas'
-import { SpecificationExtension } from '@/features/specification-extension'
-import { DISCRIMINATOR_CONTEXT } from '@/hooks/useDiscriminator'
 
 import {
   compositions,

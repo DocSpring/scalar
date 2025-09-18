@@ -1,9 +1,8 @@
 <script setup lang="ts">
+import { Schema } from '@scalar/api-reference/components/Content/Schema'
 import { ScalarMarkdown } from '@scalar/components'
 import type { OpenAPIV3_1 } from '@scalar/openapi-types'
 import { computed, ref } from 'vue'
-
-import { Schema } from '@/components/Content/Schema'
 
 import ContentTypeSelect from './ContentTypeSelect.vue'
 

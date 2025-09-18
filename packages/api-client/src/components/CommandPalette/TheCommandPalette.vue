@@ -1,10 +1,9 @@
 <script lang="ts">
+import { importCurlCommand } from '@scalar/api-client/libs/importers/curl'
+import { PathId } from '@scalar/api-client/routes'
+import { useWorkspace } from '@scalar/api-client/store'
+import { useActiveEntities } from '@scalar/api-client/store/active-entities'
 import type { Collection } from '@scalar/oas-utils/entities/spec'
-
-import { importCurlCommand } from '@/libs/importers/curl'
-import { PathId } from '@/routes'
-import { useWorkspace } from '@/store'
-import { useActiveEntities } from '@/store/active-entities'
 
 import CommandPaletteCollection from './CommandPaletteCollection.vue'
 import CommandPaletteExample from './CommandPaletteExample.vue'
@@ -47,12 +46,11 @@ export type CommandPaletteEvent = {
 
 <script setup lang="ts">
 import { Dialog, DialogPanel, DialogTitle } from '@headlessui/vue'
+import { ROUTES } from '@scalar/api-client/constants'
+import type { HotKeyEvent } from '@scalar/api-client/libs'
 import { ScalarIcon, useModal } from '@scalar/components'
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { useRouter } from 'vue-router'
-
-import { ROUTES } from '@/constants'
-import type { HotKeyEvent } from '@/libs'
 
 const modalState = useModal()
 const router = useRouter()

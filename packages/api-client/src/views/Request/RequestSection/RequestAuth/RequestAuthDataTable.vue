@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { DataTable } from '@scalar/api-client/components/DataTable'
+import type { EnvVariable } from '@scalar/api-client/store/active-entities'
 import { useModal } from '@scalar/components'
 import type { Environment } from '@scalar/oas-utils/entities/environment'
 import type {
@@ -8,9 +10,6 @@ import type {
 } from '@scalar/oas-utils/entities/spec'
 import type { Workspace } from '@scalar/oas-utils/entities/workspace'
 import { computed, ref, watch } from 'vue'
-
-import { DataTable } from '@/components/DataTable'
-import type { EnvVariable } from '@/store/active-entities'
 
 import DeleteRequestAuthModal from './DeleteRequestAuthModal.vue'
 import RequestAuthTab from './RequestAuthTab.vue'

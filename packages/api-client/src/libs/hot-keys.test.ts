@@ -1,7 +1,7 @@
 import { describe, it, expect, vi, afterEach } from 'vitest'
 import { handleHotKeyDown, getModifiers, isInput } from './hot-keys'
 import { isMacOS } from '@scalar/helpers/general/is-mac-os'
-import type { EventBus } from '@/libs/event-bus'
+import type { EventBus } from '@scalar/api-client/libs/event-bus'
 
 // Mock isMacOS
 vi.mock('@scalar/helpers/general/is-mac-os', () => ({

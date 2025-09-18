@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import ServerVariablesSelect from '@/components/Server/ServerVariablesSelect.vue'
-import ServerVariablesTextbox from '@/components/Server/ServerVariablesTextbox.vue'
+import ServerVariablesSelect from '@scalar/api-client/components/Server/ServerVariablesSelect.vue'
+import ServerVariablesTextbox from '@scalar/api-client/components/Server/ServerVariablesTextbox.vue'
 import type {
   ServerVariables,
   ServerVariableValues,
-} from '@/components/Server/types'
+} from '@scalar/api-client/components/Server/types'
 
 const {
   values,

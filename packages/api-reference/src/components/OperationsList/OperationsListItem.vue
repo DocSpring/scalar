@@ -1,18 +1,17 @@
 <script setup lang="ts">
+import { HttpMethod } from '@scalar/api-reference/components/HttpMethod'
+import { SectionHeaderTag } from '@scalar/api-reference/components/Section'
+import { useSidebar } from '@scalar/api-reference/features/sidebar'
+import type {
+  TraversedEntry,
+  TraversedOperation,
+  TraversedWebhook,
+} from '@scalar/api-reference/features/traverse-schema'
 import { getHttpMethodInfo } from '@scalar/helpers/http/http-info'
 import { ScalarIconWebhooksLogo } from '@scalar/icons'
 import { isOperationDeprecated } from '@scalar/oas-utils/helpers'
 import type { OpenAPIV3_1, XScalarStability } from '@scalar/types/legacy'
 import { computed } from 'vue'
-
-import { HttpMethod } from '@/components/HttpMethod'
-import { SectionHeaderTag } from '@/components/Section'
-import { useSidebar } from '@/features/sidebar'
-import type {
-  TraversedEntry,
-  TraversedOperation,
-  TraversedWebhook,
-} from '@/features/traverse-schema'
 
 const { operation } = defineProps<{
   operation: TraversedOperation | TraversedWebhook

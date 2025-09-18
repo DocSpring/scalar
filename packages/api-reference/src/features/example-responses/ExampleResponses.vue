@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+import ScreenReader from '@scalar/api-reference/components/ScreenReader.vue'
+import { ExamplePicker } from '@scalar/api-reference/v2/blocks/scalar-request-example-block'
 import {
   ScalarCard,
   ScalarCardFooter,
@@ -17,9 +19,6 @@ import type { OperationObject } from '@scalar/workspace-store/schemas/v3.1/stric
 import type { ResponseObject } from '@scalar/workspace-store/schemas/v3.1/strict/response'
 import type { Dereference } from '@scalar/workspace-store/schemas/v3.1/type-guard'
 import { computed, ref, toValue, useId } from 'vue'
-
-import ScreenReader from '@/components/ScreenReader.vue'
-import { ExamplePicker } from '@/v2/blocks/scalar-request-example-block'
 
 import ExampleResponse from './ExampleResponse.vue'
 import ExampleResponseTab from './ExampleResponseTab.vue'

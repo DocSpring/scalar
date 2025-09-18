@@ -5,7 +5,7 @@ import { describe, expect, it, vi } from 'vitest'
 import Models from './Models.vue'
 
 // Mock useSidebar composable
-vi.mock('@/features/sidebar', () => ({
+vi.mock('@scalar/api-reference/features/sidebar', () => ({
   useSidebar: vi.fn(() => ({
     collapsedSidebarItems: {
       'model/user': true,
@@ -15,7 +15,7 @@ vi.mock('@/features/sidebar', () => ({
 }))
 
 // Mock useNavState composable
-vi.mock('@/hooks/useNavState', () => ({
+vi.mock('@scalar/api-reference/hooks/useNavState', () => ({
   useNavState: vi.fn(() => ({
     getModelId: vi.fn(({ name }: { name: string }) => `model-${name}`),
   })),

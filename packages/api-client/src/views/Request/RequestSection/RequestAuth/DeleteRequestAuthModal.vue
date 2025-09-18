@@ -1,8 +1,7 @@
 <script setup lang="ts">
+import { useWorkspace } from '@scalar/api-client/store/store'
 import { ScalarButton, ScalarModal } from '@scalar/components'
 import type { SecurityScheme } from '@scalar/oas-utils/entities/spec'
-
-import { useWorkspace } from '@/store/store'
 
 const props = defineProps<{
   state: { open: boolean; show: () => void; hide: () => void }

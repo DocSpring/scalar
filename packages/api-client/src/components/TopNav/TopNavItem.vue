@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import ScalarHotkey from '@scalar/api-client/components/ScalarHotkey.vue'
 import {
   ScalarContextMenu,
   ScalarDropdownButton,
@@ -11,8 +12,6 @@ import {
 } from '@scalar/components'
 import { isMacOS } from '@scalar/helpers/general/is-mac-os'
 import { LibraryIcon } from '@scalar/icons/library'
-
-import ScalarHotkey from '@/components/ScalarHotkey.vue'
 
 defineProps<{
   hotkey?: string

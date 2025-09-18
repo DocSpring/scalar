@@ -1,4 +1,4 @@
-import { traverseDocument, type TraversedEntry } from '@/features/traverse-schema'
+import { traverseDocument, type TraversedEntry } from '@scalar/api-reference/features/traverse-schema'
 import type { OpenAPIV3_1 } from '@scalar/openapi-types'
 import { apiReferenceConfigurationSchema } from '@scalar/types'
 import type { WorkspaceStore } from '@scalar/workspace-store/client'

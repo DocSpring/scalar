@@ -1,4 +1,9 @@
 <script setup lang="ts">
+import { DataTableRow } from '@scalar/api-client/components/DataTable'
+import type { EnvVariable } from '@scalar/api-client/store/active-entities'
+import { useWorkspace, type UpdateScheme } from '@scalar/api-client/store/store'
+import { authorizeOauth2 } from '@scalar/api-client/views/Request/libs'
+import { updateScheme as _updateScheme } from '@scalar/api-client/views/Request/RequestSection/helpers/update-scheme'
 import { ScalarButton, useLoadingState } from '@scalar/components'
 import type { Environment } from '@scalar/oas-utils/entities/environment'
 import {
@@ -10,12 +15,6 @@ import {
 } from '@scalar/oas-utils/entities/spec'
 import type { Workspace } from '@scalar/oas-utils/entities/workspace'
 import { useToasts } from '@scalar/use-toasts'
-
-import { DataTableRow } from '@/components/DataTable'
-import type { EnvVariable } from '@/store/active-entities'
-import { useWorkspace, type UpdateScheme } from '@/store/store'
-import { authorizeOauth2 } from '@/views/Request/libs'
-import { updateScheme as _updateScheme } from '@/views/Request/RequestSection/helpers/update-scheme'
 
 import OAuthScopesInput from './OAuthScopesInput.vue'
 import RequestAuthDataTableInput from './RequestAuthDataTableInput.vue'

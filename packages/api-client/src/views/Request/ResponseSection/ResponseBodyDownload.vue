@@ -1,8 +1,7 @@
 <script lang="ts" setup>
+import { getMediaTypeConfig } from '@scalar/api-client/views/Request/consts'
 import { ScalarIcon } from '@scalar/components'
 import { computed } from 'vue'
-
-import { getMediaTypeConfig } from '@/views/Request/consts'
 
 const props = defineProps<{
   href: string
