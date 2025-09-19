@@ -71,27 +71,41 @@ const activeServer = computed(() => {
 const { items } = useSidebar()
 const { hash, isIntersectionEnabled } = useNavState()
 
+const pendingLazyIds = ref(new Set<string>())
+const freezeCleanup = ref<ReturnType<typeof freezeAtTop> | null>(null)
+let releaseTimeout: ReturnType<typeof setTimeout> | null = null
+
+const clearReleaseTimeout = () => {
+  if (releaseTimeout) {
+    clearTimeout(releaseTimeout)
+    releaseTimeout = null
+  }
+}
+
 const attachFreeze = (targetHash: string | undefined | null) => {
   if (!targetHash) {
     return null
   }
-  return freezeAtTop(targetHash)
+  const cleanup = freezeAtTop(targetHash)
+  return cleanup
 }
-
-const freezeCleanup = ref<ReturnType<typeof freezeAtTop> | null>(
-  attachFreeze(hash.value),
-)
 
 /** Resume scrolling */
 const resume = () => {
+  clearReleaseTimeout()
   freezeCleanup.value?.()
   freezeCleanup.value = null
+  pendingLazyIds.value.clear()
   hasLazyLoaded.value = true
   isIntersectionEnabled.value = true
 }
 
-/** IDs for all lazy elements above the current entry */
-const lazyIds = ref<Set<string>>(new Set())
+const ensureFreeze = () => {
+  if (pendingLazyIds.value.size === 0) return
+  if (!freezeCleanup.value) {
+    freezeCleanup.value = attachFreeze(hash.value)
+  }
+}
 
 /** The index of the root entry */
 const rootIndex = computed(() =>
@@ -106,18 +120,22 @@ lazyBus.on(({ loading, loaded, save }) => {
 
   // Track the previous elements that are loading
   if (loading && save) {
-    lazyIds.value.add(loading)
+    pendingLazyIds.value.add(loading)
+    ensureFreeze()
   }
 
   // Track which elements have loaded
   if (loaded && save) {
-    lazyIds.value.delete(loaded)
+    pendingLazyIds.value.delete(loaded)
   }
 
   // We are empty! Unfreeze the page
-  if (lazyIds.value.size === 0) {
+  if (pendingLazyIds.value.size === 0) {
     emit('allEntriesLoaded', true)
-    setTimeout(() => resume(), 300)
+    clearReleaseTimeout()
+    releaseTimeout = setTimeout(() => {
+      resume()
+    }, 300)
   }
 })
 
@@ -130,7 +148,9 @@ watch(
   () => hash.value,
   (value) => {
     freezeCleanup.value?.()
-    freezeCleanup.value = attachFreeze(value)
+    freezeCleanup.value = value ? attachFreeze(value) : null
+    pendingLazyIds.value.clear()
+    clearReleaseTimeout()
   },
   { immediate: false },
 )

@@ -163,14 +163,21 @@ onBeforeMount(() => {
 
 // Disables intersection observer and scrolls to section once it has been opened
 const scrollToSection = async (id?: string) => {
+  if (!id) {
+    console.log('[ScalarLayout] scrollToSection reset')
+    documentEl.value?.scrollTo(0, 0)
+    await sleep(100)
+    return
+  }
+
+  console.log('[ScalarLayout] scrollToSection', {
+    targetId: id,
+    currentHash: hash.value,
+  })
+
   isIntersectionEnabled.value = false
   updateHash()
-
-  if (id) {
-    scrollToOperation(id)
-  } else {
-    documentEl.value?.scrollTo(0, 0)
-  }
+  scrollToOperation(id)
 
   await sleep(100)
   isIntersectionEnabled.value = true

@@ -2,6 +2,8 @@
  * Freezes an element at the top of the viewport using a mutation observer to check if the element has entered the dom
  * Differs from freezeElement as the element doesn't need to exist yet
  */
+import { scrollElementIntoViewWithOffset } from './scroll-offset'
+
 export const freezeAtTop = (id: string) => {
   if (!id) {
     return () => null
@@ -25,7 +27,9 @@ export const freezeAtTop = (id: string) => {
 
     // Schedule the scroll adjustment for the next frame
     rafId = requestAnimationFrame(() => {
-      element?.scrollIntoView({ block: 'start' })
+      if (element) {
+        scrollElementIntoViewWithOffset(element)
+      }
       rafId = null
     })
   })

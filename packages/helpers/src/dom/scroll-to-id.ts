@@ -3,9 +3,16 @@
  *
  * Also focuses the element if the focus flag is true
  */
+import { scrollElementIntoViewWithOffset } from './scroll-offset'
+
 export const scrollToId = async (id: string, focus?: boolean) => {
   const scrollToElement = (element: HTMLElement) => {
-    element.scrollIntoView()
+    console.log('[ScalarScroll] scroll-to-id', {
+      id,
+      focus,
+      elementId: element.id,
+    })
+    scrollElementIntoViewWithOffset(element)
     if (focus) {
       element.focus()
     }
