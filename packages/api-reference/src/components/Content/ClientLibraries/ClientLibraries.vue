@@ -15,10 +15,13 @@ import { useClipboard } from '@scalar/use-hooks/useClipboard'
 import type { WorkspaceDocument } from '@scalar/workspace-store/schemas/schemas/workspace'
 import {
   computed,
+  defineComponent,
+  h,
   onBeforeUnmount,
   onMounted,
   useId,
   useTemplateRef,
+  type PropType,
 } from 'vue'
 
 import StarlightCard from '../../StarlightCard.vue'
@@ -42,6 +45,111 @@ const docSpringClients = getDocSpringClients()
 
 const morePanel = useId()
 
+const CLIENT_INFO_BULLETS = [
+  '- Authentication with API token ID and secret',
+  '- Request headers and JSON payloads',
+  '- Response handling and error details',
+  '- Calling API endpoints like [`testAuthentication`](#tag/authentication/get/authentication)',
+]
+
+const CLIENT_INTRO_OVERRIDES: Record<string, string> = {
+  'c/libcurl':
+    'Use libcurl to make secure HTTPS calls from C with fine-grained control over headers, payloads, and TLS settings. The following code samples keep things dependency-light while still handling JSON bodies and authentication.',
+  'csharp/httpclient':
+    'Use the built-in `HttpClient` from .NET to send asynchronous requests without pulling in extra packages. It fits naturally into ASP.NET controllers, Azure Functions, or background services that already rely on the standard library.',
+  'csharp/restsharp':
+    'Use RestSharp when you prefer a fluent API for serializing payloads and parsing responses. The examples show how to plug DocSpring calls into existing RestSharp-powered integrations.',
+  'clojure/clj_http':
+    'Use the `clj-http` library to perform DocSpring requests from Clojure. The following code samples highlight idiomatic map-based request bodies and keyword access to JSON responses.',
+  'dart/http':
+    'Use the `package:http` client to integrate DocSpring calls in Flutter apps, Dart Cloud Functions, or CLIs. The lightweight API keeps async code approachable while still handling headers and JSON payloads.',
+  'go/native':
+    'Use Go’s `net/http` standard library so you can call DocSpring without third-party dependencies. The following code samples configure request structs, write JSON, and inspect responses using familiar Go patterns.',
+  'http/http1.1':
+    'Use a raw HTTP/1.1 transcript when you want to share or debug DocSpring requests at the protocol level. It is perfect for quick experiments in tools like `nc`, browser devtools, or API Gateways that accept plain wire payloads.',
+  'java/asynchttp':
+    'Use AsyncHttpClient for high-throughput Java services that already depend on Netty. The following code samples show how to build requests with futures and plug DocSpring into non-blocking pipelines.',
+  'java/nethttp':
+    'Use the Java 11 `HttpClient` to keep dependencies minimal while gaining good HTTP/2 defaults. The following code samples demonstrate builder-style configuration, JSON bodies, and response handling using the standard library.',
+  'java/okhttp':
+    'Use OkHttp when you want a mature, battle-tested HTTP stack for JVM projects. The following code samples outline how to configure the client, post JSON payloads, and capture responses in a fluent way.',
+  'java/unirest':
+    'Use Unirest if you like a concise chainable API and automatic serialization. It is handy for scripts or lightweight services that already rely on Unirest’s minimal footprint.',
+  'js/fetch':
+    'Use the built-in Fetch API to make direct HTTP requests to DocSpring. This approach keeps dependencies light—copy the example into your project and drop in your credentials.',
+  'js/axios':
+    'Use Axios when you prefer a promise-based client with interceptors and automatic JSON parsing. It slots neatly into React, Vue, or Svelte apps that already depend on Axios for API calls.',
+  'js/ofetch':
+    'Use `ofetch` (from the unjs ecosystem) for a tiny wrapper around Fetch that adds smart defaults like automatic JSON handling. It keeps your bundle small while providing ergonomic helpers.',
+  'js/jquery':
+    'Use jQuery’s `$.ajax` helper if you are maintaining legacy widgets or dashboards that still ship with jQuery. The snippet shows how to post DocSpring requests without rewriting existing code.',
+  'js/xhr':
+    'Use `XMLHttpRequest` when you need maximum compatibility with legacy browsers or embedded web views. The following code samples demonstrate manually configuring headers, serializing JSON, and reading responses.',
+  'kotlin/okhttp':
+    'Use OkHttp in Kotlin to integrate DocSpring with Android apps or backend services. The following code samples embrace Kotlin idioms while building on OkHttp’s robust connection management.',
+  'node/fetch':
+    'Use the global `fetch` available in modern Node.js versions (or a polyfill) to keep your DocSpring integration dependency-free. The following code samples fit well into serverless handlers and lightweight scripts.',
+  'node/axios':
+    'Use Axios in Node.js when you want retries, interceptors, or advanced middleware patterns. It mirrors the browser examples so you can share code across full-stack projects.',
+  'node/ofetch':
+    'Use `ofetch` in Node.js for a lightweight Fetch wrapper with JSON helpers and built-in retry support. It is a great fit for Nitro, Nuxt, and other unjs-based stacks.',
+  'node/undici':
+    'Use Undici, the modern Node.js HTTP client from the core team, for high-performance DocSpring calls. The following code samples highlight streamlined request builders and response bodies driven by async iterables.',
+  'objc/nsurlsession':
+    'Use `NSURLSession` to make DocSpring API requests from Objective-C on iOS or macOS. The following code samples configure `NSMutableURLRequest`, write JSON payloads, and parse responses on completion handlers.',
+  'ocaml/cohttp':
+    'Use Cohttp to make DocSpring API requests from OCaml projects. The following code samples lean on Lwt for async flow and show how to assemble requests using immutable records.',
+  'php/curl':
+    'Use PHP’s cURL extension for a portable DocSpring integration that runs anywhere PHP does. The following code samples cover setting options, encoding payloads, and decoding JSON responses.',
+  'php/guzzle':
+    'Use Guzzle when you want PSR-compliant middleware, dependency injection, and richer abstractions. The following code samples show how to configure a reusable client and make DocSpring requests with nice helpers.',
+  'powershell/webrequest':
+    'Use `Invoke-WebRequest` for quick DocSpring calls from interactive PowerShell sessions or Windows automation scripts. It is ideal for ad-hoc testing and simple workflows.',
+  'powershell/restmethod':
+    'Use `Invoke-RestMethod` when you want automatic JSON parsing in PowerShell. The following code samples keep your scripts concise while still exposing headers and status handling.',
+  'python/python3':
+    'Use Python’s `urllib.request` so you can reach DocSpring without third-party packages. It is perfect for Lambda functions or scripts that must stay within a standard library footprint.',
+  'python/requests':
+    'Use the popular `requests` library for a clean, Pythonic API. The following code samples show how to post JSON, add authentication headers, and handle structured responses.',
+  'python/httpx_sync':
+    'Use `httpx` in synchronous mode to gain modern features like HTTP/2 and connection pooling while keeping a familiar requests-style API.',
+  'python/httpx_async':
+    'Use `httpx.AsyncClient` to integrate DocSpring with async frameworks such as FastAPI, Starlette, or Trio. The following code samples highlight awaitable request/response handling.',
+  'r/httr':
+    'Use the `httr` package when you need tidyverse-friendly helpers for DocSpring calls. The following code samples demonstrate building requests with `httr::POST` and parsing JSON into R data structures.',
+  'ruby/native':
+    'Use Ruby’s `Net::HTTP` standard library to reach DocSpring without extra gems. The following code samples fit well into background jobs, scripts, or Rails initializers.',
+  'rust/reqwest':
+    'Use Reqwest, the ergonomic HTTP client for Rust, to pair async/await with strong typing. The following code samples walk through building a request, serializing JSON via Serde, and handling results safely.',
+  'shell/curl':
+    'Use the `curl` CLI to test DocSpring endpoints from any terminal. It is perfect for quick smoke tests, CI scripts, or sharing minimal repro steps with teammates.',
+  'shell/wget':
+    'Use `wget` when you prefer a simple CLI that ships on many Linux distributions. The following code samples show how to post JSON bodies and capture responses right from the shell.',
+  'shell/httpie':
+    'Use HTTPie for a human-friendly command-line experience. The following code samples highlight declarative syntax and rich output that makes debugging DocSpring calls pleasant.',
+  'swift/nsurlsession':
+    'Use `URLSession` in Swift to integrate DocSpring with native Apple platforms. The following code samples lean on `URLRequest`, JSON encoding, and structured response handling inside async code.',
+}
+
+const standardEnding =
+  'Copy the sample into your project, replace the placeholders with your DocSpring credentials, and you are ready to test.'
+
+const buildClientInfoMarkdown = (client: ClientOption) => {
+  const intro = CLIENT_INTRO_OVERRIDES[client.id]
+    ? `${CLIENT_INTRO_OVERRIDES[client.id]}\n\n` + standardEnding
+    : `Use the ${client.title} client to call DocSpring without installing the official SDK.\n\n` +
+      standardEnding
+
+  const heading = `# ${client.title}`
+  return [
+    heading,
+    intro,
+    'You’ll see examples of:',
+    '',
+    ...CLIENT_INFO_BULLETS,
+  ].join('\n')
+}
+
 /** Grab the option for the currently selected Http Client */
 const selectedClientOption = computed(() => {
   // First try to find in the regular clientOptions
@@ -61,10 +169,9 @@ const selectedClientOption = computed(() => {
 })
 
 /** List of featured clients - hide JavaScript and Elixir to fit row */
-const featuredClients = computed(() =>
-  docSpringClients.options.filter(
-    (c) => !['custom/js', 'custom/elixir'].includes(c.id),
-  ),
+const featuredClients = computed(
+  () => docSpringClients.options.filter((c) => !['custom/js'].includes(c.id)),
+  // [...docSpringClients.options],
 )
 
 /** Currently selected tab index */
@@ -124,6 +231,33 @@ const moreClientOptions = computed(() => {
 })
 
 const wrapperRef = useTemplateRef('wrapper')
+
+const ClientInfoMessage = defineComponent({
+  name: 'ClientInfoMessage',
+  props: {
+    client: {
+      type: Object as PropType<ClientOption>,
+      required: true,
+    },
+  },
+  setup(props) {
+    const message = computed(() => buildClientInfoMarkdown(props.client))
+
+    return () =>
+      h(
+        'section',
+        {
+          class: 'skip-scalar-reset sl-markdown-content',
+        },
+        [
+          h(ScalarMarkdown, {
+            textWrap: true,
+            value: message.value,
+          }),
+        ],
+      )
+  },
+})
 
 // Local copy-to-clipboard handler for pre-rendered expressive-code blocks
 const { copyToClipboard } = useClipboard()
@@ -272,18 +406,14 @@ const processedInstallationHtml = computed(() => {
   }
 
   // Replace placeholders in TEXT NODES (body content)
-  const walker = windowDoc.createTreeWalker(
-    container,
-    NodeFilter.SHOW_TEXT,
-    {
-      acceptNode(node: Node) {
-        const v = node.nodeValue || ''
-        return v.includes('API_TOKEN_ID') || v.includes('API_TOKEN_SECRET')
-          ? NodeFilter.FILTER_ACCEPT
-          : NodeFilter.FILTER_REJECT
-      },
-    } as any,
-  )
+  const walker = windowDoc.createTreeWalker(container, NodeFilter.SHOW_TEXT, {
+    acceptNode(node: Node) {
+      const v = node.nodeValue || ''
+      return v.includes('API_TOKEN_ID') || v.includes('API_TOKEN_SECRET')
+        ? NodeFilter.FILTER_ACCEPT
+        : NodeFilter.FILTER_REJECT
+    },
+  } as any)
 
   const textNodes: Text[] = []
   for (let n = walker.nextNode(); n; n = walker.nextNode())
@@ -384,18 +514,19 @@ const markdownReplaceAndMask = computed(() => {
             ">
             <div
               v-if="installationInstructions.html"
-              class="instruction-content instruction-html"
+              class="client-link-cards instruction-content instruction-html"
               v-html="processedInstallationHtml" />
             <div
               v-if="installationInstructions.description"
               class="instruction-content"
               :class="installationInstructions.source && 'has-source'">
               <ScalarMarkdown
+                textWrap
                 :replaceAndMaskCredentials="markdownReplaceAndMask"
                 :value="processedInstallationDescription" />
 
               <StarlightCard
-                classNames="my-3 mt-5"
+                classNames="mt-6 mb-0"
                 description="Make an API call to confirm that authentication is working"
                 href="#tag/authentication/get/authentication"
                 title="Test Authentication" />
@@ -411,13 +542,8 @@ const markdownReplaceAndMask = computed(() => {
             </div>
           </template>
           <template v-else>
-            <div
-              class="client-library-info-pane skip-scalar-reset sl-markdown-content default-client-info">
-              <h3>{{ client.title }}</h3>
-              <p>
-                Code examples will be shown using the
-                {{ client.title }} library.
-              </p>
+            <div class="instruction-content">
+              <ClientInfoMessage :client="client" />
             </div>
           </template>
         </TabPanel>
@@ -436,18 +562,19 @@ const markdownReplaceAndMask = computed(() => {
           ">
           <div
             v-if="installationInstructions.html"
-            class="instruction-content instruction-html"
+            class="client-link-cards instruction-content instruction-html"
             v-html="processedInstallationHtml" />
           <div
             v-if="installationInstructions.description"
             class="instruction-content"
             :class="installationInstructions.source && 'has-source'">
             <ScalarMarkdown
+              textWrap
               :replaceAndMaskCredentials="markdownReplaceAndMask"
               :value="processedInstallationDescription" />
 
             <StarlightCard
-              classNames="mt-3"
+              classNames="mt-6 mb-0"
               description="Make an API call to confirm that authentication is working"
               href="#tag/authentication/get/authentication"
               title="Test Authentication" />
@@ -463,13 +590,10 @@ const markdownReplaceAndMask = computed(() => {
           </div>
         </template>
         <template v-else>
-          <div
-            class="client-library-info-pane skip-scalar-reset sl-markdown-content default-client-info">
-            <h3>{{ selectedClientOption?.title }}</h3>
-            <p>
-              Code examples will be shown using the
-              {{ selectedClientOption?.title }} library.
-            </p>
+          <div class="instruction-content">
+            <ClientInfoMessage
+              v-if="selectedClientOption"
+              :client="selectedClientOption" />
           </div>
         </template>
       </div>
@@ -485,6 +609,7 @@ const markdownReplaceAndMask = computed(() => {
   font-size: var(--scalar-small);
   font-family: var(--scalar-font-code);
   padding: 9px 12px;
+  padding-bottom: 36px;
   border-top: none;
   white-space: nowrap;
   overflow: hidden;

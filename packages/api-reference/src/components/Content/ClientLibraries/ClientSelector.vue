@@ -198,9 +198,9 @@ const comboboxSelectedValue = computed(() => {
 }
 /* allow wrapping instead of hiding on small screens */
 .client-libraries-icon {
-  max-width: 22px;
-  max-height: 22px;
-  min-width: 22px;
+  max-width: 23px;
+  max-height: 23px;
+  min-width: 23px;
   width: 100%;
   aspect-ratio: 1;
   display: flex;

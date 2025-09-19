@@ -212,11 +212,11 @@ const { hash } = useNavState()
   margin-top: 3rem;
 }
 .custom-intro-columns > .section-column:first-of-type {
-  flex: 0 1 62%;
+  flex: 0 1 64%;
   min-width: 0;
 }
 .custom-intro-columns > .section-column:last-of-type {
-  flex: 0 1 38%;
+  flex: 0 1 36%;
   min-width: 0;
   display: flex;
   flex-direction: column;

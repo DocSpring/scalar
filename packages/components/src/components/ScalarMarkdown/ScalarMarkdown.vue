@@ -19,10 +19,13 @@ const props = withDefaults(
      * AFTER markdown is rendered with a masked span structure to avoid HTML escaping.
      */
     replaceAndMaskCredentials?: Record<string, string | undefined>
+    /** When true, disable ellipsis truncation and allow normal wrapping */
+    textWrap?: boolean
   }>(),
   {
     withImages: false,
     withAnchors: false,
+    textWrap: false,
   },
 )
 
@@ -78,11 +81,20 @@ const html = computed(() => {
   }
   return out
 })
+
 </script>
 <template>
   <div
     :class="
-      cx('markdown text-ellipsis', { 'line-clamp-4': clamp }, props.class)
+      cx(
+        'markdown',
+        {
+          'text-ellipsis': !props.textWrap,
+          'text-wrap': props.textWrap,
+          'line-clamp-4': clamp,
+        },
+        props.class,
+      )
     "
     :style="{
       '-webkit-line-clamp': typeof clamp === 'string' ? clamp : undefined,
