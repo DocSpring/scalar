@@ -11,7 +11,7 @@ export default defineConfig({
     PACKAGE_VERSION: JSON.stringify(process.env.npm_package_version),
   },
   resolve: {
-    alias: alias(import.meta.url),
+    alias: alias(import.meta.url, '@scalar/api-client'),
     dedupe: ['vue'],
   },
   optimizeDeps: {
