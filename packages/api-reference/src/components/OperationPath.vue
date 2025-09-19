@@ -12,7 +12,7 @@ const isVariable = (part: string) => part.startsWith('{') && part.endsWith('}')
 const cleanPath = computed(() => {
   return props.path.replace(
     /\?endpoint_variant=[^&\s]*(&|$)/,
-    (match, ampersand) => {
+    (_match, ampersand) => {
       // If there's an ampersand after, keep the ? and return the rest
       return ampersand === '&' ? '?' : ''
     },

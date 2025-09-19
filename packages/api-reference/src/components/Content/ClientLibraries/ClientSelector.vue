@@ -4,11 +4,12 @@ import { findClient } from '@scalar/api-reference/v2/blocks/scalar-request-examp
 import type {
   ClientOption,
   ClientOptionGroup,
+  DocSpringTargetId,
 } from '@scalar/api-reference/v2/blocks/scalar-request-example-block/types'
 import { emitCustomEvent } from '@scalar/api-reference/v2/events/definitions'
 import { ScalarCombobox, ScalarIcon } from '@scalar/components'
 import { freezeElement } from '@scalar/helpers/dom/freeze-element'
-import type { AvailableClients, TargetId } from '@scalar/types/snippetz'
+import type { AvailableClients } from '@scalar/types/snippetz'
 import { computed, ref } from 'vue'
 
 const props = defineProps<{
@@ -33,10 +34,11 @@ const containerRef = ref<HTMLElement>()
  * Icons have longer names to appear in icon searches, e.g. "javascript-js" instead of just "javascript". This function
  * maps the language key to the icon name.
  */
-const getIconByLanguageKey = (targetKey: TargetId) => {
-  const key = targetKey === 'js' ? 'javascript' : targetKey
-  // elixir now uses a custom droplet icon: programming-language-elixir
-  return `programming-language-${key}` as const
+const getIconByLanguageKey = (targetKey: DocSpringTargetId) => {
+  if (targetKey === 'js') return 'programming-language-javascript'
+  if (targetKey === 'typescript') return 'programming-language-typescript'
+  if (targetKey === 'elixir') return 'programming-language-elixir'
+  return `programming-language-${targetKey}` as const
 }
 
 /** Set custom example, or update the selected HTTP client globally */
@@ -61,7 +63,7 @@ const selectClient = (option: ClientOption) => {
 
 /** Calculates the targetKey from the selected client id */
 const selectedTargetKey = computed(
-  () => props.selectedClient?.split('/')[0] as TargetId | undefined,
+  () => props.selectedClient?.split('/')[0] as DocSpringTargetId | undefined,
 )
 
 /** Find the currently selected client for the combobox */

@@ -72,6 +72,7 @@ import { getSecrets } from '@scalar/api-reference/v2/blocks/scalar-request-examp
 import type {
   ClientOption,
   ClientOptionGroup,
+  DocSpringTargetId,
 } from '@scalar/api-reference/v2/blocks/scalar-request-example-block/types'
 import { emitCustomEvent } from '@scalar/api-reference/v2/events'
 import {
@@ -88,7 +89,7 @@ import { freezeElement } from '@scalar/helpers/dom/freeze-element'
 import type { HttpMethod as HttpMethodType } from '@scalar/helpers/http/http-methods'
 import { ScalarIconCaretDown } from '@scalar/icons'
 import type { XCodeSample } from '@scalar/openapi-types/schemas/extensions'
-import { type AvailableClients, type TargetId } from '@scalar/snippetz'
+import { type AvailableClients } from '@scalar/snippetz'
 import type { ExampleObject } from '@scalar/workspace-store/schemas/v3.1/strict/example'
 import type { OperationObject } from '@scalar/workspace-store/schemas/v3.1/strict/path-operations'
 import type { SecuritySchemeObject } from '@scalar/workspace-store/schemas/v3.1/strict/security-scheme'
@@ -101,6 +102,10 @@ import { computed, ref, useId, watch, type ComponentPublicInstance } from 'vue'
 
 import StarlightCard from '../../../../components/StarlightCard.vue'
 import ExamplePicker from './ExamplePicker.vue'
+
+// These components stay imported for optional slots/content toggled by DocSpring.
+void ScalarMarkdown
+void StarlightCard
 
 const {
   clientOptions,
@@ -187,19 +192,19 @@ const processedCustomDescription = computed<string | undefined>(() => {
 
   if (!basicAuthScheme) return desc
 
-  const username = (basicAuthScheme as any)['x-scalar-secret-username'] as
-    | string
-    | undefined
-  const password = (basicAuthScheme as any)['x-scalar-secret-password'] as
-    | string
-    | undefined
+  const username = basicAuthScheme?.['x-scalar-secret-username']
 
   let out = desc
   // Show the token ID openly, but DO NOT replace the secret here –
   // masking happens in <ScalarMarkdown> via replaceAndMaskCredentials.
-  if (username) out = out.replace(/API_TOKEN_ID/g, username)
+  if (typeof username === 'string' && username.length > 0) {
+    out = out.replace(/API_TOKEN_ID/g, username)
+  }
   return out
 })
+
+void descriptionReplaceAndMask
+void processedCustomDescription
 
 /**
  * Group plugins by target/language to show in a dropdown
@@ -213,7 +218,7 @@ const clients = computed(() => {
 
       return {
         id,
-        lang: (sample.lang as TargetId) || 'plaintext',
+        lang: (sample.lang as DocSpringTargetId) || 'plaintext',
         title: label,
         label,
       } as ClientOption // We yolo assert this as the other properties are only needed in the top selector
@@ -358,10 +363,10 @@ const generatedCode = computed<string>(() => {
           const password = basicAuthScheme['x-scalar-secret-password']
 
           // Only replace if we have actual values, otherwise keep the placeholders
-          if (username) {
+          if (typeof username === 'string' && username.length > 0) {
             processedSource = processedSource.replace(/API_TOKEN_ID/g, username)
           }
-          if (password) {
+          if (typeof password === 'string' && password.length > 0) {
             processedSource = processedSource.replace(
               /API_TOKEN_SECRET/g,
               password,

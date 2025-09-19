@@ -72,6 +72,7 @@ export type ReferenceLayoutSlot =
   | 'content-end'
   | 'sidebar-start'
   | 'sidebar-end'
+  | 'after-auth'
 
 export type ReferenceLayoutSlots = {
   [x in ReferenceLayoutSlot]: (props: ReferenceSlotProps) => any

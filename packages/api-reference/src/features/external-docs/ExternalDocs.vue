@@ -1,10 +1,9 @@
 <script setup lang="ts">
-import { ScalarIconBook } from '@scalar/icons'
 import { type OpenAPIV3_1 } from '@scalar/openapi-types'
 
 import StarlightCard from '../../components/StarlightCard.vue'
 
-const props = defineProps<{
+defineProps<{
   value?: OpenAPIV3_1.ExternalDocumentationObject
 }>()
 </script>

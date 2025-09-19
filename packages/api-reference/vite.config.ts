@@ -9,6 +9,7 @@ const apiReferenceSrc = fileURLToPath(new URL('./src', import.meta.url))
 const apiReferenceTest = fileURLToPath(new URL('./test', import.meta.url))
 const componentsSrc = fileURLToPath(new URL('../components/src', import.meta.url))
 const iconsSrc = fileURLToPath(new URL('../icons/src', import.meta.url))
+const apiClientDist = fileURLToPath(new URL('../api-client/dist', import.meta.url))
 const apiClientSrc = fileURLToPath(new URL('../api-client/src', import.meta.url))
 
 export default defineConfig({
@@ -24,10 +25,14 @@ export default defineConfig({
       // Resolve workspace packages from src for fast dev iteration
       { find: '@scalar/components', replacement: componentsSrc },
       { find: '@scalar/icons', replacement: iconsSrc },
-      { find: '@scalar/api-client', replacement: apiClientSrc },
+      { find: '@scalar/api-client', replacement: apiClientDist },
+      {
+        find: /^@scalar\/api-client\/components\/(.*)$/,
+        replacement: `${apiClientSrc}/components/$1`,
+      },
       {
         find: /^@scalar\/api-client\/(.*)$/,
-        replacement: `${apiClientSrc}/$1`,
+        replacement: `${apiClientDist}/$1`,
       },
     ],
     dedupe: ['vue'],

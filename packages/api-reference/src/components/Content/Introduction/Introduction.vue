@@ -59,10 +59,6 @@ const activeServer = computed(() => {
   return servers[activeCollection.value.servers[0]]
 })
 
-const introCardsSlot = computed(() =>
-  config?.layout === 'classic' ? 'after' : 'aside',
-)
-
 const { hash } = useNavState()
 </script>
 <template>

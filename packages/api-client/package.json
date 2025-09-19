@@ -118,6 +118,16 @@
       "types": "./src/hooks/*.ts",
       "default": "./src/hooks/*.ts"
     },
+    "./router": {
+      "import": "./src/router.ts",
+      "types": "./src/router.ts",
+      "default": "./src/router.ts"
+    },
+    "./routes": {
+      "import": "./src/routes.ts",
+      "types": "./src/routes.ts",
+      "default": "./src/routes.ts"
+    },
     "./layouts/App": {
       "import": "./src/layouts/App/index.ts",
       "types": "./src/layouts/App/index.ts",

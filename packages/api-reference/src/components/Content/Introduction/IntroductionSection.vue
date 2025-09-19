@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { Badge } from '@scalar/api-reference/components/Badge'
-import { LinkList } from '@scalar/api-reference/components/LinkList'
 import {
   Section,
   SectionColumn,
@@ -14,12 +13,6 @@ import {
   DownloadLink,
   OPENAPI_VERSION_SYMBOL,
 } from '@scalar/api-reference/features/download-link'
-import { ExternalDocs } from '@scalar/api-reference/features/external-docs'
-import {
-  Contact,
-  License,
-  TermsOfService,
-} from '@scalar/api-reference/features/info-object'
 import { SpecificationExtension } from '@scalar/api-reference/features/specification-extension'
 import { DEFAULT_INTRODUCTION_SLUG } from '@scalar/api-reference/features/traverse-schema'
 import { useNavState } from '@scalar/api-reference/hooks/useNavState'

@@ -6,6 +6,24 @@
     "declaration": true,
     "declarationMap": true,
     "emitDeclarationOnly": true,
-    "outDir": "dist/"
+    "outDir": "dist/",
+    "paths": {
+      "@scalar/api-reference": ["./src"],
+      "@scalar/api-reference/*": ["./src/*"],
+      "@scalar/api-reference-test/*": ["./test/*"],
+      "@scalar/api-client": ["../api-client/src", "../api-client/dist"],
+      "@scalar/api-client/components": ["../api-client/src/components/index.ts"],
+      "@scalar/api-client/*": ["../api-client/src/*", "../api-client/dist/*"],
+      "@scalar/api-client/components/*": ["../api-client/src/components/*"],
+      "@scalar/api-client/layouts": ["../api-client/src/layouts/index.ts"],
+      "@scalar/api-client/layouts/*": ["../api-client/src/layouts/*"],
+      "@scalar/api-client/views": ["../api-client/src/views/index.ts"],
+      "@scalar/api-client/views/*": ["../api-client/src/views/*"],
+      "@scalar/api-client/hooks": ["../api-client/src/hooks/index.ts"],
+      "@scalar/api-client/hooks/*": ["../api-client/src/hooks/*"],
+      "@scalar/api-client/libs/*": ["../api-client/src/libs/*"],
+      "@scalar/api-client/store": ["../api-client/src/store/index.ts"],
+      "@scalar/api-client/store/*": ["../api-client/src/store/*"]
+    }
   }
 }

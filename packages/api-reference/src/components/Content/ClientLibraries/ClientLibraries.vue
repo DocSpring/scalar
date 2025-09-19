@@ -218,15 +218,6 @@ defineExpose({
 const { securitySchemes } = useWorkspace()
 const { activeCollection } = useActiveEntities()
 
-function htmlEscape(str: string) {
-  return str
-    .replaceAll('&', '&amp;')
-    .replaceAll('<', '&lt;')
-    .replaceAll('>', '&gt;')
-    .replaceAll('"', '&quot;')
-    .replaceAll("'", '&#39;')
-}
-
 function resolveActiveBasicCredentials() {
   // Normalize selected security-scheme UIDs to a flat string[]
   const normalizeUids = (input: unknown): string[] => {
@@ -285,21 +276,20 @@ const processedInstallationHtml = computed(() => {
     container,
     NodeFilter.SHOW_TEXT,
     {
-      acceptNode(node) {
+      acceptNode(node: Node) {
         const v = node.nodeValue || ''
         return v.includes('API_TOKEN_ID') || v.includes('API_TOKEN_SECRET')
           ? NodeFilter.FILTER_ACCEPT
           : NodeFilter.FILTER_REJECT
       },
     } as any,
-    false,
   )
 
   const textNodes: Text[] = []
   for (let n = walker.nextNode(); n; n = walker.nextNode())
     textNodes.push(n as Text)
 
-  textNodes.forEach((textNode) => {
+  textNodes.forEach((textNode: Text) => {
     let v = textNode.nodeValue || ''
 
     if (username && v.includes('API_TOKEN_ID')) {

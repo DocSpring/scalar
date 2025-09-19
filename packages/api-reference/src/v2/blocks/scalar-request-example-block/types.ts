@@ -1,6 +1,8 @@
 import type { ScalarComboboxOption, ScalarComboboxOptionGroup } from '@scalar/components'
 import type { AvailableClients, ClientId, TargetId } from '@scalar/snippetz'
 
+export type DocSpringTargetId = TargetId | 'typescript' | 'elixir'
+
 /**
  * Represents a client option in the request example block.
  * Extends the base combobox option with language-specific information
@@ -10,11 +12,11 @@ export type ClientOption = ScalarComboboxOption & {
   /** A more specific ID - can be built-in client or custom client like 'custom/ruby' */
   id: AvailableClients[number] | string
   /** Programming language or tool for code generation (e.g., 'javascript', 'python', 'curl') */
-  lang: TargetId | 'curl' | 'plaintext'
+  lang: DocSpringTargetId | 'curl' | 'plaintext'
   /** Title shows when the client is selected in the dropdown */
   title: string
   /** Target key for the client, differs from the lang due to the curl thing */
-  targetKey: TargetId
+  targetKey: DocSpringTargetId
   /** Title of the target */
   targetTitle: string
   /** Client key for the client */

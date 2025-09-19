@@ -414,7 +414,9 @@ watch(hash, (newHash, oldHash) => {
           :config="configuration"
           :store="store">
           <template #after-auth>
-            <slot name="after-auth" />
+            <slot
+              v-bind="referenceSlotProps"
+              name="after-auth" />
           </template>
           <template #start>
             <slot
