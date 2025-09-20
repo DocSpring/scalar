@@ -103,10 +103,6 @@ import { computed, ref, useId, watch, type ComponentPublicInstance } from 'vue'
 import StarlightCard from '../../../../components/StarlightCard.vue'
 import ExamplePicker from './ExamplePicker.vue'
 
-// These components stay imported for optional slots/content toggled by DocSpring.
-void ScalarMarkdown
-void StarlightCard
-
 const {
   clientOptions,
   selectedClient,
@@ -119,6 +115,9 @@ const {
   operation,
   generateLabel,
 } = defineProps<RequestExampleProps>()
+// These components stay imported for optional slots/content toggled by DocSpring.
+void ScalarMarkdown
+void StarlightCard
 
 defineSlots<{
   header: () => unknown
@@ -155,56 +154,6 @@ const customRequestExamples = computed(() => {
     (key) => (operation[key] as XCodeSample[]) ?? [],
   )
 })
-
-type ExtendedXCodeSample = XCodeSample & { description?: string }
-
-const selectedCustomDescription = computed<string | undefined>(() => {
-  if (!localSelectedClient.value?.id?.startsWith?.('custom')) return undefined
-  const sample = (customRequestExamples.value as ExtendedXCodeSample[]).find(
-    (example) => generateCustomId(example) === localSelectedClient.value?.id,
-  )
-  return sample?.description
-})
-
-/** Placeholder -> secret mapping for targeted replace+mask in markdown */
-const descriptionReplaceAndMask = computed<Record<string, string>>(() => {
-  const basic = securitySchemes.find(
-    (scheme) => scheme.type === 'http' && scheme.scheme === 'basic',
-  ) as any
-  const password = basic?.['x-scalar-secret-password'] as string | undefined
-  const map: Record<string, string> = {}
-  if (password && password.length >= 1) {
-    map['API_TOKEN_SECRET'] = password
-  }
-  return map
-})
-
-/** Apply API_TOKEN_ID substitution to the description; keep API_TOKEN_SECRET as a placeholder
- * so ScalarMarkdown can replace+mask it safely.
- */
-const processedCustomDescription = computed<string | undefined>(() => {
-  const desc = selectedCustomDescription.value
-  if (!desc) return undefined
-
-  const basicAuthScheme = securitySchemes.find(
-    (scheme) => scheme.type === 'http' && scheme.scheme === 'basic',
-  )
-
-  if (!basicAuthScheme) return desc
-
-  const username = basicAuthScheme?.['x-scalar-secret-username']
-
-  let out = desc
-  // Show the token ID openly, but DO NOT replace the secret here –
-  // masking happens in <ScalarMarkdown> via replaceAndMaskCredentials.
-  if (typeof username === 'string' && username.length > 0) {
-    out = out.replace(/API_TOKEN_ID/g, username)
-  }
-  return out
-})
-
-void descriptionReplaceAndMask
-void processedCustomDescription
 
 /**
  * Group plugins by target/language to show in a dropdown
@@ -338,6 +287,52 @@ watch(
     localSelectedClient.value = findFallbackClient(newClient)
   },
 )
+
+type ExtendedXCodeSample = XCodeSample & { description?: string }
+
+const selectedCustomDescription = computed<string | undefined>(() => {
+  if (!localSelectedClient.value?.id?.startsWith?.('custom')) return undefined
+  const sample = (customRequestExamples.value as ExtendedXCodeSample[]).find(
+    (example) => generateCustomId(example) === localSelectedClient.value?.id,
+  )
+  return sample?.description
+})
+
+/** Placeholder -> secret mapping for targeted replace+mask in markdown */
+const descriptionReplaceAndMask = computed<Record<string, string>>(() => {
+  const basic = securitySchemes.find(
+    (scheme) => scheme.type === 'http' && scheme.scheme === 'basic',
+  ) as any
+  const password = basic?.['x-scalar-secret-password'] as string | undefined
+  const map: Record<string, string> = {}
+  if (password && password.length >= 1) {
+    map['API_TOKEN_SECRET'] = password
+  }
+  return map
+})
+
+/** Apply API_TOKEN_ID substitution to the description; keep API_TOKEN_SECRET as a placeholder */
+const processedCustomDescription = computed<string | undefined>(() => {
+  const desc = selectedCustomDescription.value
+  if (!desc) return undefined
+
+  const basicAuthScheme = securitySchemes.find(
+    (scheme) => scheme.type === 'http' && scheme.scheme === 'basic',
+  )
+
+  if (!basicAuthScheme) return desc
+
+  const username = basicAuthScheme?.['x-scalar-secret-username']
+
+  let out = desc
+  if (typeof username === 'string' && username.length > 0) {
+    out = out.replace(/API_TOKEN_ID/g, username)
+  }
+  return out
+})
+
+void descriptionReplaceAndMask.value
+void processedCustomDescription.value
 
 /** Generate the code snippet for the selected example */
 const generatedCode = computed<string>(() => {
@@ -494,37 +489,13 @@ const id = useId()
 
     <!-- Code snippet -->
     <ScalarCardSection
-      class="request-editor-section custom-scroll flex-col p-0">
+      class="request-editor-section flex-1 flex-col p-0 min-h-0">
       <!-- Optional description rendered as markdown above the code -->
-      <!-- <div
-        v-if="processedCustomDescription"
-        class="code-description mt-5 p-3">
-        <ScalarMarkdown
-          :allowTags="['span']"
-          :replaceAndMaskCredentials="descriptionReplaceAndMask"
-          :value="processedCustomDescription" />
-      </div> -->
-
-      <!-- <div class="flex flex-row gap-2 p-3">
-        <StarlightCard
-          classNames="flex-1 sl-link-card-small"
-          description="Set up the API client"
-          href="#client-libraries"
-          title="Install DocSpring" />
-
-        <StarlightCard
-          v-if="operation.operationId != 'testAuthentication'"
-          classNames="flex-1 sl-link-card-small"
-          description="Make sure your API token works"
-          href="#tag/authentication/get/authentication"
-          title="Test Authentication" />
-      </div> -->
-
       <div
         :id="`${id}-example`"
-        class="code-snippet">
+        class="code-snippet custom-scroll min-h-0 flex-1">
         <ScalarCodeBlock
-          class="bg-b-2 !min-h-full -outline-offset-2"
+          class="bg-b-2 h-full max-h-full min-h-0 overflow-auto -outline-offset-2"
           :content="generatedCode"
           :hideCredentials="secretCredentials"
           :lang="localSelectedClient?.lang"

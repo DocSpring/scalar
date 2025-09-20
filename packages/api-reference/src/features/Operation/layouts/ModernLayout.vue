@@ -162,7 +162,7 @@ const handleDiscriminatorChange = (type: string) => {
 
             <!-- New Example Request -->
             <ScalarErrorBoundary>
-              <VisibleOnIntersect>
+              <VisibleOnIntersect class="example-request">
                 <template #default>
                   <RequestExample
                     :clientOptions="clientOptions"
@@ -220,6 +220,40 @@ const handleDiscriminatorChange = (type: string) => {
     ((var(--full-height) - var(--refs-header-height)) - 60px) / 2
   );
   position: relative;
+}
+
+.examples > .example-request {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.example-request :deep(.scalar-card) {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.example-request :deep(.request-editor-section) {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.example-request :deep(.code-snippet) {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+}
+
+.example-request :deep(.scalar-code-block),
+.example-request :deep(.scalar-codeblock-pre) {
+  max-height: 100%;
+  min-height: 0;
+  overflow: auto;
 }
 
 /*
