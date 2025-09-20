@@ -101,6 +101,7 @@ const resume = () => {
 }
 
 const ensureFreeze = () => {
+  if (hasLazyLoaded.value) return
   if (pendingLazyIds.value.size === 0) return
   if (!freezeCleanup.value) {
     freezeCleanup.value = attachFreeze(hash.value)
@@ -134,20 +135,28 @@ lazyBus.on(({ loading, loaded, save }) => {
     emit('allEntriesLoaded', true)
     clearReleaseTimeout()
     releaseTimeout = setTimeout(() => {
-      resume()
+      if (!hasLazyLoaded.value) {
+        resume()
+      }
     }, 300)
   }
 })
 
 // Resume scrolling after 5 seconds as a failsafe
 setTimeout(() => {
-  resume()
+  if (!hasLazyLoaded.value) {
+    resume()
+  }
 }, 5000)
 
 watch(
   () => hash.value,
   (value) => {
     freezeCleanup.value?.()
+    if (hasLazyLoaded.value) {
+      freezeCleanup.value = null
+      return
+    }
     freezeCleanup.value = value ? attachFreeze(value) : null
     pendingLazyIds.value.clear()
     clearReleaseTimeout()
