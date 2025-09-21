@@ -38,19 +38,22 @@ export const createSidebar = (dereferencedDocument: Ref<OpenAPIV3_1.Document>, o
   const scrollToOperation = (operationId: string, focus?: boolean) => {
     const sectionId = options.getSectionId(operationId)
 
-    if (sectionId && sectionId !== operationId) {
-      // We use the lazyBus to check when the target has loaded then scroll to it
-      if (!collapsedSidebarItems[sectionId]) {
-        const unsubscribe = lazyBus.on((ev) => {
-          if (ev.loaded === operationId) {
-            scrollToId(operationId, focus)
-            unsubscribe()
-          }
-        })
-        setCollapsedSidebarItem(sectionId, true)
-      } else {
-        scrollToId(operationId, focus)
-      }
+    if (!sectionId || sectionId === operationId) {
+      scrollToId(operationId, focus)
+      return
+    }
+
+    // We use the lazyBus to check when the target has loaded then scroll to it
+    if (!collapsedSidebarItems[sectionId]) {
+      const unsubscribe = lazyBus.on((ev) => {
+        if (ev.loaded === operationId) {
+          scrollToId(operationId, focus)
+          unsubscribe()
+        }
+      })
+      setCollapsedSidebarItem(sectionId, true)
+    } else {
+      scrollToId(operationId, focus)
     }
   }
 
