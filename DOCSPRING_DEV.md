@@ -39,7 +39,7 @@ Guidelines
 Docs app (Astro) wiring
 
 - The docs site (Astro) also resolves workspace packages from `src` so you can preview changes without rebuilding packages:
-  - `docs/astro.config.mjs` → `vite.resolve.alias` includes mappings such as:
+  - `docs/astro.config.ts` → `vite.resolve.alias` includes mappings such as:
     - `@scalar/api-reference` → `./scalar/packages/api-reference/src`
     - `@scalar/components` → `./scalar/packages/components/src`
     - `@icons` → `./scalar/packages/icons/src`
