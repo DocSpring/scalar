@@ -47,6 +47,7 @@
     "build:packages": "turbo --filter './packages/**' --concurrency=100% build",
     "build:integrations": "turbo --filter ./integrations/** build",
     "build:api-reference": "turbo --filter ./packages/api-reference build",
+    "build:docs-dev": "turbo build --filter=./packages/build-tooling --filter=./packages/helpers --filter=./packages/openapi-types --filter=./packages/types --filter=./packages/use-toasts --filter=./packages/code-highlight --filter=./packages/json-magic --filter=./packages/workspace-store --filter=./packages/snippetz --filter=./packages/openapi-parser --filter=./packages/object-utils --filter=./packages/oas-utils --filter=./packages/use-hooks --filter=./packages/postman-to-openapi --filter=./packages/draggable --filter=./packages/icons --filter=./packages/components --filter=./packages/use-codemirror --filter=./packages/import --filter=./packages/galaxy",
     "build:standalone": "pnpm --filter api-reference build:standalone",
     "clean": "pnpm clean:dist && pnpm clean:turbo && pnpm clean:nuxt && pnpm clean:next && pnpm clean:nodeModules",
     "clean:install": "pnpm clean && pnpm install",
