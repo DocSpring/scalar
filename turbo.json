@@ -1,12 +1,13 @@
 {
   "$schema": "https://turbo.build/schema.json",
   "globalEnv": ["GOCACHE", "LOCALAPPDATA"],
-  "ui": "tui",
+  "ui": "stream",
   "tasks": {
     "lint:fix": {},
     "build": {
       "outputs": ["dist/**", "storybook-static/**", ".output", ".nuxt", ".next", "build"],
-      "dependsOn": ["^build"]
+      "dependsOn": ["^build"],
+      "outputLogs": "new-only"
     },
     "types:check": {
       "dependsOn": ["^build"],
