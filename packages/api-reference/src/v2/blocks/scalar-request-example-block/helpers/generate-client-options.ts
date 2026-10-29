@@ -92,6 +92,15 @@ const docSpringClients: ClientOptionGroup = {
       targetTitle: 'Elixir',
       clientKey: 'elixir',
     },
+    {
+      id: 'custom/rust',
+      lang: 'rust',
+      title: 'DocSpring Rust',
+      label: 'DocSpring Rust',
+      targetKey: 'rust',
+      targetTitle: 'Rust',
+      clientKey: 'rust',
+    },
   ],
 }
 

@@ -168,10 +168,31 @@ const selectedClientOption = computed(() => {
   return result
 })
 
-/** List of featured clients - hide JavaScript and Elixir to fit row */
-const featuredClients = computed(
-  () => docSpringClients.options.filter((c) => !['custom/js'].includes(c.id)),
-  // [...docSpringClients.options],
+/**
+ * The DocSpring clients this document has installation instructions for (the v1 reference has no Rust client), or all
+ * of them when it has none
+ */
+const availableDocSpringClientIds = computed(() => {
+  const installations = document.info['x-scalar-sdk-installation']
+  const ids = docSpringClients.options.map((client) => client.id)
+  if (!Array.isArray(installations) || !installations.length) {
+    return ids
+  }
+  const langs = installations.map((instruction) =>
+    instruction.lang.toLowerCase(),
+  )
+  return ids.filter((id) =>
+    langs.includes(id.substring('custom/'.length).toLowerCase()),
+  )
+})
+
+/** List of featured clients: JavaScript and Rust go under More, so the row fits */
+const featuredClients = computed(() =>
+  docSpringClients.options.filter(
+    (c) =>
+      availableDocSpringClientIds.value.includes(c.id) &&
+      !['custom/js', 'custom/rust'].includes(c.id),
+  ),
 )
 
 /** Currently selected tab index */
@@ -187,7 +208,9 @@ const tabIndex = computed(() => {
 const nonFeaturedDocSpringClients = computed(() => {
   const featured = featuredClients.value.map((c) => c.id)
   return docSpringClients.options.filter(
-    (client) => !featured.includes(client.id),
+    (client) =>
+      availableDocSpringClientIds.value.includes(client.id) &&
+      !featured.includes(client.id),
   )
 })
 
@@ -208,7 +231,9 @@ const moreClientOptions = computed(() => {
           return {
             ...group,
             options: group.options.filter(
-              (client) => !featuredIds.includes(client.id),
+              (client) =>
+                availableDocSpringClientIds.value.includes(client.id) &&
+                !featuredIds.includes(client.id),
             ),
           }
         }
