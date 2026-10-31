@@ -61,15 +61,20 @@ const selectClient = (option: ClientOption) => {
   )
 }
 
-/** Calculates the targetKey from the selected client id */
-const selectedTargetKey = computed(
-  () => props.selectedClient?.split('/')[0] as DocSpringTargetId | undefined,
-)
-
 /** Find the currently selected client for the combobox */
 const comboboxSelectedValue = computed(() => {
   return findClient(enhancedClientOptions.value, props.selectedClient)
 })
+
+/**
+ * The selected client's targetKey, for its icon. A DocSpring client's id starts with "custom/", so its option has the
+ * language (custom/rust is rust, custom/cli is shell).
+ */
+const selectedTargetKey = computed(() =>
+  props.selectedClient?.startsWith('custom/')
+    ? comboboxSelectedValue.value?.targetKey
+    : (props.selectedClient?.split('/')[0] as DocSpringTargetId | undefined),
+)
 </script>
 <template>
   <div

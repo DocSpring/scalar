@@ -159,6 +159,8 @@ const customRequestExamples = computed(() => {
  * Group plugins by target/language to show in a dropdown
  */
 const clients = computed(() => {
+  const docSpringGroupLabels = ['DocSpring API Clients', 'DocSpring CLI']
+
   // Handle custom code examples from the OpenAPI spec
   if (customRequestExamples.value.length) {
     const customClients = customRequestExamples.value.map((sample) => {
@@ -167,27 +169,37 @@ const clients = computed(() => {
 
       return {
         id,
-        lang: (sample.lang as DocSpringTargetId) || 'plaintext',
+        // The CLI's examples are shell commands
+        lang:
+          sample.lang === 'cli'
+            ? 'bash'
+            : (sample.lang as DocSpringTargetId) || 'plaintext',
         title: label,
         label,
       } as ClientOption // We yolo assert this as the other properties are only needed in the top selector
     })
+    const cliClients = customClients.filter(
+      (client) => client.id === 'custom/cli',
+    )
 
-    // Always show custom examples first, then regular HTTP clients
+    // Always show custom examples first (the API clients, then the CLI), then regular HTTP clients
     return [
       {
         label: 'DocSpring API Clients',
-        options: customClients,
+        options: customClients.filter((client) => client.id !== 'custom/cli'),
       },
+      ...(cliClients.length
+        ? [{ label: 'DocSpring CLI', options: cliClients }]
+        : []),
       ...clientOptions.filter(
-        (group) => group.label !== 'DocSpring API Clients',
+        (group) => !docSpringGroupLabels.includes(group.label ?? ''),
       ), // Remove any DocSpring clients from props
     ]
   }
 
   // If no custom examples, only show regular HTTP clients (no DocSpring clients)
   return clientOptions.filter(
-    (group) => group.label !== 'DocSpring API Clients',
+    (group) => !docSpringGroupLabels.includes(group.label ?? ''),
   )
 })
 

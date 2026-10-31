@@ -12,7 +12,7 @@ export type ClientOption = ScalarComboboxOption & {
   /** A more specific ID - can be built-in client or custom client like 'custom/ruby' */
   id: AvailableClients[number] | string
   /** Programming language or tool for code generation (e.g., 'javascript', 'python', 'curl') */
-  lang: DocSpringTargetId | 'curl' | 'plaintext'
+  lang: DocSpringTargetId | 'curl' | 'plaintext' | 'bash'
   /** Title shows when the client is selected in the dropdown */
   title: string
   /** Target key for the client, differs from the lang due to the curl thing */

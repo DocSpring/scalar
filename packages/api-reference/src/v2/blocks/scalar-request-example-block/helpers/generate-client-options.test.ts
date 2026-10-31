@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { generateClientOptions, generateCustomId } from './generate-client-options'
+import { generateClientOptions, generateClientOptionsWithDocSpring, generateCustomId } from './generate-client-options'
 import type { XCodeSample } from '@scalar/openapi-types/schemas/extensions'
 
 describe('generateClientOptions', () => {
@@ -277,5 +277,19 @@ describe('generateCustomId', () => {
 
     const results = samples.map((sample) => generateCustomId(sample))
     expect(results).toEqual(['custom/javascript', 'custom/python', 'custom/curl'])
+  })
+})
+
+describe('generateClientOptionsWithDocSpring', () => {
+  it('puts the DocSpring API clients first, then the CLI in its own group, then the HTTP clients', () => {
+    const result = generateClientOptionsWithDocSpring(undefined)
+
+    expect(result[0]?.label).toBe('DocSpring API Clients')
+    expect(result[0]?.options.map((option) => option.id)).not.toContain('custom/cli')
+    expect(result[1]).toEqual({
+      label: 'DocSpring CLI',
+      options: [expect.objectContaining({ id: 'custom/cli', lang: 'bash', targetKey: 'shell' })],
+    })
+    expect(result.slice(2)).toEqual(generateClientOptions(undefined))
   })
 })

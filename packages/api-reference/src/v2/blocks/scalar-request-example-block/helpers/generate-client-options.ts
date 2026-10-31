@@ -104,6 +104,22 @@ const docSpringClients: ClientOptionGroup = {
   ],
 }
 
+/** The DocSpring CLI's commands, in a group of their own after the API clients (highlighted as bash) */
+const docSpringCli: ClientOptionGroup = {
+  label: 'DocSpring CLI',
+  options: [
+    {
+      id: 'custom/cli',
+      lang: 'bash',
+      title: 'DocSpring CLI',
+      label: 'DocSpring CLI',
+      targetKey: 'shell',
+      targetTitle: 'CLI',
+      clientKey: 'cli',
+    },
+  ],
+}
+
 /**
  * Generates client options for the request example block by filtering and organizing
  * built-in snippets based on the hiddenClients configuration. This function creates
@@ -180,11 +196,14 @@ export const generateClientOptions = (
 /** Get just the DocSpring clients for use in other components */
 export const getDocSpringClients = () => docSpringClients
 
-/** Generate client options with DocSpring clients at the top (for RequestExample) */
+/** Get the DocSpring CLI's group for use in other components */
+export const getDocSpringCli = () => docSpringCli
+
+/** Generate client options with DocSpring clients and the CLI at the top (for RequestExample) */
 export const generateClientOptionsWithDocSpring = (
   hiddenClients: ApiReferenceConfiguration['hiddenClients'],
 ): ClientOptionGroup[] => {
   const options = generateClientOptions(hiddenClients)
   // Always put DocSpring clients at the top
-  return [docSpringClients, ...options]
+  return [docSpringClients, docSpringCli, ...options]
 }

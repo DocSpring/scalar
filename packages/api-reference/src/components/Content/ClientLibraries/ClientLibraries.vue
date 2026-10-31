@@ -3,7 +3,10 @@ import { TabGroup, TabList, TabPanel, TabPanels } from '@headlessui/vue'
 import { useActiveEntities, useWorkspace } from '@scalar/api-client/store'
 import { DEFAULT_CLIENT } from '@scalar/api-reference/v2/blocks/scalar-request-example-block/helpers/find-client'
 // Import DocSpring clients helper
-import { getDocSpringClients } from '@scalar/api-reference/v2/blocks/scalar-request-example-block/helpers/generate-client-options'
+import {
+  getDocSpringCli,
+  getDocSpringClients,
+} from '@scalar/api-reference/v2/blocks/scalar-request-example-block/helpers/generate-client-options'
 import type {
   ClientOption,
   ClientOptionGroup,
@@ -40,8 +43,10 @@ const {
   selectedClient?: AvailableClients[number] | string
 }>()
 
-// Get DocSpring clients for featured tabs
+// Get DocSpring clients for featured tabs, and the CLI (never featured)
 const docSpringClients = getDocSpringClients()
+const docSpringCli = getDocSpringCli()
+const docSpringOptions = [...docSpringClients.options, ...docSpringCli.options]
 
 const morePanel = useId()
 
@@ -160,21 +165,19 @@ const selectedClientOption = computed(() => {
 
   // If not found and selectedClient is a DocSpring client, look in DocSpring clients
   if (!result && selectedClient?.startsWith('custom/')) {
-    result = docSpringClients.options.find(
-      (client) => client.id === selectedClient,
-    )
+    result = docSpringOptions.find((client) => client.id === selectedClient)
   }
 
   return result
 })
 
 /**
- * The DocSpring clients this document has installation instructions for (the v1 reference has no Rust client), or all
- * of them when it has none
+ * The DocSpring clients this document has installation instructions for (the v1 reference has no Rust client or CLI),
+ * or all of them when it has none
  */
 const availableDocSpringClientIds = computed(() => {
   const installations = document.info['x-scalar-sdk-installation']
-  const ids = docSpringClients.options.map((client) => client.id)
+  const ids = docSpringOptions.map((client) => client.id)
   if (!Array.isArray(installations) || !installations.length) {
     return ids
   }
@@ -225,7 +228,10 @@ const moreClientOptions = computed(() => {
     // DocSpring clients are already in props, just filter out the featured ones from the DocSpring group
     return clientOptions
       .map((group) => {
-        if (group.label === 'DocSpring API Clients') {
+        if (
+          group.label === 'DocSpring API Clients' ||
+          group.label === 'DocSpring CLI'
+        ) {
           // Only show non-featured DocSpring clients in the dropdown
           const featuredIds = featuredClients.value.map((c) => c.id)
           return {
@@ -244,6 +250,12 @@ const moreClientOptions = computed(() => {
     // DocSpring clients not in props, add them manually (legacy behavior)
     const options = [...clientOptions]
 
+    const cliClients = docSpringCli.options.filter((client) =>
+      availableDocSpringClientIds.value.includes(client.id),
+    )
+    if (cliClients.length > 0) {
+      options.unshift({ label: 'DocSpring CLI', options: cliClients })
+    }
     if (nonFeaturedDocSpringClients.value.length > 0) {
       options.unshift({
         label: 'DocSpring API Clients',
